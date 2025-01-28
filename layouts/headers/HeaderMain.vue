@@ -12,6 +12,7 @@
             />
           </NuxtLink>
         </div>
+        <Menu />
         <div class="header-buttons">
           <div class="pr-2">
             <div class="flex items-center px-1">
@@ -79,6 +80,7 @@
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useAuthStore } from '@/stores/auth.store';
+import Menu from './Menu.vue';
 import LoginRegistration from '@/components/modal/LoginRegistration.vue';
 
 const loginRegistrationRef = ref(null);
@@ -258,9 +260,9 @@ const handleModalClosed = () => {
     display: flex;
     align-items: center;
   }
-  .menu {
+  /* .menu {
     display: none;
-  }
+  } */
 
   @media (min-width: 1024px) {
   }
