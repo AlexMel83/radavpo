@@ -16,9 +16,9 @@ export default defineNuxtConfig({
       },
     ],
     prerender: {
-      routes: ['/uk/howtohelp',
-      '/uk/privacy-policy',
-      '/uk/terms',],
+      routes: ['/howtohelp',
+      '/privacy-policy',
+      '/terms',],
     },
   },
   plugins: [
