@@ -70,7 +70,6 @@ const authStore = useAuthStore();
 const menuOpen = ref(false);
 const route = useRoute();
 const router = useRouter();
-const checkVar = ref(false);
 
 const isHomePage = computed(() => route.path === '/');
 const isAuthed = computed(() => authStore.isAuthed);
