@@ -12,7 +12,9 @@
         >
           <NuxtLink to="/" class="relative flex items-center space-x-2">
             <div class="text-start flex flex-col text-gray-200 text-sm sm:text-base lg:text-lg">
-              <div class="font-bold truncate">{{ $t('header.title') }}</div>
+              <div class="font-bold truncate">
+                {{ $t('header.title') }}
+              </div>
               <span class="truncate">{{ $t('header.subtitle') }}</span>
             </div>
           </NuxtLink>
@@ -111,12 +113,12 @@ const hideMenu = () => {
   menuOpen.value = false;
 };
 
-const toggleMenu = () => {
-  menuOpen.value = !menuOpen.value;
-  if (menuOpen.value) {
-    openLoginModal();
-  }
-};
+// const toggleMenu = () => {
+//   menuOpen.value = !menuOpen.value;
+//   if (menuOpen.value) {
+//     openLoginModal();
+//   }
+// };
 
 const toggleSearch = () => {
   isSearchVisible.value = !isSearchVisible.value;
