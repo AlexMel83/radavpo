@@ -61,7 +61,7 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { useAuthStore } from '@/stores/auth.store';
+import { useAuthStore } from '~/stores/app.store';
 import LoginRegistration from '@/components/modal/LoginRegistration.vue';
 import SearchInput from './SearchInput.vue';
 import ColorMode from './ColorMode.vue';

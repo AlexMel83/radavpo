@@ -56,12 +56,12 @@
 
 <script setup>
 import { useRoute } from 'vue-router';
-import { useAuthStore } from '@/stores/auth.store.ts';
+import { useAppStore } from '~/stores/app.store';
 import SearchInput from './SearchInput.vue';
 import ColorMode from './ColorMode.vue';
 import UserName from './UserName.vue';
 
-const store = useAuthStore();
+const store = useAppStore();
 
 const route = useRoute();
 const isHomePage = computed(() => route.path === '/');

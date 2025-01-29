@@ -1,5 +1,5 @@
 <script setup>
-import { useAuthStore } from '~/stores/auth.store';
+import { useAuthStore } from '~/stores/app.store';
 import { object, string, ref as yupRef } from 'yup';
 import { defineShortcuts } from '#imports';
 import EyeIcon from '../icons/EyeIcon.vue';

@@ -36,7 +36,7 @@
 
 <script setup>
 import IconsUser from '@/components/icons/User.vue';
-import { useAuthStore } from '@/stores/auth.store.ts';
+import { useAuthStore } from '~/stores/app.store';
 import { ref, computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 

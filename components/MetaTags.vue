@@ -3,7 +3,10 @@
 </template>
 
 <script setup>
-const { url, title, description, image } = defineProps({
+import { useRequestURL } from 'nuxt/app';
+import { useAppStore } from '~/stores/app.store';
+
+const props = defineProps({
   url: {
     type: String,
     required: false,
@@ -27,38 +30,41 @@ const { url, title, description, image } = defineProps({
 });
 
 const store = useAppStore();
+const { locale } = useI18n();
+const requestUrl = useRequestURL();
+const currentUrl = computed(() => props.url || requestUrl.href);
+const currentLocale = computed(() => locale.value || 'uk');
 
 const baseUrl =
   store.baseURL === 'https://radavpo_apidev.starkon.pp.ua'
     ? 'https://radavpo_dev.starkon.pp.ua'
     : 'https://radavpo.starkon.pp.ua';
 
-const urlImage = computed(() => {
-  return image.startsWith('http') ? image : baseUrl + image;
-});
+const urlImage = computed(() => (props.image.startsWith('http') ? props.image : baseUrl + props.image));
 
 useHead({
   htmlAttrs: {
-    lang: 'uk',
+    lang: currentLocale.value,
   },
-  title,
+  title: props.title,
   meta: [
-    { name: 'description', content: description },
-    { property: 'og:title', content: title },
-    { property: 'og:description', content: description },
+    { name: 'description', content: props.description },
+    { property: 'og:title', content: props.title },
+    { property: 'og:description', content: props.description },
     { property: 'og:image', content: urlImage.value },
-    { property: 'og:url', content: url },
-    { name: 'twitter:title', content: title },
-    { name: 'twitter:description', content: description },
+    { property: 'og:url', content: currentUrl.value },
+    { name: 'twitter:title', content: props.title },
+    { name: 'twitter:description', content: props.description },
     { name: 'twitter:image', content: urlImage.value },
   ],
 });
 
 useSeoMeta({
-  title,
-  description,
-  ogTitle: title,
-  ogDescription: description,
+  title: props.title,
+  description: props.description,
+  ogTitle: props.title,
+  ogDescription: props.description,
   ogImage: urlImage.value,
+  ogUrl: currentUrl.value,
 });
 </script>

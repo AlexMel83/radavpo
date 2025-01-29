@@ -28,15 +28,24 @@ interface AuthResponse {
   };
 }
 
+export const useAppStore = defineStore('auth', {
+  state: () => ({
+    isMenuOpen: false,
+    isLoading: false,
+    menuOpen: false,
+  }),
+  actions: {
+    toggleMenu() {
+      this.isMenuOpen = !this.isMenuOpen;
+    },
+  },
+});
+
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     userData: null as AuthResponse | null,
-    isMenuOpen: false,
-    isLoading: false,
     isAuthed: false,
-    menuOpen: false,
   }),
-
   actions: {
     saveUserData(data: Partial<AuthResponse>) {
       if (!this.userData) {
@@ -75,7 +84,6 @@ export const useAuthStore = defineStore('auth', {
         localStorage.setItem('userData', JSON.stringify(this.userData));
       }
     },
-
     loadUserData() {
       if (typeof window !== 'undefined') {
         const data = localStorage.getItem('userData');
@@ -87,7 +95,6 @@ export const useAuthStore = defineStore('auth', {
       }
       return null;
     },
-
     async logOut() {
       const nuxtApp = useNuxtApp();
       const $api = nuxtApp.$api as { auth: AuthApi };
@@ -100,10 +107,6 @@ export const useAuthStore = defineStore('auth', {
       } catch (error) {
         console.error('Error during logOut:', error);
       }
-    },
-
-    toggleMenu() {
-      this.isMenuOpen = !this.isMenuOpen;
     },
   },
 });

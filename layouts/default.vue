@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import { useAuthStore } from '@/stores/auth.store.ts';
+import { useAuthStore } from '~/stores/app.store';
 import FooterMain from './footers/FooterMain.vue';
 import HeaderAuthUser from '@/layouts/headers/HeaderAuthUser.vue';
 import HeaderMain from './headers/HeaderMain.vue';
@@ -77,7 +77,6 @@ onMounted(async () => {
 });
 
 onUnmounted(() => {
-  // authStore.initUserData();
   window.removeEventListener('scroll', handleScroll);
 });
 </script>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useAuthStore } from '~/stores/auth.store';
+import { useAuthStore } from '~/stores/app.store';
 import apiModule from '../api/index';
 
 export default defineNuxtPlugin((nuxtApp) => {
