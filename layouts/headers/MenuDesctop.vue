@@ -1,7 +1,7 @@
 <template>
-  <div class="menu-group">
+  <div class="menu-group mx-auto">
     <ul class="flex justify-around p-0 m-0 list-none">
-      <li class="relative mx-5">
+      <li class="relative mx-2 text-sm sm:text-base lg:text-lg">
         <NuxtLink
           class="hover:text-primary-300 p-1 inline-block transition-colors border-b-2 border-transparent hover:border-primary-300"
           to="/"
@@ -10,7 +10,7 @@
         </NuxtLink>
       </li>
       <li
-        class="relative mx-5 flex items-center group"
+        class="relative mx-2 flex items-center group text-sm sm:text-base lg:text-lg"
         @mouseenter="isMenuAboutOpen = true"
         @mouseleave="isMenuAboutOpen = false"
       >
@@ -21,11 +21,11 @@
           {{ $t('menu.about') }}
         </NuxtLink>
         <ul
-          class="absolute right-3 top-full hidden bg-white dark:bg-gray-800 shadow-md rounded-md p-1 group-hover:block transition-all duration-300"
+          class="absolute right-3 top-full hidden bg-gray-800 shadow-md rounded-md p-1 group-hover:block transition-all duration-300"
         >
           <li>
             <NuxtLink
-              class="block p-1 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
+              class="block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
               to="/reporting"
             >
               {{ $t('menu.reporting') }}
@@ -35,8 +35,7 @@
         <CollapsedIcon v-if="!isMenuAboutOpen" />
         <ExpandedIcon v-if="isMenuAboutOpen" class="text-primary-300" />
       </li>
-
-      <li class="relative mx-5">
+      <li class="relative mx-2 text-sm sm:text-base lg:text-lg">
         <NuxtLink
           class="hover:text-primary-300 p-1 inline-block transition-colors border-b-2 border-transparent hover:border-primary-300"
           to="/blog"
@@ -45,7 +44,7 @@
         </NuxtLink>
       </li>
       <li
-        class="relative mx-5 flex items-center group"
+        class="relative mx-2 flex items-center group text-sm sm:text-base lg:text-lg"
         @mouseenter="isMenuResourcesOpen = true"
         @mouseleave="isMenuResourcesOpen = false"
       >
@@ -56,11 +55,11 @@
           {{ $t('menu.resources') }}
         </NuxtLink>
         <ul
-          class="absolute right-3 top-full hidden bg-white dark:bg-gray-800 shadow-md rounded-md p-1 group-hover:block transition-all duration-300"
+          class="absolute right-3 top-full hidden bg-gray-800 shadow-md rounded-md p-1 group-hover:block transition-all duration-300"
         >
           <li>
             <NuxtLink
-              class="block p-1 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
+              class="block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
               to="/housing"
             >
               {{ $t('menu.housing') }}
@@ -68,7 +67,7 @@
           </li>
           <li>
             <NuxtLink
-              class="block p-1 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
+              class="block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
               to="/employment"
             >
               {{ $t('menu.employment') }}
@@ -76,7 +75,7 @@
           </li>
           <li>
             <NuxtLink
-              class="block p-1 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
+              class="block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
               to="/support"
             >
               {{ $t('menu.support') }}
@@ -86,7 +85,7 @@
         <CollapsedIcon v-if="!isMenuResourcesOpen" />
         <ExpandedIcon v-if="isMenuResourcesOpen" class="text-primary-300" />
       </li>
-      <li class="relative mx-5">
+      <li class="relative mx-2 text-sm sm:text-base lg:text-lg">
         <NuxtLink
           class="hover:text-primary-300 p-1 inline-block transition-colors border-b-2 border-transparent hover:border-primary-300"
           to="/join"

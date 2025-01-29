@@ -1,56 +1,63 @@
 <template>
   <div :class="{ 'header-main': true, 'home-page': isHomePage }">
     <div class="header-wrapper">
-      <div class="logo-container">
-        <div class="cursor-pointer logo py-2" @click="hideMenu">
-          <NuxtLink to="/" class="inline-block relative">
-            <div class="absolute inset-0 bg-white blur-sm" />
-            <img src="/cfhope-logo-tranparent.png" alt="logo" class="relative h-auto w-12 object-contain" />
+      <!-- Используем flex с равномерным распределением -->
+      <div
+        class="heder-container flex flex-wrap items-center justify-between w-full min-h-[50px] sm:min-h-[60px] lg:min-h-[70px] px-2"
+      >
+        <!-- Логотип -->
+        <div
+          class="logo cursor-pointer p-2 flex items-center space-x-2 flex-1 min-w-[120px] sm:min-w-[150px] lg:min-w-[200px]"
+          @click="hideMenu"
+        >
+          <NuxtLink to="/" class="relative flex items-center space-x-2">
+            <div class="text-start flex flex-col text-gray-200 text-sm sm:text-base lg:text-lg">
+              <div class="font-bold truncate">{{ $t('header.title') }}</div>
+              <span class="truncate">{{ $t('header.subtitle') }}</span>
+            </div>
           </NuxtLink>
         </div>
-        <Menu />
-        <div class="header-buttons">
-          <div class="pr-2">
+
+        <!-- Меню (занимает доступное пространство) -->
+        <div class="flex-1 flex justify-center min-w-[150px] sm:min-w-[200px]">
+          <MenuDesctop />
+        </div>
+
+        <!-- Кнопки справа -->
+        <div
+          class="header-buttons flex flex-wrap items-center justify-end gap-1 px-1 text-sm sm:text-base lg:text-lg flex-1 min-w-[120px] sm:min-w-[150px] lg:min-w-[200px]"
+        >
+          <div class="">
             <div class="flex items-center px-1">
               <button
                 v-for="(lang, index) in locales"
                 :key="lang.code"
-                :class="{
-                  'text-primary-300 hover:text-primary-500': lang.code === currentLocale,
-                }"
+                :class="{ 'text-primary-300 hover:text-primary-500': lang.code === currentLocale }"
                 class="flex items-center"
                 @click="changeLanguage(lang.code)"
               >
                 <span class="hover:scale-110">{{ lang.name }}</span>
-                <span v-if="index < locales.length - 1" class="text-white px-1">|</span>
+                <span v-if="index < locales.length - 1" class="text-white">|</span>
               </button>
             </div>
           </div>
           <ColorMode class="color-mode" />
-          <button class="md:hidden" @click="toggleMenu">
-            <IconsBarsIcon v-if="!menuOpen" class="h-8 w-8 hover:scale-110" />
-            <IconsCloseIcon v-else class="h-8 w-8 text-white hover:scale-110 hover:text-white" />
-          </button>
-          <template v-if="!isAuthed">
-            <button
-              class="hidden md:block text-white rounded hover:scale-110 focus:outline-none min-w-[70px] py-2"
-              @click="openLoginModal"
-            >
-              {{ $t('header.enter') }}
-            </button>
-          </template>
-          <button icon class="search-icon mx-3" :class="{ 'text-primary-300': isSearchVisible }" @click="toggleSearch">
+          <button icon class="search-icon" :class="{ 'text-primary-300': isSearchVisible }" @click="toggleSearch">
             <IconsMagnifyingGlassIcon class="h-6 w-6" />
+          </button>
+          <button
+            v-if="!isAuthed"
+            class="hidden md:block text-white rounded hover:scale-110 focus:outline-none min-w-[70px] py-2"
+            @click="openLoginModal"
+          >
+            {{ $t('header.enter') }}
           </button>
         </div>
       </div>
-      <div class="mt-4">
+
+      <div>
         <LoginRegistration ref="loginRegistrationRef" @modal-closed="handleModalClosed" />
       </div>
-      <p class="text-center text-gray-200 mb-2 text-xl">
-        <span class="font-bold">{{ $t('header.title') }}</span>
-        {{ $t('header.subtitle') }}
-      </p>
       <div v-if="isSearchVisible" class="search-container">
         <SearchInput />
       </div>
@@ -65,7 +72,7 @@ import { useAuthStore } from '~/stores/app.store';
 import LoginRegistration from '@/components/modal/LoginRegistration.vue';
 import SearchInput from './SearchInput.vue';
 import ColorMode from './ColorMode.vue';
-import Menu from './Menu.vue';
+import MenuDesctop from './MenuDesctop.vue';
 
 const loginRegistrationRef = ref(null);
 const authStore = useAuthStore();

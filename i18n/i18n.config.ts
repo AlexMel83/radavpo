@@ -5,8 +5,8 @@ export default defineI18nConfig(() => ({
     en: {
       header: {
         enter: 'Enter',
-        title: 'The Council of the IDPs',
-        subtitle: 'of the Starokostyantiniv City Community',
+        title: 'The Council of the IDPs:',
+        subtitle: 'Starokostyantiniv',
       },
       menu: {
         home: 'Home',
@@ -46,7 +46,7 @@ export default defineI18nConfig(() => ({
         policy: 'Privacy policy',
         howToHelp: 'How to help',
         developer: 'Developed by Alexander Meleshko',
-        copyright: '© 2024. All rights reserved.',
+        copyright: '© 2025. All rights reserved.',
       },
       DonationServiceTerms: {
         title: 'Platform Terms of Use',
@@ -212,8 +212,8 @@ export default defineI18nConfig(() => ({
     uk: {
       header: {
         enter: 'Увійти',
-        title: 'Рада ВПО',
-        subtitle: 'Старокостянтинівської міської громади',
+        title: 'Рада ВПО:',
+        subtitle: 'Старокостянтинів',
       },
       menu: {
         home: 'Головна',
@@ -253,7 +253,7 @@ export default defineI18nConfig(() => ({
         policy: 'Політика конфіденційності',
         howToHelp: 'Як допомогти',
         developer: 'Розроблено Олександром Мелешко',
-        copyright: '© 2024. Всі права захищено.',
+        copyright: '© 2025. Всі права захищено.',
       },
       DonationServiceTerms: {
         title: 'Умови використання платформи',
