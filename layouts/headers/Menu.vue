@@ -33,7 +33,7 @@
           </li>
         </ul>
         <CollapsedIcon v-if="!isMenuAboutOpen" />
-        <ExpandedIcon class="text-primary-300" v-if="isMenuAboutOpen" />
+        <ExpandedIcon v-if="isMenuAboutOpen" class="text-primary-300" />
       </li>
 
       <li class="relative mx-5">
@@ -62,26 +62,29 @@
             <NuxtLink
               class="block p-1 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
               to="/housing"
-              >{{ $t('menu.housing') }}</NuxtLink
             >
+              {{ $t('menu.housing') }}
+            </NuxtLink>
           </li>
           <li>
             <NuxtLink
               class="block p-1 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
               to="/employment"
-              >{{ $t('menu.employment') }}</NuxtLink
             >
+              {{ $t('menu.employment') }}
+            </NuxtLink>
           </li>
           <li>
             <NuxtLink
               class="block p-1 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
               to="/support"
-              >{{ $t('menu.support') }}</NuxtLink
             >
+              {{ $t('menu.support') }}
+            </NuxtLink>
           </li>
         </ul>
         <CollapsedIcon v-if="!isMenuResourcesOpen" />
-        <ExpandedIcon class="text-primary-300" v-if="isMenuResourcesOpen" />
+        <ExpandedIcon v-if="isMenuResourcesOpen" class="text-primary-300" />
       </li>
       <li class="relative mx-5">
         <NuxtLink
