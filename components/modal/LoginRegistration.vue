@@ -52,23 +52,14 @@ const handleTogglePasswordVisibility = async () => {
 
 const loginSchema = object({
   email: string().email('Невірний email').required('Потрібен Email'),
-  password: string()
-    .min(minPwd, `Пароль має бути не менше ${minPwd} симовлів`)
-    .required('Потрібен пароль'),
+  password: string().min(minPwd, `Пароль має бути не менше ${minPwd} симовлів`).required('Потрібен пароль'),
 });
 const registrationSchema = object({
   email: string().email('Невірний email').required('Потрібен Email'),
-  password: string()
-    .min(minPwd, `Пароль не менше ${minPwd} символів`)
-    .required('Потрібен пароль'),
-  passConfirm: string().oneOf(
-    [yupRef('password'), ''],
-    'Паролі не співпадають',
-  ),
+  password: string().min(minPwd, `Пароль не менше ${minPwd} символів`).required('Потрібен пароль'),
+  passConfirm: string().oneOf([yupRef('password'), ''], 'Паролі не співпадають'),
 });
-const schema = computed(() =>
-  userIsNotRegistered.value ? registrationSchema : loginSchema,
-);
+const schema = computed(() => (userIsNotRegistered.value ? registrationSchema : loginSchema));
 
 const openModal = () => {
   isOpen.value = !isOpen.value;
@@ -96,8 +87,7 @@ const handleFocus = (field) => {
 const handleBlur = (field) => {
   if (field === 'email' && !state.email) emailActive.value = false;
   if (field === 'password' && !state.password) passwordActive.value = false;
-  if (field === 'passConfirm' && !state.passConfirm)
-    passConfirmActive.value = false;
+  if (field === 'passConfirm' && !state.passConfirm) passConfirmActive.value = false;
 };
 
 const handleSubmit = async (event) => {
@@ -121,18 +111,11 @@ const handleSubmit = async (event) => {
       return;
     }
     const res = await $load(
-      () =>
-        userIsNotRegistered.value
-          ? $api.auth.signUp(payload)
-          : $api.auth.signIn(payload),
+      () => (userIsNotRegistered.value ? $api.auth.signUp(payload) : $api.auth.signIn(payload)),
       errors,
     );
 
-    if (
-      res &&
-      [200, 201].includes(res.status) &&
-      ![400, 401, 403, 404, 500].includes(res.data.status)
-    ) {
+    if (res && [200, 201].includes(res.status) && ![400, 401, 403, 404, 500].includes(res.data.status)) {
       const data = res.data;
       if (!userIsNotRegistered.value) {
         authStore.saveUserData(data);
@@ -190,31 +173,18 @@ watch(
         }"
       >
         <div class="flex items-center">
-          <h3
-            class="ml-10 flex-grow text-base font-semibold leading-6 text-gray-900 dark:text-[#999] text-center"
-          >
+          <h3 class="ml-10 flex-grow text-base font-semibold leading-6 text-gray-900 dark:text-[#999] text-center">
             {{ $t('LoginRegistration.title') }}
           </h3>
-          <button
-            class="flex items-center justify-center w-8 h-8 ml-2"
-            @click="closeModal"
-          >
+          <button class="flex items-center justify-center w-8 h-8 ml-2" @click="closeModal">
             <IconsCloseIcon />
           </button>
         </div>
         <ModalSocial />
-        <h3
-          class="text-base font-semibold leading-6 text-gray-900 dark:text-[#999] text-center"
-        >
+        <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-[#999] text-center">
           {{ $t('LoginRegistration.orInputEmail') }}
         </h3>
-        <UForm
-          v-auto-animate
-          :schema="schema"
-          :state="state"
-          class="space-y-4"
-          @submit="handleSubmit"
-        >
+        <UForm v-auto-animate :schema="schema" :state="state" class="space-y-4" @submit="handleSubmit">
           <div class="space-y-3 mt-2">
             <UFormGroup
               name="email"
@@ -273,9 +243,7 @@ watch(
                   @blur="handleBlur('password')"
                 >
                   <template #leading>
-                    <IconsLockClosedIcon
-                      class="absolute left-2 top-1/2 transform -translate-y-1/2"
-                    />
+                    <IconsLockClosedIcon class="absolute left-2 top-1/2 transform -translate-y-1/2" />
                   </template>
                   <label>{{ $t('LoginRegistration.password') }}</label>
                 </UInput>
@@ -294,9 +262,7 @@ watch(
                   @blur="handleBlur('password')"
                 >
                   <template #leading>
-                    <IconsLockClosedIcon
-                      class="absolute left-2 top-1/2 transform -translate-y-1/2"
-                    />
+                    <IconsLockClosedIcon class="absolute left-2 top-1/2 transform -translate-y-1/2" />
                   </template>
                   <label>{{ $t('LoginRegistration.password') }}</label>
                 </UInput>
@@ -306,9 +272,7 @@ watch(
                   class="password-toggle absolute right-2 top-1/2 transform -translate-y-1/2"
                   @click="handleTogglePasswordVisibility"
                 >
-                  <component
-                    :is="togglePasswordVisibility ? EyeSlashIcon : EyeIcon"
-                  />
+                  <component :is="togglePasswordVisibility ? EyeSlashIcon : EyeIcon" />
                 </button>
               </div>
             </UFormGroup>
@@ -341,9 +305,7 @@ watch(
                 @blur="handleBlur('passConfirm')"
               >
                 <template #leading>
-                  <IconsLockClosedIcon
-                    class="absolute left-2 top-1/2 transform -translate-y-1/2"
-                  />
+                  <IconsLockClosedIcon class="absolute left-2 top-1/2 transform -translate-y-1/2" />
                 </template>
                 <label>{{ $t('LoginRegistration.repeat') }}</label>
               </UInput>
@@ -363,9 +325,7 @@ watch(
                 @blur="handleBlur('passConfirm')"
               >
                 <template #leading>
-                  <IconsLockClosedIcon
-                    class="absolute left-2 top-1/2 transform -translate-y-1/2"
-                  />
+                  <IconsLockClosedIcon class="absolute left-2 top-1/2 transform -translate-y-1/2" />
                 </template>
                 <label>{{ $t('LoginRegistration.repeat') }}</label>
               </UInput>
@@ -374,9 +334,7 @@ watch(
                 class="password-toggle absolute right-2 top-1/2 transform -translate-y-1/2"
                 @click="handleTogglePasswordVisibility"
               >
-                <component
-                  :is="togglePasswordVisibility ? EyeSlashIcon : EyeIcon"
-                />
+                <component :is="togglePasswordVisibility ? EyeSlashIcon : EyeIcon" />
               </button>
             </div>
           </UFormGroup>
@@ -387,9 +345,7 @@ watch(
             color="black"
             :loading="isLoading"
           >
-            {{
-              isEmailValid && userIsNotRegistered ? 'Зареєструватись' : 'Увійти'
-            }}
+            {{ isEmailValid && userIsNotRegistered ? 'Зареєструватись' : 'Увійти' }}
           </UButton>
         </UForm>
       </UCard>
@@ -401,9 +357,7 @@ watch(
         }"
       >
         <div class="flex items-center">
-          <h3
-            class="flex-grow text-base font-semibold leading-6 text-gray-900 dark:text-[#999] text-center"
-          >
+          <h3 class="flex-grow text-base font-semibold leading-6 text-gray-900 dark:text-[#999] text-center">
             {{ $t('LoginRegistration.graduate') }}
           </h3>
           <UButton
@@ -419,9 +373,7 @@ watch(
             "
           />
         </div>
-        <h3
-          class="text-base font-semibold leading-6 text-gray-900 dark:text-[#999] text-center"
-        >
+        <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-[#999] text-center">
           {{ $t('LoginRegistration.sendEmail') }} {{ state.email }}
         </h3>
       </UCard>

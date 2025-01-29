@@ -2,31 +2,31 @@
   <div class="menu-group">
     <ul class="menu-list">
       <li>
-        <NuxtLink class="hover:text-primary-300" to="/">{{
-          $t('menu.home')
-        }}</NuxtLink>
+        <NuxtLink class="hover:text-primary-300" to="/">
+          {{ $t('menu.home') }}
+        </NuxtLink>
       </li>
       <li>
-        <NuxtLink class="hover:text-primary-300" to="/about">{{
-          $t('menu.about')
-        }}</NuxtLink>
+        <NuxtLink class="hover:text-primary-300" to="/about">
+          {{ $t('menu.about') }}
+        </NuxtLink>
         <ul class="submenu">
           <li>
-            <NuxtLink class="hover:text-primary-300" to="/reporting">{{
-              $t('menu.reporting')
-            }}</NuxtLink>
+            <NuxtLink class="hover:text-primary-300" to="/reporting">
+              {{ $t('menu.reporting') }}
+            </NuxtLink>
           </li>
         </ul>
       </li>
       <li>
-        <NuxtLink class="hover:text-primary-300" to="/blog">{{
-          $t('menu.blog')
-        }}</NuxtLink>
+        <NuxtLink class="hover:text-primary-300" to="/blog">
+          {{ $t('menu.blog') }}
+        </NuxtLink>
       </li>
       <li>
-        <NuxtLink class="hover:text-primary-300" to="/resources">{{
-          $t('menu.resources')
-        }}</NuxtLink>
+        <NuxtLink class="hover:text-primary-300" to="/resources">
+          {{ $t('menu.resources') }}
+        </NuxtLink>
         <!-- <ul class="submenu">
           <li>
             <NuxtLink to="/housing">{{ $t('menu.housing') }}</NuxtLink>
@@ -40,9 +40,9 @@
         </ul> -->
       </li>
       <li>
-        <NuxtLink class="hover:text-primary-300" to="/join">{{
-          $t('menu.join')
-        }}</NuxtLink>
+        <NuxtLink class="hover:text-primary-300" to="/join">
+          {{ $t('menu.join') }}
+        </NuxtLink>
         <!-- <ul class="submenu">
           <li>
             <NuxtLink to="/donate">{{ $t('menu.donate') }}</NuxtLink>

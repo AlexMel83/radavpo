@@ -12,13 +12,7 @@
         <MagnifyingGlassIcon class="icon-class text-black dark:text-white" />
       </template>
       <template #trailing>
-        <UButton
-          v-show="searchTerm !== ''"
-          color="gray"
-          variant="link"
-          :padded="false"
-          @click="searchTerm = ''"
-        >
+        <UButton v-show="searchTerm !== ''" color="gray" variant="link" :padded="false" @click="searchTerm = ''">
           <CloseIcon class="icon-class" />
         </UButton>
       </template>

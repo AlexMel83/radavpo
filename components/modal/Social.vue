@@ -40,12 +40,7 @@ const handleSocialLogin = async (provider) => {
     </div>
 
     <!-- Error Notification -->
-    <UNotifications
-      v-if="errors.textError"
-      color="red"
-      :timeout="3000"
-      class="mt-4"
-    >
+    <UNotifications v-if="errors.textError" color="red" :timeout="3000" class="mt-4">
       {{ errors.textError }}
     </UNotifications>
   </div>

@@ -64,11 +64,7 @@ watch(
 
 const isInCabinet = computed(() => {
   const currentPath = route.path;
-  return (
-    currentPath.startsWith('/manager') ||
-    currentPath.startsWith('/user') ||
-    currentPath.startsWith('/admin')
-  );
+  return currentPath.startsWith('/manager') || currentPath.startsWith('/user') || currentPath.startsWith('/admin');
 });
 
 const setRout = () => {

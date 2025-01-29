@@ -9,22 +9,14 @@
       :class="{ 'in-footer': isScrollToTopInFooter, show: showScrollToTop }"
       @click="scrollToTop"
     >
-      <svg
-        width="50"
-        height="50"
-        viewBox="0 0 50 50"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect
           x="0.5"
           y="0.5"
           width="49"
           height="49"
           rx="24.5"
-          :stroke="
-            isScrollToTopInFooter ? 'var(--white-color)' : 'var(--footer-bg)'
-          "
+          :stroke="isScrollToTopInFooter ? 'var(--white-color)' : 'var(--footer-bg)'"
         />
         <rect
           x="3.5"
@@ -32,15 +24,11 @@
           width="43"
           height="43"
           rx="21.5"
-          :stroke="
-            isScrollToTopInFooter ? 'var(--white-color)' : 'var(--footer-bg)'
-          "
+          :stroke="isScrollToTopInFooter ? 'var(--white-color)' : 'var(--footer-bg)'"
         />
         <path
           d="M26.0607 18.9596C25.4749 18.3738 24.5251 18.3738 23.9393 18.9596L14.3934 28.5055C13.8076 29.0913 13.8076 30.0411 14.3934 30.6269C14.9792 31.2127 15.9289 31.2127 16.5147 30.6269L25 22.1416L33.4853 30.6269C34.0711 31.2127 35.0208 31.2127 35.6066 30.6269C36.1924 30.0411 36.1924 29.0913 35.6066 28.5055L26.0607 18.9596ZM26.5 21.0203L26.5 20.0203L23.5 20.0203L23.5 21.0203L26.5 21.0203Z"
-          :fill="
-            isScrollToTopInFooter ? 'var(--white-color)' : 'var(--footer-bg)'
-          "
+          :fill="isScrollToTopInFooter ? 'var(--white-color)' : 'var(--footer-bg)'"
         />
       </svg>
     </button>
@@ -66,8 +54,7 @@ const scrollToTop = () => {
 const handleScroll = () => {
   if (footerRef.value) {
     const footerRect = footerRef.value;
-    const isInFooter =
-      footerRect.top <= window.innerHeight && footerRect.bottom >= 0;
+    const isInFooter = footerRect.top <= window.innerHeight && footerRect.bottom >= 0;
 
     isScrollToTopInFooter.value = isInFooter;
 

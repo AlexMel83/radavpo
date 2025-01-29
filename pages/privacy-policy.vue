@@ -19,10 +19,7 @@
 
           <p class="mb-4">
             {{ $t('PrivacyPolicy.ourSite') }}
-            <a
-              href="https://cfhope.in.ua"
-              target="__blank"
-              class="text-blue-600 hover:text-blue-800"
+            <a href="https://cfhope.in.ua" target="__blank" class="text-blue-600 hover:text-blue-800"
               >https://cfhope.in.ua</a
             >
           </p>
@@ -74,11 +71,7 @@
           </h2>
           <p class="mb-4">
             {{ $t('PrivacyPolicy.contactsDescription')
-            }}<a
-              href="mailto:admin@memory.pp.ua"
-              class="text-blue-600 hover:text-blue-800"
-              >admin@memory.pp.ua</a
-            >
+            }}<a href="mailto:admin@memory.pp.ua" class="text-blue-600 hover:text-blue-800">admin@memory.pp.ua</a>
           </p>
         </div>
       </div>

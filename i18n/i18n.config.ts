@@ -47,8 +47,7 @@ export default defineI18nConfig(() => ({
       },
       DonationServiceTerms: {
         title: 'Platform Terms of Use',
-        contractTitle:
-          'CONTRACT of a public offer to provide a charitable donation',
+        contractTitle: 'CONTRACT of a public offer to provide a charitable donation',
         description:
           'This public offer to provide a charitable donation (hereinafter - the Offer) is addressed to an unspecified circle of individuals - natural and legal entities (hereinafter - the Benefactor), who are visitors to the website on the Internet: https://memory.pp.ua (hereinafter - the Site), and is an official and public offer of the Charitable Organization "Charitable Fund of Social Reforms and Support "Nadia" (Identification code of legal entity 26220897), in the person of the Director Oleksandr Mykolayovych Meleshko, acting on the basis of the Statute (hereinafter - the Foundation), to conclude a contract on the provision of a charitable donation (hereinafter - the Agreement), the subject and essential conditions of which are indicated below:',
         definitionTitle: '1. Terms and Definitions',
@@ -71,8 +70,7 @@ export default defineI18nConfig(() => ({
         subjectTitle: '2. The subject of the contract',
         subjectDescription1:
           "2.1. The subject of this Agreement is the free and voluntary transfer by the Benefactor to the property of the Fund by making a charitable donation for the implementation of the Foundation's statutory activities, including (but not exclusively) the provision of charitable assistance to gifted children, children with disabilities, orphans and deprived of parental care, children of the participants of the operation of the joint forces (USO / ATO) and forced migrants, children living in the military conflict zone in the east of Ukraine, within the framework of the Fund's programs and projects in the fields of culture, education, health care, spiritual and physical development of the individual in accordance with the Law of Ukraine 'On Charitable Activities and Charitable Organizations'",
-        subjectDescription2:
-          '2.2. The benefactor independently determines the size of the charitable donation.',
+        subjectDescription2: '2.2. The benefactor independently determines the size of the charitable donation.',
         subjectDescription3:
           '2.3. The subject of this Agreement is not directly or indirectly receiving profit by any of the parties to this Agreement.',
         contactsTitle: '11. Location and bank details',
@@ -89,8 +87,7 @@ export default defineI18nConfig(() => ({
       Activate: {
         title: 'Account activation',
         process: 'Activation...',
-        graduate:
-          'Congratulations! Your account has been successfully activated!',
+        graduate: 'Congratulations! Your account has been successfully activated!',
         askForData: 'Fill in the data to complete the registration',
         name: 'Name:',
         surname: 'Surname:',
@@ -104,8 +101,7 @@ export default defineI18nConfig(() => ({
         process: 'Authentication...',
         graduate: 'Congratulations! Your authentication has been successfully!',
         askForData1: 'But your profile data are incomplete.',
-        askForData2:
-          'Add information about yourself, in order to be able to use the platform.',
+        askForData2: 'Add information about yourself, in order to be able to use the platform.',
         name: 'Name',
         surname: 'Surname:',
         phone: 'Phone:',
@@ -118,14 +114,8 @@ export default defineI18nConfig(() => ({
         volonters: 'We are looking for volunteers!',
         volontersDescription:
           'To develop our geoportal, we are looking for volunteers who will help make it more useful for society. In particular, we need:',
-        designers: [
-          'Designers',
-          ' — to improve the user interface and overall visual design.',
-        ],
-        QA: [
-          'Testers',
-          ' — to ensure the quality of the portal and identify errors.',
-        ],
+        designers: ['Designers', ' — to improve the user interface and overall visual design.'],
+        QA: ['Testers', ' — to ensure the quality of the portal and identify errors.'],
         lawyers: [
           'Lawyers',
           ' — to fill the thematic sections and reference books of the platform with useful information and help in the development of document templates aimed at making it easier for IDPs to receive compensation for lost or damaged property.',
@@ -142,10 +132,8 @@ export default defineI18nConfig(() => ({
         supportDescription:
           'Your donations will help pay for the services and infrastructure we need to keep the project going. Any financial support and sharing would be greatly appreciated!',
         joinTitle: 'Join our project!',
-        joinDescriptionText:
-          'If you want to become part of our team or provide financial support, please contact us ',
-        joinDescriptionAfterLink:
-          '. We welcome any input, regardless of your experience or capabilities!',
+        joinDescriptionText: 'If you want to become part of our team or provide financial support, please contact us ',
+        joinDescriptionAfterLink: '. We welcome any input, regardless of your experience or capabilities!',
         aboutCompany: [
           'If you want to know more about our team: ',
           "Charitable fund of social reforms and support 'Hope'",
@@ -175,8 +163,7 @@ export default defineI18nConfig(() => ({
         changeDescription:
           'We may update our privacy policy from time to time. All changes will be posted on this page.',
         contactsTitle: 'Contact information',
-        contactsDescription:
-          'If you have any questions about our privacy policy, please contact us by email:',
+        contactsDescription: 'If you have any questions about our privacy policy, please contact us by email:',
       },
       LoginRegistration: {
         title: 'Log in or register',
@@ -264,8 +251,7 @@ export default defineI18nConfig(() => ({
       },
       DonationServiceTerms: {
         title: 'Умови використання платформи',
-        contractTitle:
-          'ДОГОВІР публічної оферти про надання благодійної пожертви',
+        contractTitle: 'ДОГОВІР публічної оферти про надання благодійної пожертви',
         description:
           'Ця публічна оферта про надання благодійної пожертви (надалі – Оферта) адресована невизначеному колу осіб – фізичним та юридичним особам (надалі – Благодійник), що є відвідувачами сайту в мережі Інтернет: https://memory.pp.ua (надалі – Сайт), і є офіційною і публічною пропозицією Благодійної організації "Благодійний фонд соціальних реформ та підтримки "Надія" (Ідентифікаційний код юридичної особи 26220897), в особі Директора Мелешка Олександра Миколайовича, який діє на підставі Статуту (надалі – Фонд), укласти договір про надання благодійної пожертви (надалі – Договір), предмет та істотні умови якого вказані нижче:',
         definitionTitle: '1. Терміни та визначення',
@@ -288,8 +274,7 @@ export default defineI18nConfig(() => ({
         subjectTitle: '2. Предмет договору',
         subjectDescription1:
           "2.1. Предметом цього Договору є безоплатна та добровільна передача Благодійником у власність Фонду грошових коштів шляхом здійснення благодійної пожертви на здійснення статутної діяльності Фонду, в тому числі (але не виключно) з надання благодійної допомоги обдарованим дітям, дітям з інвалідністю, дітям-сиротам та позбавленим батьківського піклування, дітям учасників операції об'єднаних сил (ООС / АТО) та вимушених переселенців, дітям, які проживають у зоні військового конфлікту на сході України, в рамках програм Фонду та проектів у сфері культури, освіти, охорони здоров'я, духовного і фізичного розвитку особистості відповідно до Закону України «Про благодійну діяльність та благодійні організації».",
-        subjectDescription2:
-          '2.2. Благодійник самостійно визначає розмір благодійної пожертви.',
+        subjectDescription2: '2.2. Благодійник самостійно визначає розмір благодійної пожертви.',
         subjectDescription3:
           '2.3. Предметом цього Договору не є отримання прямо чи опосередковано прибутку жодною зі сторін цього Договору.',
         contactsTitle: '11. Місцезнаходження та банківські реквізити',
@@ -320,8 +305,7 @@ export default defineI18nConfig(() => ({
         process: 'Аутентифікація...',
         graduate: ' Вітаємо аутентифікація пройшла успішно!',
         askForData1: 'Але дані Вашого профілю неповні.',
-        askForData2:
-          'Додайте інформації про себе, щоб можна було користуватись платформою.',
+        askForData2: 'Додайте інформації про себе, щоб можна було користуватись платформою.',
         name: 'Ім’я:',
         surname: 'Прізвище:',
         phone: 'Телефон:',
@@ -338,10 +322,7 @@ export default defineI18nConfig(() => ({
           'Дизайнери',
           ' — для покращення користувальницького інтерфейсу та загального візуального оформлення.',
         ],
-        QA: [
-          'Тестувальники',
-          ' — для забезпечення якості роботи порталу та виявлення помилок.',
-        ],
+        QA: ['Тестувальники', ' — для забезпечення якості роботи порталу та виявлення помилок.'],
         lawyers: [
           'Юристи',
           ' — для наповнення тематичних розділів та довідників платформи, корисною інформацією та допомоги розроблення шаблонів документів націлених спростити ВПО отримання компенсації за втрачене або пошкоджене майно.',
@@ -360,8 +341,7 @@ export default defineI18nConfig(() => ({
         joinTitle: 'Приєднуйтесь до нашого проекту!',
         joinDescriptionText:
           "Якщо ви хочете стати частиною нашої команди або надати фінансову підтримки, зв'яжіться з нами ",
-        joinDescriptionAfterLink:
-          '. Ми будемо раді будь-якому внеску, незалежно від вашого досвіду чи можливостей!',
+        joinDescriptionAfterLink: '. Ми будемо раді будь-якому внеску, незалежно від вашого досвіду чи можливостей!',
         aboutCompany: [
           'Якщо ви хочете дізнатись більше про нашу команду: ',
           'Благодійний фонд соціальних реформ та підтримки "Надія".',
@@ -369,8 +349,7 @@ export default defineI18nConfig(() => ({
       },
       PrivacyPolicy: {
         title: 'Політика конфіденційності',
-        subTitle:
-          "Мапа пам'яті: збереження історії та відновлення справедливості",
+        subTitle: "Мапа пам'яті: збереження історії та відновлення справедливості",
         fundName: 'Благодійний фонд соціальних реформ "Надія"',
         ourSite: 'Наш основний веб-сайт:',
         collectInfoTitle: 'Збір та використання інформації',
@@ -397,8 +376,7 @@ export default defineI18nConfig(() => ({
       },
       GeoError: {
         title: 'Помилка:',
-        description:
-          'Для отримання доступу до мапи пам’яті необхідно увімкнути служби мапи',
+        description: 'Для отримання доступу до мапи пам’яті необхідно увімкнути служби мапи',
         close: 'Закрити',
       },
       LoginRegistration: {

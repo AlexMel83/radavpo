@@ -5,11 +5,7 @@
         <div class="cursor-pointer logo" @click="hideMenu">
           <NuxtLink to="/" class="inline-block relative">
             <div class="absolute inset-0 bg-white blur-sm" />
-            <img
-              src="/cfhope-logo-tranparent.png"
-              alt="logo"
-              class="relative h-auto w-12 object-contain"
-            />
+            <img src="/cfhope-logo-tranparent.png" alt="logo" class="relative h-auto w-12 object-contain" />
           </NuxtLink>
         </div>
         <div class="header-buttons">
@@ -22,33 +18,22 @@
                 v-for="(lang, index) in locales"
                 :key="lang.code"
                 :class="{
-                  'text-primary-300 hover:text-primary-500':
-                    lang.code === currentLocale,
+                  'text-primary-300 hover:text-primary-500': lang.code === currentLocale,
                 }"
                 class="flex items-center"
                 @click="changeLanguage(lang.code)"
               >
                 <span class="hover:scale-110">{{ lang.name }}</span>
-                <span v-if="index < locales.length - 1" class="text-white px-1"
-                  >|</span
-                >
+                <span v-if="index < locales.length - 1" class="text-white px-1">|</span>
               </button>
             </div>
           </div>
           <ColorMode class="color-mode" />
           <button icon class="burger" @click="toggleMenu">
             <IconsBarsIcon v-if="!isMenuOpen" class="h-8 w-8 hover:scale-110" />
-            <IconsCloseIcon
-              v-else
-              class="h-8 w-8 text-white hover:scale-110 hover:text-white"
-            />
+            <IconsCloseIcon v-else class="h-8 w-8 text-white hover:scale-110 hover:text-white" />
           </button>
-          <button
-            icon
-            class="search-icon mx-3"
-            :class="{ 'text-primary-300': isSearchVisible }"
-            @click="toggleSearch"
-          >
+          <button icon class="search-icon mx-3" :class="{ 'text-primary-300': isSearchVisible }" @click="toggleSearch">
             <IconsMagnifyingGlassIcon class="h-6 w-6" />
           </button>
         </div>

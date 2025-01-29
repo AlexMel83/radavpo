@@ -5,11 +5,7 @@
         <div class="cursor-pointer logo py-2" @click="hideMenu">
           <NuxtLink to="/" class="inline-block relative">
             <div class="absolute inset-0 bg-white blur-sm" />
-            <img
-              src="/cfhope-logo-tranparent.png"
-              alt="logo"
-              class="relative h-auto w-12 object-contain"
-            />
+            <img src="/cfhope-logo-tranparent.png" alt="logo" class="relative h-auto w-12 object-contain" />
           </NuxtLink>
         </div>
         <Menu />
@@ -20,26 +16,20 @@
                 v-for="(lang, index) in locales"
                 :key="lang.code"
                 :class="{
-                  'text-primary-300 hover:text-primary-500':
-                    lang.code === currentLocale,
+                  'text-primary-300 hover:text-primary-500': lang.code === currentLocale,
                 }"
                 class="flex items-center"
                 @click="changeLanguage(lang.code)"
               >
                 <span class="hover:scale-110">{{ lang.name }}</span>
-                <span v-if="index < locales.length - 1" class="text-white px-1"
-                  >|</span
-                >
+                <span v-if="index < locales.length - 1" class="text-white px-1">|</span>
               </button>
             </div>
           </div>
           <ColorMode class="color-mode" />
           <button class="md:hidden" @click="toggleMenu">
             <IconsBarsIcon v-if="!menuOpen" class="h-8 w-8 hover:scale-110" />
-            <IconsCloseIcon
-              v-else
-              class="h-8 w-8 text-white hover:scale-110 hover:text-white"
-            />
+            <IconsCloseIcon v-else class="h-8 w-8 text-white hover:scale-110 hover:text-white" />
           </button>
           <template v-if="!isAuthed">
             <button
@@ -49,21 +39,13 @@
               {{ $t('header.enter') }}
             </button>
           </template>
-          <button
-            icon
-            class="search-icon mx-3"
-            :class="{ 'text-primary-300': isSearchVisible }"
-            @click="toggleSearch"
-          >
+          <button icon class="search-icon mx-3" :class="{ 'text-primary-300': isSearchVisible }" @click="toggleSearch">
             <IconsMagnifyingGlassIcon class="h-6 w-6" />
           </button>
         </div>
       </div>
       <div class="mt-4">
-        <LoginRegistration
-          ref="loginRegistrationRef"
-          @modal-closed="handleModalClosed"
-        />
+        <LoginRegistration ref="loginRegistrationRef" @modal-closed="handleModalClosed" />
       </div>
       <p class="text-center text-gray-200 mb-2 text-xl">
         <span class="font-bold">{{ $t('header.title') }}</span>
@@ -88,6 +70,7 @@ const authStore = useAuthStore();
 const menuOpen = ref(false);
 const route = useRoute();
 const router = useRouter();
+const checkVar = ref(false);
 
 const isHomePage = computed(() => route.path === '/');
 const isAuthed = computed(() => authStore.isAuthed);

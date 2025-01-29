@@ -31,11 +31,7 @@
       </ul>
       <p class="mt-2 text-lg">
         {{ $t('HowToHelp.ifYouStarterText') }}
-        <a
-          href="mailto:admin@memory.pp.ua"
-          target="_blank"
-          class="text-blue-600 hover:text-blue-800"
-        >
+        <a href="mailto:admin@memory.pp.ua" target="_blank" class="text-blue-600 hover:text-blue-800">
           admin@memory.pp.ua
         </a>
         {{ $t('HowToHelp.ifYouStarterAfterLink') }}
@@ -57,21 +53,14 @@
       </h3>
       <p class="mt-2 text-lg">
         {{ $t('HowToHelp.joinDescriptionText')
-        }}<a
-          href="mailto:admin@memory.pp.ua"
-          _blank
-          class="text-blue-600 hover:text-blue-800"
-          >admin@memory.pp.ua</a
+        }}<a href="mailto:admin@memory.pp.ua" _blank class="text-blue-600 hover:text-blue-800">admin@memory.pp.ua</a
         >{{ $t('HowToHelp.joinDescriptionAfterLink') }}
       </p>
 
       <!-- <p class="mt-2 text-lg">{{ $t('HowToHelp.aboutCompany') }}</p> -->
       <p class="mt-2 text-lg">
         {{ $t('HowToHelp.aboutCompany[0]')
-        }}<a
-          href="https://cfhope.in.ua"
-          target="__blank"
-          class="text-blue-500 underline hover:text-blue-700"
+        }}<a href="https://cfhope.in.ua" target="__blank" class="text-blue-500 underline hover:text-blue-700"
           >{{ $t('HowToHelp.aboutCompany[1]') }}
         </a>
       </p>

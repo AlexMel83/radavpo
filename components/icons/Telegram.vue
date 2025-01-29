@@ -6,14 +6,7 @@
       fill="white"
     />
     <defs>
-      <linearGradient
-        id="paint0_linear_87_7225"
-        x1="16"
-        y1="2"
-        x2="16"
-        y2="30"
-        gradientUnits="userSpaceOnUse"
-      >
+      <linearGradient id="paint0_linear_87_7225" x1="16" y1="2" x2="16" y2="30" gradientUnits="userSpaceOnUse">
         <stop stop-color="#37BBFE" />
         <stop offset="1" stop-color="#007DBB" />
       </linearGradient>

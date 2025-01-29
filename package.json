@@ -1,5 +1,5 @@
 {
-  "name": "RadaVPO",
+  "name": "rada_vpo",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,7 +9,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "start": "node .output/server/index.mjs",
-    "precommit": "eslint --config .eslintrc.json --fix \"**/*.{js,cjs,ts,vue}\" --ignore-pattern \"**/*.spec.{js,cjs,ts,vue}\" && prettier --write \"**/*.{js,cjs,ts,css,scss,vue}\"",
+    "precommit": "eslint --fix \"./**/*.{js,ts,vue}\" && prettier --write \"./**/*.{js,ts,vue,css,scss}\"",
     "prepare": "husky install"
   },
   "devDependencies": {
