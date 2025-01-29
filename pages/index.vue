@@ -64,6 +64,7 @@
           </div>
         </div>
       </div>
+      <ShareButtons class="max-w-[800px]" :page-object="{ title: $t('header.title') }" />
     </div>
   </div>
 </template>

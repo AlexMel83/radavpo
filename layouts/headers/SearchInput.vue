@@ -39,8 +39,6 @@ watch(
 </script>
 
 <style scoped>
-@import '../assets/src/styles.css';
-
 .search-wrapper {
   padding: 0 10px 5px 10px;
   width: 100%;

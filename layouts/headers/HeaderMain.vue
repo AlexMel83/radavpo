@@ -62,8 +62,10 @@
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useAuthStore } from '@/stores/auth.store';
-import Menu from './Menu.vue';
 import LoginRegistration from '@/components/modal/LoginRegistration.vue';
+import SearchInput from './SearchInput.vue';
+import ColorMode from './ColorMode.vue';
+import Menu from './Menu.vue';
 
 const loginRegistrationRef = ref(null);
 const authStore = useAuthStore();

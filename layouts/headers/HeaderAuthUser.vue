@@ -57,7 +57,9 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import { useAuthStore } from '@/stores/auth.store.ts';
-import UserName from '~/layouts/headers/UserName.vue';
+import SearchInput from './SearchInput.vue';
+import ColorMode from './ColorMode.vue';
+import UserName from './UserName.vue';
 
 const store = useAuthStore();
 

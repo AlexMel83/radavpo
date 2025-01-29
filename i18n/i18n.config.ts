@@ -37,6 +37,9 @@ export default defineI18nConfig(() => ({
       SearchInput: {
         placeholder: 'Search by name',
       },
+      ShareButtons: {
+        sharedSocial: 'Sharing throug social media',
+      },
       Footer: {
         address: 'Avdiivka city, Molodijna street, 3A',
         terms: 'Terms of use',
@@ -240,6 +243,9 @@ export default defineI18nConfig(() => ({
       },
       SearchInput: {
         placeholder: 'Пошук по назві',
+      },
+      ShareButtons: {
+        sharedSocial: 'Поділитись через соціальні мережі',
       },
       Footer: {
         address: 'м. Авдіївка, вул. Молодіжна, 3А',
