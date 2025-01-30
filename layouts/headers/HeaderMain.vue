@@ -69,7 +69,6 @@
 </template>
 
 <script setup>
-import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useAuthStore, useAppStore } from '~/stores/app.store';
 import LoginRegistration from '@/components/modal/LoginRegistration.vue';
@@ -81,10 +80,8 @@ const loginRegistrationRef = ref(null);
 const authStore = useAuthStore();
 const store = useAppStore();
 const menuOpen = ref(false);
-const route = useRoute();
 const router = useRouter();
 
-const isHomePage = computed(() => route.path === '/');
 const isAuthed = computed(() => authStore.isAuthed);
 const isMenuOpen = computed(() => store.menuOpen);
 const isSearchVisible = ref(false);
