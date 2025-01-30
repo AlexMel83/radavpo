@@ -11,7 +11,7 @@
           @click="hideMenu"
         >
           <NuxtLink to="/" class="relative flex items-center space-x-2">
-            <div class="text-start flex flex-col text-gray-200 text-sm sm:text-base lg:text-lg">
+            <div class="text-start sm-md:max-w-[250px] flex flex-col text-gray-200 text-sm md:text-base lg:text-lg">
               <div class="font-bold truncate">
                 {{ $t('header.title') }}
               </div>
@@ -22,7 +22,7 @@
         <MenuDesctop class="hidden md:flex flex-1 justify-center min-w-[150px] sm:min-w-[200px]" />
         <!-- Кнопки справа -->
         <div
-          class="header-buttons hidden md:flex items-center justify-end gap-1 px-1 text-sm sm:text-base lg:text-lg flex-1 min-w-[120px] sm:min-w-[150px] lg:min-w-[200px]"
+          class="header-buttons hidden md:flex items-center justify-end gap-1 px-1 text-sm sm:text-base lg:text-lg flex-1"
         >
           <div class="languages_toggle flex flex-col items-start px-1">
             <button

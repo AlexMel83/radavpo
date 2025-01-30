@@ -1,7 +1,7 @@
 <template>
   <div class="menu-group mx-auto">
     <ul class="flex justify-around p-0 m-0 list-none">
-      <li class="relative mx-2 text-sm sm:text-base lg:text-lg">
+      <li class="relative mx-1 lg:mx-2 text-sm sm:text-base lg:text-lg">
         <NuxtLink
           class="hover:text-primary-300 p-1 inline-block transition-colors border-b-2 border-transparent hover:border-primary-300"
           to="/"
@@ -10,7 +10,7 @@
         </NuxtLink>
       </li>
       <li
-        class="relative mx-2 flex items-center group text-sm sm:text-base lg:text-lg"
+        class="relative mx-1 lg:mx-2 flex items-center group text-sm sm:text-base lg:text-lg"
         @mouseenter="isMenuAboutOpen = true"
         @mouseleave="isMenuAboutOpen = false"
       >
@@ -35,8 +35,16 @@
         <CollapsedIcon v-if="!isMenuAboutOpen" />
         <ExpandedIcon v-if="isMenuAboutOpen" class="text-primary-300" />
       </li>
+      <li class="relative mx-1 lg:mx-2 text-sm sm:text-base lg:text-lg">
+        <NuxtLink
+          class="hover:text-primary-300 p-1 inline-block transition-colors border-b-2 border-transparent hover:border-primary-300"
+          to="/page_under_construction"
+        >
+          {{ $t('menu.blog') }}
+        </NuxtLink>
+      </li>
       <li
-        class="relative mx-2 flex items-center group text-sm sm:text-base lg:text-lg"
+        class="relative mx-1 lg:mx-2 flex items-center group text-sm sm:text-base lg:text-lg"
         @mouseenter="isMenuResourcesOpen = true"
         @mouseleave="isMenuResourcesOpen = false"
       >
@@ -78,7 +86,7 @@
         <ExpandedIcon v-if="isMenuResourcesOpen" class="text-primary-300" />
       </li>
       <li
-        class="relative mx-2 flex items-center group text-sm sm:text-base lg:text-lg"
+        class="relative mx-1 lg:mx-2 flex items-center group text-sm sm:text-base lg:text-lg"
         @mouseenter="isMenuJoinOpen = true"
         @mouseleave="isMenuJoinOpen = false"
       >

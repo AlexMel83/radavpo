@@ -13,6 +13,7 @@ export default {
     extend: {},
     screens: {
       xs: '440px',
+      'sm-md': '830px',
       ...defaultTheme.screens,
     },
     zIndex: {
