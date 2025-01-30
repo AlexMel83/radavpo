@@ -41,7 +41,6 @@
               <IconsMagnifyingGlassIcon class="hover:scale-110 h-5 w-5" />
             </button>
           </div>
-
           <button
             v-if="!isAuthed"
             class="cabinet text-white rounded hover:scale-110 focus:outline-none min-w-[70px] py-2"
@@ -50,14 +49,18 @@
             <IconsUser class="mx-auto h-5 w-5" /> {{ $t('header.enter') }}
           </button>
         </div>
-
         <!-- Мобильное меню -->
-        <button icon class="burger md:hidden" @click="toggleMenu">
-          <IconsBarsIcon v-if="!isMenuOpen" class="h-8 w-8 hover:scale-110" />
-          <IconsCloseIcon v-else class="h-8 w-8 text-white hover:scale-110 hover:text-white" />
-        </button>
+        <div class="burger md:hidden">
+          <button @click="toggleMenu">
+            <IconsBarsIcon v-if="!isMenuOpen" class="h-8 w-8 hover:scale-110" />
+            <IconsCloseIcon v-else class="h-8 w-8 text-white hover:scale-110 hover:text-white" />
+          </button>
+          <MenuMobile
+            v-show="isMenuOpen"
+            class="transition-all duration-300 ease-in-out transform absolute left-0 right-0 bg-[var(--header-bg)] z-10 top-full p-4"
+          />
+        </div>
       </div>
-
       <div>
         <LoginRegistration ref="loginRegistrationRef" @modal-closed="handleModalClosed" />
       </div>
@@ -75,6 +78,7 @@ import LoginRegistration from '@/components/modal/LoginRegistration.vue';
 import SearchInput from './SearchInput.vue';
 import ColorMode from './ColorMode.vue';
 import MenuDesctop from './MenuDesctop.vue';
+import MenuMobile from './MenuMobile.vue';
 
 const loginRegistrationRef = ref(null);
 const authStore = useAuthStore();
@@ -125,8 +129,3 @@ const handleModalClosed = () => {
   menuOpen.value = false;
 };
 </script>
-
-<style scoped>
-@media (min-width: 768px) {
-}
-</style>
