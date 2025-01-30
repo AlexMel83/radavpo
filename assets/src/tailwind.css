@@ -4,6 +4,6 @@
 
 html,
 :host {
-  text-size-adjust: 100%; /* Современное свойство */
-  -webkit-text-size-adjust: 100%; /* Для устаревших браузеров */
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }

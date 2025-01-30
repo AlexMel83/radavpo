@@ -46,8 +46,8 @@ html {
 
 html,
 :host {
-  text-size-adjust: 100%; /* Современное свойство */
-  -webkit-text-size-adjust: 100%; /* Для устаревших браузеров */
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 * {
@@ -56,8 +56,3 @@ html,
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
 }
-
-/* button:hover,
-button:active {
-  color: white;
-} */

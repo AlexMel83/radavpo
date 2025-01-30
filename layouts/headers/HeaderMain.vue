@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'header-main': true, 'home-page': isHomePage }">
+  <div class="header-main text-white bg-[var(--header-bg)] sticky top-0 z-50">
     <div class="header-wrapper">
       <!-- Используем flex с равномерным распределением -->
       <div
@@ -19,15 +19,10 @@
             </div>
           </NuxtLink>
         </div>
-
-        <!-- Меню (занимает доступное пространство) -->
-        <div class="flex-1 flex justify-center min-w-[150px] sm:min-w-[200px]">
-          <MenuDesctop />
-        </div>
-
+        <MenuDesctop class="hidden md:flex flex-1 justify-center min-w-[150px] sm:min-w-[200px]" />
         <!-- Кнопки справа -->
         <div
-          class="header-buttons flex items-center justify-end gap-1 px-1 text-sm sm:text-base lg:text-lg flex-1 min-w-[120px] sm:min-w-[150px] lg:min-w-[200px]"
+          class="header-buttons hidden md:flex items-center justify-end gap-1 px-1 text-sm sm:text-base lg:text-lg flex-1 min-w-[120px] sm:min-w-[150px] lg:min-w-[200px]"
         >
           <div class="languages_toggle flex flex-col items-start px-1">
             <button
@@ -41,20 +36,26 @@
             </button>
           </div>
           <div class="flex flex-col items-center">
-            <ColorMode class="color-mode" />
+            <ColorMode />
             <button icon class="search-icon" :class="{ 'text-primary-300': isSearchVisible }" @click="toggleSearch">
-              <IconsMagnifyingGlassIcon class="h-5 w-5" />
+              <IconsMagnifyingGlassIcon class="hover:scale-110 h-5 w-5" />
             </button>
           </div>
 
           <button
             v-if="!isAuthed"
-            class="cabinet hidden md:block text-white rounded hover:scale-110 focus:outline-none min-w-[70px] py-2"
+            class="cabinet text-white rounded hover:scale-110 focus:outline-none min-w-[70px] py-2"
             @click="openLoginModal"
           >
             <IconsUser class="mx-auto h-5 w-5" /> {{ $t('header.enter') }}
           </button>
         </div>
+
+        <!-- Мобильное меню -->
+        <button icon class="burger md:hidden" @click="toggleMenu">
+          <IconsBarsIcon v-if="!isMenuOpen" class="h-8 w-8 hover:scale-110" />
+          <IconsCloseIcon v-else class="h-8 w-8 text-white hover:scale-110 hover:text-white" />
+        </button>
       </div>
 
       <div>
@@ -70,7 +71,7 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { useAuthStore } from '~/stores/app.store';
+import { useAuthStore, useAppStore } from '~/stores/app.store';
 import LoginRegistration from '@/components/modal/LoginRegistration.vue';
 import SearchInput from './SearchInput.vue';
 import ColorMode from './ColorMode.vue';
@@ -78,12 +79,14 @@ import MenuDesctop from './MenuDesctop.vue';
 
 const loginRegistrationRef = ref(null);
 const authStore = useAuthStore();
+const store = useAppStore();
 const menuOpen = ref(false);
 const route = useRoute();
 const router = useRouter();
 
 const isHomePage = computed(() => route.path === '/');
 const isAuthed = computed(() => authStore.isAuthed);
+const isMenuOpen = computed(() => store.menuOpen);
 const isSearchVisible = ref(false);
 
 //i18n
@@ -110,18 +113,15 @@ const openLoginModal = () => {
 };
 
 const hideMenu = () => {
-  menuOpen.value = false;
+  store.menuOpen = false;
 };
-
-// const toggleMenu = () => {
-//   menuOpen.value = !menuOpen.value;
-//   if (menuOpen.value) {
-//     openLoginModal();
-//   }
-// };
 
 const toggleSearch = () => {
   isSearchVisible.value = !isSearchVisible.value;
+};
+
+const toggleMenu = () => {
+  store.menuOpen = !store.menuOpen;
 };
 
 const handleModalClosed = () => {
@@ -130,134 +130,6 @@ const handleModalClosed = () => {
 </script>
 
 <style scoped>
-.search-container,
-.color-mode {
-  margin-right: 10px;
-}
-.search-icon:hover {
-  transform: scale(1.1);
-}
-
-.header-main {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  background-color: var(--header-bg);
-  color: var(--white-color);
-  position: relative;
-}
-
-.logo img {
-  width: 50px;
-  height: 30px;
-}
-
-.logo-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 10px;
-}
-
-.header-btn {
-  margin-left: 24px;
-  height: 30px;
-  display: none;
-  text-transform: capitalize;
-}
-
-.burger {
-  margin-left: 15px;
-  color: white;
-  background-color: transparent;
-  box-shadow: none;
-}
-
-.menu {
-  position: relative;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  background-color: var(--header-bg);
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 3px 0 0 0;
-}
-
-.header-menu-btn {
-  width: 100%;
-  max-width: 343px;
-  height: 46px;
-  text-transform: capitalize;
-}
-
-.header-menu-btn:active {
-  border-radius: 4px;
-  border: 1px solid var(--btn-border);
-  background: var(--white-color);
-}
-
-.header-menu-btn:not(:last-child) {
-  margin-bottom: 24px;
-}
-
-.header-buttons {
-  height: 30px;
-  display: flex;
-  align-items: center;
-}
-
-.lang-active {
-  font-weight: 700;
-}
-
-.bold {
-  font-size: 2.25rem;
-  font-weight: 900;
-}
-.is-user {
-  margin-right: 20px;
-  font-size: 16px;
-}
-.is-user span {
-  margin-right: 5px;
-}
-
 @media (min-width: 768px) {
-  .header-main.home-page {
-    background-image: url('~/assets/header_bg.png');
-    background-size: cover;
-  }
-
-  .logo img {
-    width: 84px;
-    height: 50px;
-  }
-
-  .burger {
-    display: none;
-  }
-
-  .header-btn {
-    display: block;
-    letter-spacing: normal;
-    font-size: 16px;
-    padding: 0 12px;
-  }
-
-  .header-buttons {
-    display: flex;
-    align-items: center;
-  }
-  /* .menu {
-    display: none;
-  } */
-
-  @media (min-width: 1024px) {
-  }
 }
 </style>
