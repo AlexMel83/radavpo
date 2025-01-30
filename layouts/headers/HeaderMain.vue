@@ -27,32 +27,32 @@
 
         <!-- Кнопки справа -->
         <div
-          class="header-buttons flex flex-wrap items-center justify-end gap-1 px-1 text-sm sm:text-base lg:text-lg flex-1 min-w-[120px] sm:min-w-[150px] lg:min-w-[200px]"
+          class="header-buttons flex items-center justify-end gap-1 px-1 text-sm sm:text-base lg:text-lg flex-1 min-w-[120px] sm:min-w-[150px] lg:min-w-[200px]"
         >
-          <div class="">
-            <div class="flex items-center px-1">
-              <button
-                v-for="(lang, index) in locales"
-                :key="lang.code"
-                :class="{ 'text-primary-300 hover:text-primary-500': lang.code === currentLocale }"
-                class="flex items-center"
-                @click="changeLanguage(lang.code)"
-              >
-                <span class="hover:scale-110">{{ lang.name }}</span>
-                <span v-if="index < locales.length - 1" class="text-white">|</span>
-              </button>
-            </div>
+          <div class="languages_toggle flex flex-col items-start px-1">
+            <button
+              v-for="lang in locales"
+              :key="lang.code"
+              :class="{ 'text-primary-300 hover:text-primary-500': lang.code === currentLocale }"
+              class="flex items-center w-full border-t border-white first:border-t-0"
+              @click="changeLanguage(lang.code)"
+            >
+              <span class="hover:scale-110">{{ lang.name }}</span>
+            </button>
           </div>
-          <ColorMode class="color-mode" />
-          <button icon class="search-icon" :class="{ 'text-primary-300': isSearchVisible }" @click="toggleSearch">
-            <IconsMagnifyingGlassIcon class="h-6 w-6" />
-          </button>
+          <div class="flex flex-col items-center">
+            <ColorMode class="color-mode" />
+            <button icon class="search-icon" :class="{ 'text-primary-300': isSearchVisible }" @click="toggleSearch">
+              <IconsMagnifyingGlassIcon class="h-5 w-5" />
+            </button>
+          </div>
+
           <button
             v-if="!isAuthed"
-            class="hidden md:block text-white rounded hover:scale-110 focus:outline-none min-w-[70px] py-2"
+            class="cabinet hidden md:block text-white rounded hover:scale-110 focus:outline-none min-w-[70px] py-2"
             @click="openLoginModal"
           >
-            {{ $t('header.enter') }}
+            <IconsUser class="mx-auto h-5 w-5" /> {{ $t('header.enter') }}
           </button>
         </div>
       </div>
