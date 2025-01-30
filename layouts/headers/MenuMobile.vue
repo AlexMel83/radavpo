@@ -19,7 +19,7 @@
           >
             {{ $t('menu.about') }}
           </NuxtLink>
-          <button @click="isMenuAboutOpen = !isMenuAboutOpen" class="ml-2">
+          <button class="ml-2" @click="isMenuAboutOpen = !isMenuAboutOpen">
             <CollapsedIcon v-if="!isMenuAboutOpen" />
             <ExpandedIcon v-if="isMenuAboutOpen" class="text-primary-300" />
           </button>
@@ -53,7 +53,7 @@
           >
             {{ $t('menu.resources') }}
           </NuxtLink>
-          <button @click="isMenuResourcesOpen = !isMenuResourcesOpen" class="ml-2">
+          <button class="ml-2" @click="isMenuResourcesOpen = !isMenuResourcesOpen">
             <CollapsedIcon v-if="!isMenuResourcesOpen" />
             <ExpandedIcon v-if="isMenuResourcesOpen" class="text-primary-300" />
           </button>
@@ -94,7 +94,7 @@
           >
             {{ $t('menu.join') }}
           </NuxtLink>
-          <button @click="isMenuJoinOpen = !isMenuJoinOpen" class="ml-2">
+          <button class="ml-2" @click="isMenuJoinOpen = !isMenuJoinOpen">
             <CollapsedIcon v-if="!isMenuJoinOpen" />
             <ExpandedIcon v-if="isMenuJoinOpen" class="text-primary-300" />
           </button>
