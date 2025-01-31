@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-group mx-auto" v-auto-animate>
+  <div v-auto-animate class="menu-group mx-auto">
     <ul class="flex flex-col p-0 m-0 list-none space-y-2 text-right">
       <!-- Home -->
       <li class="text-sm sm:text-base lg:text-lg">
