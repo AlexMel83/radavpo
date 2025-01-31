@@ -18,16 +18,16 @@
       Наші соціальні мережі:
       <div class="social-media flex justify-around w-full mt-3">
         <a href="https://www.facebook.com/cfhopeua" target="_blank" class="social">
-          <img width="32" height="32" src="/icons/facebook.png" alt="icon-facebook" />
+          <img width="32" height="32" src="/icons/facebook.png" alt="icon" />
         </a>
         <a href="https://t.me/cfhopeua" target="_blank" class="social">
-          <img width="32" height="32" src="/icons/telegram.png" alt="icon-telegram" />
+          <img width="32" height="32" src="/icons/telegram.png" alt="icon" />
         </a>
         <a href="viber://chat?number=+380987654321" target="_blank" class="social">
-          <img width="32" height="32" src="/icons/viber.png" alt="icon-viber" />
+          <img width="32" height="32" src="/icons/viber.png" alt="icon" />
         </a>
         <a href="https://www.instagram.com/cfhopeua/" target="_blank" class="social">
-          <img width="32" height="32" src="/icons/instagram.png" alt="icon-instagram" />
+          <img width="32" height="32" src="/icons/instagram.png" alt="icon" />
         </a>
       </div>
       <div class="flex items-center justify-between gap-4 my-3">
