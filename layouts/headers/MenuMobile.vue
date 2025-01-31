@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-group mx-auto">
+  <div class="menu-group mx-auto" v-auto-animate>
     <ul class="flex flex-col p-0 m-0 list-none space-y-2 text-right">
       <!-- Home -->
       <li class="text-sm sm:text-base lg:text-lg">
@@ -19,7 +19,7 @@
           >
             {{ $t('menu.about') }}
           </NuxtLink>
-          <button class="ml-2" @click="isMenuAboutOpen = !isMenuAboutOpen">
+          <button aria-label="submenu" class="ml-2" @click="isMenuAboutOpen = !isMenuAboutOpen">
             <CollapsedIcon v-if="!isMenuAboutOpen" />
             <ExpandedIcon v-if="isMenuAboutOpen" class="text-primary-300" />
           </button>
@@ -53,7 +53,7 @@
           >
             {{ $t('menu.resources') }}
           </NuxtLink>
-          <button class="ml-2" @click="isMenuResourcesOpen = !isMenuResourcesOpen">
+          <button aria-label="submenu" class="ml-2" @click="isMenuResourcesOpen = !isMenuResourcesOpen">
             <CollapsedIcon v-if="!isMenuResourcesOpen" />
             <ExpandedIcon v-if="isMenuResourcesOpen" class="text-primary-300" />
           </button>
@@ -94,7 +94,7 @@
           >
             {{ $t('menu.join') }}
           </NuxtLink>
-          <button class="ml-2" @click="isMenuJoinOpen = !isMenuJoinOpen">
+          <button aria-label="submenu" class="ml-2" @click="isMenuJoinOpen = !isMenuJoinOpen">
             <CollapsedIcon v-if="!isMenuJoinOpen" />
             <ExpandedIcon v-if="isMenuJoinOpen" class="text-primary-300" />
           </button>

@@ -30,20 +30,28 @@
               :key="lang.code"
               :class="{ 'text-primary-300 hover:text-primary-500': lang.code === currentLocale }"
               class="flex items-center w-full border-t border-white first:border-t-0"
+              aria-label="chengelanguage"
               @click="changeLanguage(lang.code)"
             >
               <span class="hover:scale-110">{{ lang.name }}</span>
             </button>
           </div>
-          <div class="flex flex-col items-center">
+          <div class="flex flex-col items-center gap-1">
             <ColorMode />
-            <button icon class="search-icon" :class="{ 'text-primary-300': isSearchVisible }" @click="toggleSearch">
+            <button
+              icon
+              class="search-icon"
+              aria-label="search"
+              :class="{ 'text-primary-300': isSearchVisible }"
+              @click="toggleSearch"
+            >
               <IconsMagnifyingGlassIcon class="hover:scale-110 h-5 w-5" />
             </button>
           </div>
           <button
             v-if="!isAuthed"
             class="cabinet text-white rounded hover:scale-110 focus:outline-none min-w-[70px] py-2"
+            aria-label="cabinet"
             @click="openLoginModal"
           >
             <IconsUser class="mx-auto h-5 w-5" /> {{ $t('header.enter') }}
@@ -51,12 +59,12 @@
         </div>
         <!-- Мобильное меню -->
         <div class="burger md:hidden">
-          <button @click="toggleMenu">
+          <button aria-label="mobilemenubutton" @click="toggleMenu">
             <IconsBarsIcon v-if="!isMenuOpen" class="h-8 w-8 hover:scale-110" />
             <IconsCloseIcon v-else class="h-8 w-8 text-white hover:scale-110 hover:text-white" />
           </button>
           <MenuMobile
-            v-show="isMenuOpen"
+            v-if="isMenuOpen"
             class="transition-all duration-300 ease-in-out transform absolute left-0 right-0 bg-[var(--header-bg)] z-10 top-full p-4"
           />
         </div>
