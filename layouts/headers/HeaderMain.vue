@@ -23,7 +23,7 @@
         <!-- Кнопки справа -->
         <HeaderButtons
           class="hidden md:flex"
-          :isSearchVisible="isSearchVisible"
+          :is-search-visible="isSearchVisible"
           @toggle-search="toggleSearch"
           @open-login-modal="openLoginModal"
         />

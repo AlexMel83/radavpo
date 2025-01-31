@@ -66,7 +66,7 @@ const openLoginModal = () => {
   emit('open-login-modal');
 };
 
-const props = defineProps({
+defineProps({
   isSearchVisible: Boolean,
 });
 

@@ -2,7 +2,7 @@
   <div class="menu-group mx-auto">
     <HeaderButtons
       class="flex md:hidden"
-      :isSearchVisible="isSearchVisible"
+      :is-search-visible="isSearchVisible"
       @toggle-search="toggleSearch"
       @open-login-modal="openLoginModal"
     />
