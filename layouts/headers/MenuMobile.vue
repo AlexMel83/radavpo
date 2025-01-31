@@ -1,6 +1,24 @@
 <template>
   <div class="menu-group mx-auto">
-    <ul class="flex flex-col p-0 m-0 list-none space-y-2 text-right">
+    <HeaderButtons
+      class="flex md:hidden"
+      :isSearchVisible="isSearchVisible"
+      @toggle-search="toggleSearch"
+      @open-login-modal="openLoginModal"
+    />
+    <button
+      v-if="!isAuthed"
+      class="cabinet flex text-white rounded hover:scale-110 focus:outline-none min-w-[70px] py-2 ml-auto"
+      aria-label="cabinet"
+      @click="openLoginModal"
+    >
+      {{ $t('header.enter') }} <IconsUser class="mx-auto h-5 w-5" />
+    </button>
+    <LoginRegistrationMobile v-if="isLoginMobaileOpen" />
+    <div v-if="isSearchVisible" class="search-container my-2">
+      <SearchInput />
+    </div>
+    <ul class="flex flex-col p-0 m-0 list-none space-y-2 text-right mt-5">
       <!-- Home -->
       <li class="text-sm sm:text-base lg:text-lg">
         <NuxtLink
@@ -133,8 +151,26 @@
 <script setup>
 import CollapsedIcon from '~/components/icons/CollapsedIcon.vue';
 import ExpandedIcon from '~/components/icons/ExpandedIcon.vue';
+import LoginRegistrationMobile from './LoginRegistrationMobile.vue';
+import { useAuthStore } from '~/stores/app.store';
+import HeaderButtons from './HeaderButtons.vue';
+import SearchInput from './SearchInput.vue';
 
+const isAuthed = computed(() => authStore.isAuthed);
+const loginRegistrationRef = ref(null);
 const isMenuResourcesOpen = ref(false);
 const isMenuAboutOpen = ref(false);
 const isMenuJoinOpen = ref(false);
+const authStore = useAuthStore();
+const isLoginMobaileOpen = ref(true);
+
+const isSearchVisible = ref(false);
+const toggleSearch = () => {
+  isSearchVisible.value = !isSearchVisible.value;
+};
+const openLoginModal = () => {
+  if (loginRegistrationRef.value) {
+    loginRegistrationRef.value.openModal();
+  }
+};
 </script>

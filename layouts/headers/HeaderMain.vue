@@ -21,42 +21,12 @@
         </div>
         <MenuDesctop class="hidden md:flex flex-1 justify-center min-w-[150px] sm:min-w-[200px]" />
         <!-- Кнопки справа -->
-        <div
-          class="header-buttons hidden md:flex items-center justify-end gap-1 px-1 text-sm sm:text-base lg:text-lg flex-1"
-        >
-          <div class="languages_toggle flex flex-col items-start px-1">
-            <button
-              v-for="lang in locales"
-              :key="lang.code"
-              :class="{ 'text-primary-300 hover:text-primary-500': lang.code === currentLocale }"
-              class="flex items-center w-full border-t border-white first:border-t-0"
-              aria-label="chengelanguage"
-              @click="changeLanguage(lang.code)"
-            >
-              <span class="hover:scale-110">{{ lang.name }}</span>
-            </button>
-          </div>
-          <div class="flex flex-col items-center gap-1">
-            <ColorMode />
-            <button
-              icon
-              class="search-icon"
-              aria-label="search"
-              :class="{ 'text-primary-300': isSearchVisible }"
-              @click="toggleSearch"
-            >
-              <IconsMagnifyingGlassIcon class="hover:scale-110 h-5 w-5" />
-            </button>
-          </div>
-          <button
-            v-if="!isAuthed"
-            class="cabinet text-white rounded hover:scale-110 focus:outline-none min-w-[70px] py-2"
-            aria-label="cabinet"
-            @click="openLoginModal"
-          >
-            <IconsUser class="mx-auto h-5 w-5" /> {{ $t('header.enter') }}
-          </button>
-        </div>
+        <HeaderButtons
+          class="hidden md:flex"
+          :isSearchVisible="isSearchVisible"
+          @toggle-search="toggleSearch"
+          @open-login-modal="openLoginModal"
+        />
         <!-- Мобильное меню -->
         <div class="burger md:hidden">
           <button aria-label="mobilemenubutton" @click="toggleMenu">
@@ -80,53 +50,27 @@
 </template>
 
 <script setup>
-import { useI18n } from 'vue-i18n';
-import { useAuthStore, useAppStore } from '~/stores/app.store';
 import LoginRegistration from '@/components/modal/LoginRegistration.vue';
+import { useAppStore } from '~/stores/app.store';
+import HeaderButtons from './HeaderButtons.vue';
 import SearchInput from './SearchInput.vue';
-import ColorMode from './ColorMode.vue';
 import MenuDesctop from './MenuDesctop.vue';
 import MenuMobile from './MenuMobile.vue';
 
-const loginRegistrationRef = ref(null);
-const authStore = useAuthStore();
-const store = useAppStore();
-const menuOpen = ref(false);
-const router = useRouter();
-
-const isAuthed = computed(() => authStore.isAuthed);
-const isMenuOpen = computed(() => store.menuOpen);
 const isSearchVisible = ref(false);
-
-//i18n
-const { locale, locales } = useI18n();
-const currentLocale = computed(() => locale.value);
-const changeLanguage = async (langCode) => {
-  try {
-    const currentRoute = router.currentRoute.value;
-    const newPath =
-      langCode === 'uk'
-        ? currentRoute.fullPath.replace(/^\/(en|uk)/, '')
-        : `/${langCode}${currentRoute.fullPath.replace(/^\/(en|uk)/, '')}`;
-    locale.value = langCode;
-    await router.push(newPath);
-  } catch (error) {
-    console.error('Failed to change language:', error);
-  }
-};
-
-const openLoginModal = () => {
-  if (loginRegistrationRef.value) {
-    loginRegistrationRef.value.openModal();
-  }
-};
-
-const hideMenu = () => {
-  store.menuOpen = false;
-};
+const store = useAppStore();
 
 const toggleSearch = () => {
   isSearchVisible.value = !isSearchVisible.value;
+};
+
+const loginRegistrationRef = ref(null);
+const menuOpen = ref(false);
+
+const isMenuOpen = computed(() => store.menuOpen);
+
+const hideMenu = () => {
+  store.menuOpen = false;
 };
 
 const toggleMenu = () => {
@@ -135,5 +79,11 @@ const toggleMenu = () => {
 
 const handleModalClosed = () => {
   menuOpen.value = false;
+};
+
+const openLoginModal = () => {
+  if (loginRegistrationRef.value) {
+    loginRegistrationRef.value.openModal();
+  }
 };
 </script>
