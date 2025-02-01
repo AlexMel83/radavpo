@@ -176,7 +176,9 @@
     </div>
     <div v-else>
       <div class="flex items-center">
-        <h3 class="flex-grow text-base font-semibold leading-6 text-gray-900 dark:text-[#999] text-center">
+        <h3
+          class="flex-grow text-base font-semibold leading-6 text-white md:text-gray-900 md:dark:text-[#999] text-right md:text-center"
+        >
           {{ $t('LoginRegistration.graduate') }}
         </h3>
         <UButton
