@@ -7,6 +7,7 @@ export default defineI18nConfig(() => ({
         enter: 'Enter',
         title: 'The Council of the IDPs:',
         subtitle: 'Starokostyantiniv',
+        autorization_close: 'Close autorization form',
       },
       menu: {
         home: 'Home',
@@ -214,6 +215,7 @@ export default defineI18nConfig(() => ({
         enter: 'Увійти',
         title: 'Рада ВПО:',
         subtitle: 'Старокостянтинів',
+        autorization_close: 'Закрити форму авторизації',
       },
       menu: {
         home: 'Головна',

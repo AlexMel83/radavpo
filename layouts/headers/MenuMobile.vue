@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-group mx-auto">
+  <div v-auto-animate class="menu-group mx-auto">
     <HeaderButtons
       class="flex md:hidden"
       :is-search-visible="isSearchVisible"
@@ -8,11 +8,13 @@
     />
     <button
       v-if="!isAuthed"
-      class="cabinet flex text-white rounded hover:scale-110 focus:outline-none min-w-[70px] py-2 ml-auto"
+      class="cabinet flex text-white rounded hover:scale-105 focus:outline-none min-w-[70px] py-2 ml-auto"
       aria-label="cabinet"
-      @click="openLoginModal"
+      @click="!isLoginMobaileOpen ? (isLoginMobaileOpen = true) : (isLoginMobaileOpen = false)"
     >
-      {{ $t('header.enter') }} <IconsUser class="mx-auto h-5 w-5" />
+      {{ isLoginMobaileOpen ? $t('header.autorization_close') : $t('header.enter') }}
+      <IconsUser v-if="!isLoginMobaileOpen" class="mx-auto h-5 w-5" />
+      <IconsCloseIcon v-else class="mx-1 h-6 w-6 text-white" />
     </button>
     <LoginRegistrationMobile v-if="isLoginMobaileOpen" />
     <div v-if="isSearchVisible" class="search-container my-2">
@@ -29,7 +31,7 @@
         </NuxtLink>
       </li>
       <!-- About -->
-      <li class="relative text-sm sm:text-base lg:text-lg">
+      <li v-auto-animate class="relative text-sm sm:text-base lg:text-lg">
         <div class="flex">
           <NuxtLink
             class="hover:text-primary-300 p-1 inline-block transition-colors border-b-2 border-transparent hover:border-primary-300 ml-auto"
@@ -42,7 +44,7 @@
             <ExpandedIcon v-if="isMenuAboutOpen" class="text-primary-300" />
           </button>
         </div>
-        <ul v-show="isMenuAboutOpen" class="space-y-2 pl-4 mt-2 bg-gray-800 rounded-md p-2 ml-auto">
+        <ul v-if="isMenuAboutOpen" class="space-y-2 pl-4 mt-2 bg-gray-800 rounded-md p-2 ml-auto">
           <li>
             <NuxtLink
               class="block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors"
@@ -63,7 +65,7 @@
         </NuxtLink>
       </li>
       <!-- Resources -->
-      <li class="relative text-sm sm:text-base lg:text-lg">
+      <li v-auto-animate class="relative text-sm sm:text-base lg:text-lg">
         <div class="flex">
           <NuxtLink
             class="hover:text-primary-300 p-1 inline-block transition-colors border-b-2 border-transparent hover:border-primary-300 ml-auto"
@@ -76,7 +78,7 @@
             <ExpandedIcon v-if="isMenuResourcesOpen" class="text-primary-300" />
           </button>
         </div>
-        <ul v-show="isMenuResourcesOpen" class="space-y-2 pl-4 mt-2 bg-gray-800 rounded-md p-2 ml-auto">
+        <ul v-if="isMenuResourcesOpen" class="space-y-2 pl-4 mt-2 bg-gray-800 rounded-md p-2 ml-auto">
           <li>
             <NuxtLink
               class="block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors"
@@ -104,7 +106,7 @@
         </ul>
       </li>
       <!-- Join -->
-      <li class="relative text-sm sm:text-base lg:text-lg">
+      <li v-auto-animate class="relative text-sm sm:text-base lg:text-lg">
         <div class="flex">
           <NuxtLink
             class="hover:text-primary-300 p-1 inline-block transition-colors border-b-2 border-transparent hover:border-primary-300 ml-auto"
@@ -117,7 +119,7 @@
             <ExpandedIcon v-if="isMenuJoinOpen" class="text-primary-300" />
           </button>
         </div>
-        <ul v-show="isMenuJoinOpen" class="space-y-2 pl-4 mt-2 bg-gray-800 rounded-md p-2 ml-auto">
+        <ul v-if="isMenuJoinOpen" class="space-y-2 pl-4 mt-2 bg-gray-800 rounded-md p-2 ml-auto">
           <li>
             <NuxtLink
               class="block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors"
@@ -162,7 +164,7 @@ const isMenuResourcesOpen = ref(false);
 const isMenuAboutOpen = ref(false);
 const isMenuJoinOpen = ref(false);
 const authStore = useAuthStore();
-const isLoginMobaileOpen = ref(true);
+const isLoginMobaileOpen = ref(false);
 
 const isSearchVisible = ref(false);
 const toggleSearch = () => {

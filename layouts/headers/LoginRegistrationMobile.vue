@@ -1,25 +1,17 @@
 <template>
   <div>
-    <UCard
-      v-if="!sendActivationEmail"
-      :ui="{
-        ring: '',
-        divide: 'divide-y divide-gray-100 dark:divide-gray-800',
-      }"
-    >
-      <div class="flex items-center">
-        <h3 class="ml-10 flex-grow text-base font-semibold leading-6 text-gray-900 dark:text-[#999] text-center">
-          {{ $t('LoginRegistration.title') }}
-        </h3>
-        <button class="flex items-center justify-center w-8 h-8 ml-2" @click="closeModal">
-          <IconsCloseIcon />
-        </button>
+    <div v-if="!sendActivationEmail" class="text-right">
+      <div>
+        {{ $t('LoginRegistration.title') }}
       </div>
-      <ModalSocial />
-      <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-[#999] text-center">
-        {{ $t('LoginRegistration.orInputEmail') }}
-      </h3>
-      <UForm v-auto-animate :schema="schema" :state="state" class="space-y-4" @submit="handleSubmit">
+      <ModalSocial class="my-2" />
+      {{ $t('LoginRegistration.orInputEmail') }}
+      <UForm
+        :schema="schema"
+        :state="state"
+        class="max-w-[300px] dark:text-[#999] ml-auto space-y-4"
+        @submit="handleSubmit"
+      >
         <div class="space-y-3 mt-2">
           <UFormGroup
             name="email"
@@ -33,19 +25,18 @@
             <UInput
               v-model="state.email"
               variant="none"
-              color="primary"
-              autocomplete="new-email"
-              class="text-base dark:text-[#999]"
+              class="text-base"
               :ui="{
                 base: 'border-t-0 border-l-0 border-r-0 border-b-2 focus:ring-0',
                 input: 'bg-transparent',
                 rounded: 'rounded-none',
               }"
+              autocomplete="new-email"
               @focus="handleFocus('email')"
               @blur="handleBlur('email')"
             >
               <template #leading>
-                <IconsEnvelopeIcon class="icon" />
+                <IconsEnvelopeIcon class="icon text-[#999]" />
               </template>
               <label>{{ $t('LoginRegistration.email') }}</label>
             </UInput>
@@ -58,7 +49,6 @@
               'has-value': state.password !== '' || passwordActive,
               'form-group': true,
               'text-right': true,
-              'dark:text-[#999]': true,
             }"
           >
             <div class="password-input-wrapper relative">
@@ -78,7 +68,7 @@
                 @blur="handleBlur('password')"
               >
                 <template #leading>
-                  <IconsLockClosedIcon class="absolute left-2 top-1/2 transform -translate-y-1/2" />
+                  <IconsLockClosedIcon class="absolute left-2 top-1/2 transform -translate-y-1/2 dark:text-[#999]" />
                 </template>
                 <label>{{ $t('LoginRegistration.password') }}</label>
               </UInput>
@@ -183,14 +173,8 @@
           {{ isEmailValid && userIsNotRegistered ? 'Зареєструватись' : 'Увійти' }}
         </UButton>
       </UForm>
-    </UCard>
-    <UCard
-      v-else
-      :ui="{
-        ring: '',
-        divide: 'divide-y divide-gray-100 dark:divide-gray-800',
-      }"
-    >
+    </div>
+    <div v-else>
       <div class="flex items-center">
         <h3 class="flex-grow text-base font-semibold leading-6 text-gray-900 dark:text-[#999] text-center">
           {{ $t('LoginRegistration.graduate') }}
@@ -211,7 +195,7 @@
       <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-[#999] text-center">
         {{ $t('LoginRegistration.sendEmail') }} {{ state.email }}
       </h3>
-    </UCard>
+    </div>
   </div>
 </template>
 <script setup>
@@ -348,7 +332,6 @@ const handleSubmit = async (event) => {
       if (errors.email.includes('Цей email не зареєстровано')) {
         userIsNotRegistered.value = true;
       }
-      console.log(errors);
     }
   } catch (error) {
     console.log(error);
@@ -377,3 +360,41 @@ watch(
   },
 );
 </script>
+
+<style scoped>
+.password-input-wrapper {
+  position: relative;
+}
+.password-toggle {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.input-error {
+  color: red;
+}
+.form-group {
+  position: relative;
+  margin: 1.4rem 0;
+  transition: all 0.3s ease;
+}
+
+.form-group label {
+  position: absolute;
+  top: 85%;
+  left: 35px;
+  transform: translateY(-90%);
+  transition: all 0.3s;
+  pointer-events: none;
+  color: #999;
+  z-index: 10;
+  font-size: 125%;
+}
+
+.form-group.has-value label,
+.form-group input:focus + label {
+  top: 0;
+  left: 0;
+}
+</style>
