@@ -89,6 +89,20 @@ export default defineNuxtConfig({
           href: '/icons/favicon.png',
         },
       ],
+      script: [
+        {
+          src: 'https://www.googletagmanager.com/gtag/js?id=G-SFWPTFCSK7',
+          async: true,
+        },
+        {
+          children: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-SFWPTFCSK7');
+          `,
+        },
+      ],
     },
   },
   runtimeConfig: {
