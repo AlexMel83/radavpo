@@ -16,6 +16,13 @@ export default defineNuxtConfig({
         maxAge: 60 * 60 * 24 * 365,
       },
     ],
+    devProxy: {
+      "/api/alerts": {
+        target: "https://api.ukrainealarm.com/api/v3/alerts/1396",
+        changeOrigin: true,
+        headers: { "X-API-Key": "e3434354546456" }
+      }
+    }
   },
   plugins: [
     '~/plugins/axios.js',
@@ -81,6 +88,7 @@ export default defineNuxtConfig({
         { property: 'og:locale', content: 'uk_UA' },
         { property: 'og:type', content: 'article' },
         { property: 'og:site_name', content: 'The Council of the IDPs' },
+        { name: 'google-site-verification', content: '4oenAoJxtD-JUqm5e3ajGvAigOo9BTUQluabs7_6jBY' },
       ],
       link: [
         {
@@ -109,6 +117,8 @@ export default defineNuxtConfig({
     public: {
       apiBase: process.env.API_BASE_URL || 'https://api.memory.pp.ua',
       isDocker: process.env.NUXT_PUBLIC_IS_DOCKER || 'false',
+      API_URL: process.env.API_URL,
+      API_KEY: process.env.API_KEY
     },
   },
   compatibilityDate: '2025-01-29',
