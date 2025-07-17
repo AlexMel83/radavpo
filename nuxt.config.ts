@@ -3,6 +3,10 @@ import 'dotenv/config';
 
 export default defineNuxtConfig({
   ssr: true,
+  server: {
+    port: process.env.NUXT_PORT ? Number(process.env.NUXT_PORT) : 3000,
+    host: process.env.NUXT_HOST || '0.0.0.0'
+  },
   nitro: {
     compressPublicAssets: true,
     preset:
