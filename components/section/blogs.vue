@@ -6,7 +6,7 @@
       <div class="relative">
         <!-- Стрілка вліво -->
         <button
-          class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2"
+          class="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2"
           aria-label="Попередні"
           @click="prevSlide"
         >
@@ -19,13 +19,17 @@
             class="flex transition-transform duration-500 ease-in-out"
             :style="{ transform: `translateX(-${currentIndex * 100}%)` }"
           >
-            <div v-for="(chunk, i) in chunkedPosts" :key="i" class="flex-shrink-0 w-full flex justify-center gap-6">
+            <div
+              v-for="(chunk, i) in chunkedPosts"
+              :key="i"
+              class="flex-shrink-0 w-full flex flex-wrap justify-center gap-4 sm:gap-6"
+            >
               <UCard
                 v-for="post in chunk"
                 :key="post.slug"
-                class="w-1/3 hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 group p-2"
+                class="w-full sm:w-[32%] md:w-[25%] hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 group p-2"
                 :ui="{
-                  base: 'flex flex-col h-full overflow-hidden',
+                  base: 'flex flex-col overflow-hidden',
                   body: 'p-4 flex flex-col flex-grow',
                 }"
               >
@@ -61,7 +65,7 @@
 
         <!-- Стрілка вправо -->
         <button
-          class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2"
+          class="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2"
           aria-label="Наступні"
           @click="nextSlide"
         >
@@ -74,14 +78,28 @@
 
 <script setup>
 const { data: posts } = await useFetch('/api/blogs');
+const windowWidth = ref(process.client ? window.innerWidth : 1024);
 
-// Показуємо по 3 пости на слайд
-const chunkSize = 3;
+// Динамічний розмір пачки
+const chunkSize = computed(() => {
+  if (windowWidth.value < 640) return 1; // мобільні
+  if (windowWidth.value < 868) return 2; // планшети
+  return 3; // десктоп
+});
+
+// Стежимо за шириною екрана
+if (process.client) {
+  window.addEventListener('resize', () => {
+    windowWidth.value = window.innerWidth;
+  });
+}
+
+// Слайди
 const chunkedPosts = computed(() => {
   if (!posts.value) return [];
   const chunks = [];
-  for (let i = 0; i < posts.value.length; i += chunkSize) {
-    chunks.push(posts.value.slice(i, i + chunkSize));
+  for (let i = 0; i < posts.value.length; i += chunkSize.value) {
+    chunks.push(posts.value.slice(i, i + chunkSize.value));
   }
   return chunks;
 });
