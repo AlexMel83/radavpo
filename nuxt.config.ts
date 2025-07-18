@@ -9,11 +9,6 @@ export default defineNuxtConfig({
   },
   nitro: {
     compressPublicAssets: true,
-    preset:
-      process.env.NUXT_PUBLIC_IS_DOCKER === 'true'
-        ? 'node-server'
-        : 'cloudflare-pages',
-    static: process.env.NUXT_PUBLIC_IS_DOCKER === 'true' ? false : true,
     publicAssets: [
       {
         dir: 'public',
