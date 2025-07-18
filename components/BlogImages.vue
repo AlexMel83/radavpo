@@ -28,15 +28,15 @@
       <!-- Кнопки перелистування -->
       <button
         class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white rounded-full p-1 shadow"
-        @click="prevImage"
         aria-label="Назад"
+        @click="prevImage"
       >
         ◀
       </button>
       <button
         class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white rounded-full p-1 shadow"
-        @click="nextImage"
         aria-label="Вперед"
+        @click="nextImage"
       >
         ▶
       </button>
@@ -44,8 +44,8 @@
       <!-- Кнопка повного екрану -->
       <button
         class="absolute top-2 right-2 bg-white/70 hover:bg-white rounded-full p-1 shadow"
-        @click="openFullscreen"
         aria-label="Повний екран"
+        @click="openFullscreen"
       >
         🔍
       </button>
@@ -58,7 +58,7 @@
       @click.self="closeFullscreen"
     >
       <img :src="`/blog-images/${images[currentIndex]}`" class="max-h-full max-w-full object-contain" :alt="alt" />
-      <button class="absolute top-4 right-4 text-white text-3xl" @click="closeFullscreen" aria-label="Закрити">
+      <button class="absolute top-4 right-4 text-white text-3xl" aria-label="Закрити" @click="closeFullscreen">
         ✖
       </button>
     </div>

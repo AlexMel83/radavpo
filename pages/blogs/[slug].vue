@@ -2,11 +2,15 @@
   <div class="max-w-3xl mx-auto py-8 px-4">
     <div class="text-center items-center mb-6">
       <NuxtLink to="/blogs" class="text-blue-600 hover:underline"> ← Назад до списку блогів </NuxtLink>
-      <h1 class="text-3xl font-bold mb-4">{{ post.title }}</h1>
+      <h1 class="text-3xl font-bold mb-4">
+        {{ post.title }}
+      </h1>
     </div>
 
     <BlogImages v-if="post.images" :images="post.images" :alt="post.title" />
-    <p class="text-gray-400 text-sm mb-4">{{ formatDate(post.createdAt) }}</p>
+    <p class="text-gray-400 text-sm mb-4">
+      {{ formatDate(post.createdAt) }}
+    </p>
     <div v-html="post.content" />
 
     <div class="flex justify-between mt-12">
@@ -28,7 +32,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 const route = useRoute();
 const slug = route.params.slug;
 const { data: post } = await useFetch(`/api/blogs/${slug}`);
@@ -36,7 +40,7 @@ const { data: post } = await useFetch(`/api/blogs/${slug}`);
 // Завантаження всіх блогів (для навігації)
 const { data: allPosts } = await useFetch('/api/blogs');
 
-const currentIndex = computed(() => allPosts.value?.findIndex((p: any) => p.slug === slug));
+const currentIndex = computed(() => allPosts.value?.findIndex((p) => p.slug === slug));
 
 const prevPost = computed(() => (currentIndex.value > 0 ? allPosts.value[currentIndex.value - 1] : null));
 

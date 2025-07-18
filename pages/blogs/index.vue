@@ -6,8 +6,12 @@
         <NuxtLink :to="`/blogs/${post.slug}`" class="text-xl text-blue-600 hover:underline">
           {{ post.title }}
         </NuxtLink>
-        <p class="text-gray-600 text-sm">{{ post.excerpt }}</p>
-        <p class="text-gray-400 text-xs">{{ formatDate(post.createdAt) }}</p>
+        <p class="text-gray-600 text-sm">
+          {{ post.excerpt }}
+        </p>
+        <p class="text-gray-400 text-xs">
+          {{ formatDate(post.createdAt) }}
+        </p>
       </li>
     </ul>
   </div>
