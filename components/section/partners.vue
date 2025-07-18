@@ -1,103 +1,38 @@
 <template>
-  <section class="py-10 px-4 bg-white">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-2xl font-bold mb-6">Наші партнери</h2>
-
-      <div class="relative">
-        <!-- Стрілка вліво -->
-        <button
-          class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2 disabled:opacity-50"
-          :disabled="currentIndex === 0"
-          aria-label="Попередні"
-          @click="prevSlide"
-        >
-          ◀
-        </button>
-
-        <!-- Карусель -->
-        <div class="overflow-hidden">
-          <div
-            class="flex transition-transform duration-500 ease-in-out"
-            :style="{ transform: `translateX(-${currentIndex * 100}%)` }"
+  <section class="py-6">
+    <UContainer>
+      <h2 class="text-2xl font-bold text-center mb-10">Наші партнери</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <NuxtLink v-for="partner in partners" :key="partner.slug" :to="`/partners/${partner.slug}`">
+          <UCard
+            class="hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 group p-2"
+            :ui="{
+              base: 'flex flex-col items-center text-center h-full overflow-hidden',
+              body: 'p-4 flex flex-col flex-grow items-center',
+            }"
           >
-            <div v-for="(chunk, i) in chunkedPartners" :key="i" class="flex-shrink-0 w-full flex justify-center gap-4">
-              <div
-                v-for="partner in chunk"
-                :key="partner.slug"
-                class="w-full sm:w-[48%] lg:w-[30%] bg-white rounded shadow p-4 flex flex-col"
-              >
-                <NuxtLink :to="`/partners/${partner.slug}`">
-                  <img
-                    :src="getImage(partner.images)"
-                    :alt="partner.title"
-                    class="w-full h-40 object-cover rounded mb-2"
-                  />
-                </NuxtLink>
-                <NuxtLink :to="`/partners/${partner.slug}`">
-                  <h3 class="text-lg font-semibold hover:underline mb-1 line-clamp-2">
-                    {{ partner.title }}
-                  </h3>
-                </NuxtLink>
-                <p class="text-xs text-gray-400 line-clamp-2">
-                  {{ partner.contacts?.address || 'Адресу не вказано' }}
-                </p>
-              </div>
+            <div class="flex items-center justify-center h-48 w-full bg-white p-4">
+              <img
+                :src="`/org-images/${partner.images}`"
+                :alt="partner.title"
+                class="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105"
+              />
             </div>
-          </div>
-        </div>
-
-        <!-- Стрілка вправо -->
-        <button
-          class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2 disabled:opacity-50"
-          :disabled="currentIndex >= chunkedPartners.length - 1"
-          aria-label="Наступні"
-          @click="nextSlide"
-        >
-          ▶
-        </button>
+            <div class="mt-4">
+              <h3 class="text-lg font-semibold text-gray-800 leading-tight break-words">
+                {{ partner.title }}
+              </h3>
+              <p class="text-sm text-gray-500 mt-1">
+                {{ partner.contacts?.address }}
+              </p>
+            </div>
+          </UCard>
+        </NuxtLink>
       </div>
-    </div>
+    </UContainer>
   </section>
 </template>
 
 <script setup>
 const { data: partners } = await useFetch('/api/partners');
-
-// Показуємо по 3 пости на слайд
-const chunkSize = 3;
-const chunkedPartners = computed(() => {
-  if (!partners.value) return [];
-  const chunks = [];
-  for (let i = 0; i < partners.value.length; i += chunkSize) {
-    chunks.push(partners.value.slice(i, i + chunkSize));
-  }
-  return chunks;
-});
-
-const currentIndex = ref(0);
-
-function prevSlide() {
-  if (currentIndex.value > 0) currentIndex.value--;
-}
-
-function nextSlide() {
-  if (currentIndex.value < chunkedPartners.value.length - 1) currentIndex.value++;
-}
-
-// Фолбек-картинка
-function getImage(images) {
-  const base = '/org-images/';
-  if (!images) return '/default-preview.jpg';
-  if (Array.isArray(images)) return base + (images[0] || 'default-preview.jpg');
-  return base + images;
-}
 </script>
-
-<style scoped>
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-</style>

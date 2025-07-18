@@ -1,7 +1,7 @@
 <template>
-  <section class="py-10 px-4 bg-white">
+  <section class="py-6 px-4 bg-white">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-2xl font-bold mb-6">Новини</h2>
+      <h2 class="text-2xl font-bold text-center mb-10">Новини</h2>
 
       <div class="relative">
         <!-- Стрілка вліво -->
@@ -19,23 +19,42 @@
             class="flex transition-transform duration-500 ease-in-out"
             :style="{ transform: `translateX(-${currentIndex * 100}%)` }"
           >
-            <div v-for="(chunk, i) in chunkedPosts" :key="i" class="flex-shrink-0 w-full flex justify-center gap-4">
-              <div v-for="post in chunk" :key="post.slug" class="w-1/3 bg-white rounded shadow p-4 flex flex-col">
+            <div v-for="(chunk, i) in chunkedPosts" :key="i" class="flex-shrink-0 w-full flex justify-center gap-6">
+              <UCard
+                v-for="post in chunk"
+                :key="post.slug"
+                class="w-1/3 hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 group p-2"
+                :ui="{
+                  base: 'flex flex-col h-full overflow-hidden',
+                  body: 'p-4 flex flex-col flex-grow',
+                }"
+              >
                 <NuxtLink :to="`/blogs/${post.slug}`">
-                  <img :src="getImage(post.images)" :alt="post.title" class="w-full h-40 object-cover rounded mb-2" />
+                  <div class="h-48 w-full bg-white overflow-hidden flex items-center justify-center">
+                    <img
+                      :src="getImage(post.images)"
+                      :alt="post.title"
+                      class="w-full h-full object-cover rounded transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
                 </NuxtLink>
-                <NuxtLink :to="`/blogs/${post.slug}`">
-                  <h3 class="text-lg font-semibold hover:underline mb-1">
-                    {{ post.title }}
-                  </h3>
-                </NuxtLink>
-                <p class="text-sm text-gray-600 line-clamp-4">
-                  {{ post.excerpt }}
-                </p>
-                <p class="text-xs text-gray-400">
-                  {{ formatDate(post.createdAt) }}
-                </p>
-              </div>
+
+                <div class="mt-4 flex flex-col justify-between flex-grow">
+                  <NuxtLink :to="`/blogs/${post.slug}`">
+                    <h3 class="text-lg font-semibold text-gray-800 leading-tight hover:underline mb-2">
+                      {{ post.title }}
+                    </h3>
+                  </NuxtLink>
+
+                  <p class="text-sm text-gray-600 line-clamp-4 mb-2">
+                    {{ post.excerpt }}
+                  </p>
+
+                  <p class="text-xs text-gray-400 mt-auto">
+                    {{ formatDate(post.createdAt) }}
+                  </p>
+                </div>
+              </UCard>
             </div>
           </div>
         </div>
