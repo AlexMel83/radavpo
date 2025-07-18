@@ -7,8 +7,8 @@
         <!-- Стрілка вліво -->
         <button
           class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2"
-          @click="prevSlide"
           aria-label="Попередні"
+          @click="prevSlide"
         >
           ◀
         </button>
@@ -25,10 +25,16 @@
                   <img :src="getImage(post.images)" :alt="post.title" class="w-full h-40 object-cover rounded mb-2" />
                 </NuxtLink>
                 <NuxtLink :to="`/blogs/${post.slug}`">
-                  <h3 class="text-lg font-semibold hover:underline mb-1">{{ post.title }}</h3>
+                  <h3 class="text-lg font-semibold hover:underline mb-1">
+                    {{ post.title }}
+                  </h3>
                 </NuxtLink>
-                <p class="text-sm text-gray-600 line-clamp-4">{{ post.excerpt }}</p>
-                <p class="text-xs text-gray-400">{{ formatDate(post.createdAt) }}</p>
+                <p class="text-sm text-gray-600 line-clamp-4">
+                  {{ post.excerpt }}
+                </p>
+                <p class="text-xs text-gray-400">
+                  {{ formatDate(post.createdAt) }}
+                </p>
               </div>
             </div>
           </div>
@@ -37,8 +43,8 @@
         <!-- Стрілка вправо -->
         <button
           class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2"
-          @click="nextSlide"
           aria-label="Наступні"
+          @click="nextSlide"
         >
           ▶
         </button>

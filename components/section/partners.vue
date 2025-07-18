@@ -7,9 +7,9 @@
         <!-- Стрілка вліво -->
         <button
           class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2 disabled:opacity-50"
-          @click="prevSlide"
           :disabled="currentIndex === 0"
           aria-label="Попередні"
+          @click="prevSlide"
         >
           ◀
         </button>
@@ -49,9 +49,9 @@
         <!-- Стрілка вправо -->
         <button
           class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2 disabled:opacity-50"
-          @click="nextSlide"
           :disabled="currentIndex >= chunkedPartners.length - 1"
           aria-label="Наступні"
+          @click="nextSlide"
         >
           ▶
         </button>
