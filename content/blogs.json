@@ -1,5 +1,16 @@
 [
   {
+    "id": "4",
+    "slug": "rehome-help-find-housing-for-idps",
+    "title": "ReHome — Допоможемо знайти житло для ВПО",
+    "images": "rehome-ezgif.com-optijpeg.jpg",
+    "tags": ["ВПО", "молодь", "ТОТ"],
+    "category": "житло",
+    "excerpt": "ReHome — це платформа для збору інформації про занедбані будівлі, які можуть бути відновлені та використані як житло для переселенців (ВПО).",
+    "content": "<div class=\"text-gray-800 p-2\">\nДжерело: <a href=\"https://www.rehome.com.ua/\">www.rehome.com.ua</a>\n<UContainer class=\"mt-2\">\n<UCard class=\"text-gray-800 bg-white\">\n<template #header>\n<h1 class=\"text-xl font-semibold\">ReHome</h1>\n</template>\n<p>ReHome — це платформа для збору інформації про занедбані будівлі, які можуть бути відновлені та використані як житло для переселенців (ВПО).</p>\n<p class=\"mt-4\">Ми допомагаємо громадам та владі знаходити такі об’єкти, щоб дати їм нове життя.</p>\n<div class=\"mt-3\">\n<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/BReii-bvgKY?si=trGkNRJTJ4qj2o_f\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>\n</div>\n</UCard>\n<UCard class=\"bg-blue-50\">\n<template #header>\n<h2 class=\"text-lg font-semibold\">Які об’єкти підходять?</h2>\n</template>\n<div class=\"grid md:grid-cols-2 gap-6\">\n<ul class=\"space-y-6 text-gray-700\">\n<li class=\"flex items-start gap-4\">\n<div class=\"bg-orange-500 text-white flex items-center justify-center w-12 h-12 rounded-full text-lg font-bold\">1</div>\n<span>Колишні гуртожитки, школи, лікарні, адміністративні будівлі</span>\n</li>\n<li class=\"flex items-start gap-4\">\n<div class=\"bg-orange-500 text-white flex items-center justify-center w-12 h-12 rounded-full text-lg font-bold\">2</div>\n<span>Покинуті житлові будинки, які можна відновити</span>\n</li>\n<li class=\"flex items-start gap-4\">\n<div class=\"bg-orange-500 text-white flex items-center justify-center w-12 h-12 rounded-full text-lg font-bold\">3</div>\n<span>Будівлі у комунальній або державній власності</span>\n</li>\n<li class=\"flex items-start gap-4\">\n<div class=\"bg-orange-500 text-white flex items-center justify-center w-12 h-12 rounded-full text-lg font-bold\">4</div>\n<span>Приватні будинки, власники яких готові їх надати</span>\n</li>\n<li class=\"flex items-start gap-4\">\n<div class=\"bg-gray-600 text-white flex items-center justify-center w-12 h-12 rounded-full text-lg font-bold\">✖</div>\n<span>Не підходять: аварійні об’єкти, пам’ятки архітектури без дозволу на реконструкцію</span>\n</li>\n</ul>\n</div>\n</UCard>\n</UContainer>\n<UContainer class=\"space-y-10 py-10\">\n<UCard>\n<template #header>\n<h2 class=\"text-lg font-semibold text-center\">Як зафіксувати об’єкт?</h2>\n</template>\n<div class=\"grid md:grid-cols-3 gap-6 text-center\">\n<div class=\"bg-gray-50 rounded-2xl p-6 flex flex-col items-center\">\n<UAvatar src=\"https://www.rehome.com.ua/wp-content/uploads/2025/04/1.png\" alt=\"Фото будівлі\" size=\"xl\" class=\"mb-4\" />\n<p>Зробіть фото будівлі з <br />різних ракурсів</p>\n</div>\n<div class=\"bg-gray-50 rounded-2xl p-6 flex flex-col items-center\">\n<UAvatar src=\"https://www.rehome.com.ua/wp-content/uploads/2025/04/2.png\" alt=\"Адреса\" size=\"xl\" class=\"mb-4\" />\n<p>Запишіть адресу або точку <br />на карті</p>\n</div>\n<div class=\"bg-gray-50 rounded-2xl p-6 flex flex-col items-center\">\n<UAvatar src=\"https://www.rehome.com.ua/wp-content/uploads/2025/04/3.png\" alt=\"Стан будівлі\" size=\"xl\" class=\"mb-4\" />\n<p>Опишіть стан: є дах, вікна, <br />комунікації чи ні</p>\n</div>\n</div>\n</UCard>\n<UCard class=\"bg-white text-gray-800\">\n<p>Після цього завантажте інформацію на сайт <strong>ReHome</strong>, і ми передамо її відповідним органам влади для перевірки та подальшого відновлення.</p>\n<p class=\"mt-4 font-semibold\">Долучайтеся до змін! Разом ми можемо знайти нові домівки для людей, які цього потребують.</p>\n<div class=\"mt-6\">\n<UButton to=\"https://www.rehome.com.ua/%d0%b4%d0%be%d0%b4%d0%b0%d1%82%d0%b8-%d0%be%d0%b1%d1%94%d0%ba%d1%82/\" color=\"primary\" size=\"lg\">Додати об’єкт</UButton>\n</div>\n</UCard>\n<UCard>\n<template #header>\n<h2 class=\"text-lg font-semibold\">Контактні дані представників проєкту</h2>\n</template>\n<div class=\"space-y-8\">\n<div class=\"flex items-start gap-4\">\n<img src=\"https://www.rehome.com.ua/wp-content/themes/rehome-template/public/images/location.fdacd0.png\" class=\"w-16\" alt=\"Локація\" />\n<div>\n<h4 class=\"text-[20px] font-bold\">Головний офіс:</h4>\n<p class=\"mt-2\">м.Дніпро, Сонячна Набережна, 2</p>\n</div>\n</div>\n<div class=\"flex items-start gap-4\">\n<img src=\"https://www.rehome.com.ua/wp-content/themes/rehome-template/public/images/at.585f60.png\" class=\"w-16\" alt=\"Email\" />\n<div>\n<h4 class=\"text-[20px] font-bold\">Email:</h4>\n<a href=\"mailto:info@rehome.org.ua\" class=\"text-blue-300 hover:underline\">info@rehome.org.ua</a>\n</div>\n</div>\n</div>\n</UCard>\n</UContainer>\n</div>",
+    "createdAt": "2025-07-17"
+  },
+  {
     "id": "1",
     "slug": "ukraine-awaits-youth-from-tot",
     "title": "Україна чекає на молодь з ТОТ",
@@ -34,14 +45,6 @@
     "excerpt": "Як отримати медичну допомогу та ліки...",
     "content": "Повний текст статті про доступ до медичних послуг для внутрішньо переміщених осіб.",
     "createdAt": "2025-07-10"
-  },
-  {
-    "id": "4",
-    "slug": "education-rights",
-    "title": "Освітні права ВПО",
-    "excerpt": "Як отримати освіту та доступ до навчальних закладів...",
-    "content": "Повний текст статті про освітні права внутрішньо переміщених осіб.",
-    "createdAt": "2025-07-15"
   },
   {
     "id": "5",
