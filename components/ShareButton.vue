@@ -1,7 +1,7 @@
 <template>
   <a :href="url" target="_blank" rel="noopener noreferrer" class="btn-share" :class="type">
     <img :src="icon" :alt="type.charAt(0).toUpperCase() + type.slice(1)" class="w-6 h-6" />
-    <span>{{ label }}</span>
+    <span class="hidden sm:inline">{{ label }}</span>
   </a>
 </template>
 

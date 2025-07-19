@@ -92,14 +92,3 @@ const telegramShareUrl = computed(() =>
     : '',
 );
 </script>
-
-<style scoped lang="postcss">
-.share-button {
-  @apply flex items-center justify-center px-4 py-2 border rounded-md 
-    dark:bg-gray-700 dark:text-white bg-gray-100 text-gray-800 
-    text-sm font-semibold;
-
-  flex: 1 1 160px;
-  max-width: 200px;
-}
-</style>
