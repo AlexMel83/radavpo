@@ -1,5 +1,11 @@
 <template>
   <div class="max-w-3xl mx-auto py-8 px-4">
+    <MetaTags
+      v-if="post?.title"
+      :title="post.title || 'Default Title'"
+      :description="post.excerpt || 'Default Description'"
+      :image="post?.images[0] || post?.images || '/cfhope-logo-tranparent.png'"
+    />
     <div class="text-center items-center mb-6">
       <NuxtLink to="/blogs" class="text-blue-600 hover:underline"> ← Назад до списку блогів </NuxtLink>
       <h1 class="text-3xl font-bold mb-4">

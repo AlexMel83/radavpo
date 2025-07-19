@@ -1,5 +1,10 @@
 <template>
   <div v-if="partner" class="max-w-3xl mx-auto py-12 px-4">
+    <MetaTags
+      :title="partner.title || 'Default Title'"
+      :description="partner.excerpt || 'Default Description'"
+      :image="partner?.images[0] || partner?.images || '/cfhope-logo-tranparent.png'"
+    />
     <!-- Заголовок -->
     <div class="text-center mb-6">
       <h1 class="text-3xl font-bold">
