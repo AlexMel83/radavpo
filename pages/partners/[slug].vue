@@ -3,7 +3,7 @@
     <MetaTags
       :title="partner.title || 'Default Title'"
       :description="partner.excerpt || 'Default Description'"
-      :image="partner?.images[0] || partner?.images || '/cfhope-logo-tranparent.png'"
+      :image="`/org-images/${Array.isArray(partner?.images) ? partner.images[0] : partner?.images || 'cfhope-logo-tranparent.png'}`"
     />
     <!-- Заголовок -->
     <div class="text-center mb-6">
@@ -85,6 +85,14 @@
         Вперед →
       </UButton>
     </div>
+    <ShareButtons
+      v-if="partner?.title"
+      :page-object="{
+        title: partner.title,
+        description: partner.excerpt,
+        image: `/org-images/${Array.isArray(partner?.images) ? partner.images[0] : partner?.images || 'cfhope-logo-tranparent.png'}`,
+      }"
+    />
   </div>
 
   <div v-else class="text-center py-20 text-gray-500">

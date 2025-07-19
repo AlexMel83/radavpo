@@ -1,12 +1,12 @@
 <template>
   <div v-if="pageObject" class="share-buttons my-3 max-w-[800px] mx-auto px-2">
     <p class="text-lg font-bold mb-1 dark:text-white">{{ $t('ShareButtons.sharedSocial') }}:</p>
-    <div class="flex flex-wrap gap-4 justify-start mb-2">
+    <div class="flex flex-wrap gap-4 justify-start py-3">
       <ShareButton
         v-if="facebookShareUrl"
         :url="facebookShareUrl"
         icon="/icons/facebook.png"
-        :label="'Facebook'"
+        label="Facebook"
         type="facebook"
         class="share-button"
       />
@@ -14,15 +14,23 @@
         v-if="viberShareUrl"
         :url="viberShareUrl"
         icon="/icons/viber.png"
-        :label="'Viber'"
+        label="Viber"
         type="viber"
+        class="share-button"
+      />
+      <ShareButton
+        v-if="whatsappShareUrl"
+        :url="whatsappShareUrl"
+        icon="/icons/whatsapp.png"
+        label="WhatsApp"
+        type="whatsapp"
         class="share-button"
       />
       <ShareButton
         v-if="telegramShareUrl"
         :url="telegramShareUrl"
         icon="/icons/telegram.png"
-        :label="'Telegram'"
+        label="Telegram"
         type="telegram"
         class="share-button"
       />
@@ -40,20 +48,26 @@ import ShareButton from './ShareButton.vue';
 const props = defineProps({
   url: {
     type: String,
-    required: false,
     default: '',
   },
   pageObject: {
     type: [Object, null],
-    default: null,
     required: true,
+    default: null,
   },
 });
 
-const currentUrl = ref('');
-
-onMounted(() => {
-  currentUrl.value = props.url || window.location.href;
+// ✨ Автоматичне визначення URL, якщо не передано
+const currentUrl = computed(() => {
+  if (props.url) return props.url;
+  if (process.server) {
+    const reqUrl = useRequestURL();
+    return reqUrl.href;
+  }
+  if (process.client) {
+    return window.location.href;
+  }
+  return '';
 });
 
 const facebookShareUrl = computed(() =>
@@ -66,17 +80,26 @@ const viberShareUrl = computed(() =>
     : '',
 );
 
+const whatsappShareUrl = computed(() =>
+  props.pageObject
+    ? `https://api.whatsapp.com/send?text=${encodeURIComponent(`${props.pageObject?.title || ''} - ${currentUrl.value}`)}`
+    : '',
+);
+
 const telegramShareUrl = computed(() =>
   props.pageObject
-    ? `https://t.me/share/url?url=${encodeURIComponent(
-        currentUrl.value,
-      )}&text=${encodeURIComponent(props.pageObject?.title || '')}`
+    ? `https://t.me/share/url?url=${encodeURIComponent(currentUrl.value)}&text=${encodeURIComponent(props.pageObject?.title || '')}`
     : '',
 );
 </script>
 
-<style lang="postcss" scoped>
+<style scoped lang="postcss">
 .share-button {
-  @apply flex items-center justify-center min-w-[120px] grow basis-[25%] px-4 py-2 border rounded-md dark:bg-gray-700 dark:text-white bg-gray-100 text-gray-800;
+  @apply flex items-center justify-center px-4 py-2 border rounded-md 
+    dark:bg-gray-700 dark:text-white bg-gray-100 text-gray-800 
+    text-sm font-semibold;
+
+  flex: 1 1 160px;
+  max-width: 200px;
 }
 </style>

@@ -4,7 +4,7 @@
       v-if="post?.title"
       :title="post.title || 'Default Title'"
       :description="post.excerpt || 'Default Description'"
-      :image="post?.images[0] || post?.images || '/cfhope-logo-tranparent.png'"
+      :image="`/blog-images/${Array.isArray(post?.images) ? post.images[0] : post?.images || 'cfhope-logo-tranparent.png'}`"
     />
     <div class="text-center items-center mb-6">
       <NuxtLink to="/blogs" class="text-blue-600 hover:underline"> ← Назад до списку блогів </NuxtLink>
@@ -35,6 +35,14 @@
         Вперед →
       </button>
     </div>
+    <ShareButtons
+      v-if="post?.title"
+      :page-object="{
+        title: post.title,
+        description: post.excerpt,
+        image: `/blog-images/${Array.isArray(post?.images) ? post.images[0] : post?.images || 'cfhope-logo-tranparent.png'}`,
+      }"
+    />
   </div>
 </template>
 

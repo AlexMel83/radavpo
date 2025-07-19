@@ -67,7 +67,11 @@
           </div>
         </div>
       </div>
-      <ShareButtons class="max-w-[800px]" :page-object="{ title: $t('header.title') }" />
+      <ShareButtons
+        class="max-w-[800px]"
+        :url="'https://radavpo.starkon.pp.ua'"
+        :page-object="{ title: $t('header.title') }"
+      />
     </div>
   </div>
 </template>

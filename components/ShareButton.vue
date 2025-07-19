@@ -22,7 +22,7 @@ defineProps({
   type: {
     type: String,
     required: true,
-    validator: (value) => ['facebook', 'viber', 'telegram'].includes(value),
+    validator: (value) => ['facebook', 'viber', 'telegram', 'whatsapp'].includes(value),
   },
 });
 </script>
@@ -60,6 +60,15 @@ defineProps({
 
 .btn-share.viber:hover {
   background-color: #4a3d77;
+}
+
+.btn-share.whatsapp {
+  background-color: #25d366;
+  color: white;
+}
+
+.btn-share.whatsapp:hover {
+  background-color: #1ebe5d;
 }
 
 .btn-share.telegram {
