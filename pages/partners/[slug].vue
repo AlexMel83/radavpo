@@ -5,94 +5,89 @@
       :description="partner.excerpt || 'Default Description'"
       :image="`/org-images/${Array.isArray(partner?.images) ? partner.images[0] : partner?.images || 'cfhope-logo-tranparent.png'}`"
     />
-    <!-- Заголовок -->
-    <div class="text-center mb-6">
-      <h1 class="text-3xl font-bold">
-        {{ partner.title }}
-      </h1>
+    <div v-if="isLoading" class="text-center py-10">
+      <span class="text-gray-500">Завантаження партнерів...</span>
     </div>
+    <div v-else>
+      <div class="text-center mb-6">
+        <h1 class="text-3xl font-bold">
+          {{ partner.title }}
+        </h1>
+      </div>
 
-    <!-- Зображення -->
-    <div class="mb-6">
-      <PartnerImages v-if="partner.images" :images="partner.images" :alt="partner.title" />
+      <div class="mb-6">
+        <Images v-if="partner.images" :images="partner.images" type="org" :alt="partner.title" />
+      </div>
+
+      <div class="prose prose-gray max-w-none" v-html="partner.content" />
+
+      <div v-if="partner.contacts" class="mt-8 bg-gray-50 rounded-xl p-6 shadow-sm">
+        <h2 class="text-lg font-semibold mb-4">Контакти</h2>
+        <ul class="space-y-1 text-sm text-gray-700">
+          <li v-if="partner.contacts.address">
+            <strong>Адреса: </strong>
+            <a
+              :href="`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(partner.contacts.address)}`"
+              target="_blank"
+              class="text-blue-600 hover:underline"
+            >
+              {{ partner.contacts.address }}
+            </a>
+          </li>
+
+          <li v-if="partner.contacts.phone">
+            <strong>Телефон: </strong>
+            <a :href="`tel:${partner.contacts.phone.replace(/[^+\d]/g, '')}`" class="text-blue-600 hover:underline">
+              {{ partner.contacts.phone }}
+            </a>
+          </li>
+          <li v-if="partner.contacts.email">
+            <strong>Email: </strong>
+            <a :href="`mailto:${partner.contacts.email}`" class="text-blue-600 hover:underline">
+              {{ partner.contacts.email }}</a
+            >
+          </li>
+          <li v-if="partner.url">
+            <strong>Вебсайт: </strong>
+            <a :href="partner.url" target="_blank" class="text-blue-600 hover:underline"> {{ partner.url }}</a>
+          </li>
+          <li v-if="partner.contacts.socials">
+            <strong>Соцмережі: </strong>
+            <span v-for="(link, key, index) in partner.contacts.socials" :key="key">
+              <a :href="link" target="_blank" class="text-blue-600 hover:underline"> {{ key }}</a
+              ><span v-if="index < Object.keys(partner.contacts.socials).length - 1">, </span>
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="flex justify-between mt-12">
+        <UButton
+          color="gray"
+          variant="soft"
+          :disabled="!prevPartner"
+          @click="navigateTo(`/partners/${prevPartner?.slug}`)"
+        >
+          ← Назад
+        </UButton>
+        <UButton
+          color="gray"
+          variant="soft"
+          :disabled="!nextPartner"
+          @click="navigateTo(`/partners/${nextPartner?.slug}`)"
+        >
+          Вперед →
+        </UButton>
+      </div>
+      <ShareButtons
+        v-if="partner?.title"
+        :page-object="{
+          title: partner.title,
+          description: partner.excerpt,
+          image: `/org-images/${Array.isArray(partner?.images) ? partner.images[0] : partner?.images || 'cfhope-logo-tranparent.png'}`,
+        }"
+      />
     </div>
-
-    <!-- Дата -->
-    <!-- <p class="text-gray-400 text-sm text-right mb-6">
-      {{ formatDate(partner.createdAt) }}
-    </p> -->
-
-    <!-- Контент -->
-    <div class="prose prose-gray max-w-none" v-html="partner.content" />
-
-    <!-- Контакти -->
-    <div v-if="partner.contacts" class="mt-8 bg-gray-50 rounded-xl p-6 shadow-sm">
-      <h2 class="text-lg font-semibold mb-4">Контакти</h2>
-      <ul class="space-y-1 text-sm text-gray-700">
-        <li v-if="partner.contacts.address">
-          <strong>Адреса: </strong>
-          <a
-            :href="`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(partner.contacts.address)}`"
-            target="_blank"
-            class="text-blue-600 hover:underline"
-          >
-            {{ partner.contacts.address }}
-          </a>
-        </li>
-
-        <li v-if="partner.contacts.phone">
-          <strong>Телефон: </strong>
-          <a :href="`tel:${partner.contacts.phone.replace(/[^+\d]/g, '')}`" class="text-blue-600 hover:underline">
-            {{ partner.contacts.phone }}
-          </a>
-        </li>
-        <li v-if="partner.contacts.email">
-          <strong>Email: </strong>
-          <a :href="`mailto:${partner.contacts.email}`" class="text-blue-600 hover:underline">
-            {{ partner.contacts.email }}</a
-          >
-        </li>
-        <li v-if="partner.url">
-          <strong>Вебсайт: </strong>
-          <a :href="partner.url" target="_blank" class="text-blue-600 hover:underline"> {{ partner.url }}</a>
-        </li>
-        <li v-if="partner.contacts.socials">
-          <strong>Соцмережі: </strong>
-          <span v-for="(link, key, index) in partner.contacts.socials" :key="key">
-            <a :href="link" target="_blank" class="text-blue-600 hover:underline"> {{ key }}</a
-            ><span v-if="index < Object.keys(partner.contacts.socials).length - 1">, </span>
-          </span>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Навігація між партнерами -->
-    <div class="flex justify-between mt-12">
-      <UButton
-        color="gray"
-        variant="soft"
-        :disabled="!prevPartner"
-        @click="navigateTo(`/partners/${prevPartner?.slug}`)"
-      >
-        ← Назад
-      </UButton>
-      <UButton
-        color="gray"
-        variant="soft"
-        :disabled="!nextPartner"
-        @click="navigateTo(`/partners/${nextPartner?.slug}`)"
-      >
-        Вперед →
-      </UButton>
-    </div>
-    <ShareButtons
-      v-if="partner?.title"
-      :page-object="{
-        title: partner.title,
-        description: partner.excerpt,
-        image: `/org-images/${Array.isArray(partner?.images) ? partner.images[0] : partner?.images || 'cfhope-logo-tranparent.png'}`,
-      }"
-    />
   </div>
 
   <div v-else class="text-center py-20 text-gray-500">
@@ -104,28 +99,48 @@
 const route = useRoute();
 const slug = route.params.slug;
 
-// Поточний партнер
-const { data: partner } = await useFetch(`/api/partners/${slug}`);
+const isLoading = ref(false);
+const { $api } = useNuxtApp();
+const partner = ref([]);
+const prevPartner = ref(null);
+const nextPartner = ref(null);
 
-// Усі партнери — для навігації
-const { data: allPartners } = await useFetch('/api/partners');
+onMounted(async () => {
+  await fetchPartners(`?slug=${slug}`);
+});
 
-const currentIndex = computed(() => allPartners.value?.findIndex((p) => p.slug === slug));
+const fetchPartners = async (searchQuery = null) => {
+  isLoading.value = true;
+  try {
+    const response = await $api.partners.getPartners(searchQuery);
+    partner.value = response.data[0] || null;
+    return response.data[0] || null;
+  } catch (error) {
+    isLoading.value = false;
+    console.error('Error fetching partners data:', error);
+    return null;
+  } finally {
+    isLoading.value = false;
+  }
+};
 
-const prevPartner = computed(() => (currentIndex.value > 0 ? allPartners.value[currentIndex.value - 1] : null));
+watch(partner, async (partner) => {
+  if (!partner?.id) return;
+  console.log('Fetching previous and next partners for:', partner);
+  try {
+    const prev = await $api.partners.getPartners(`?id=${partner.id - 1}`);
+    prevPartner.value = prev.data;
+  } catch (err) {
+    prevPartner.value = null; // 404 — нет предыдущего
+  }
 
-const nextPartner = computed(() =>
-  currentIndex.value < allPartners.value.length - 1 ? allPartners.value[currentIndex.value + 1] : null,
-);
-
-// Формат дати
-// function formatDate(dateStr) {
-//   return new Date(dateStr).toLocaleDateString('uk-UA', {
-//     year: 'numeric',
-//     month: 'long',
-//     day: 'numeric',
-//   });
-// }
+  try {
+    const next = await $api.partners.getPartners(`?id=${partner.id + 1}`);
+    nextPartner.value = next.data;
+  } catch (err) {
+    nextPartner.value = null; // 404 — нет следующего
+  }
+});
 
 // SEO head
 definePageMeta({

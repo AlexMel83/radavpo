@@ -114,9 +114,9 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBase: process.env.API_BASE_URL || 'https://api.memory.pp.ua',
+      apiBase: process.env.API_BASE || 'api-vpo.starkon.pp.ua',
       isDocker: process.env.NUXT_PUBLIC_IS_DOCKER || 'false',
-      API_URL: process.env.API_URL,
+      API_URL: process.env.API_BASE || 'https://api-vpo.starkon.pp.ua',
       API_KEY: process.env.API_KEY
     },
   },
