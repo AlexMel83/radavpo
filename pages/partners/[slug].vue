@@ -125,22 +125,24 @@ const fetchPartners = async (searchQuery = null) => {
 };
 
 watch(partner, async (partner) => {
-  if (!partner?.id) return;
-  console.log('Fetching previous and next partners for:', partner);
-  try {
-    const prev = await $api.partners.getPartners(`?id=${partner.id - 1}`);
-    prevPartner.value = prev.data;
-  } catch (err) {
-    prevPartner.value = null; // 404 — нет предыдущего
-    console.error('Error fetching previous partner:', err);
-  }
+  const id = partner?.id;
+  if (!id) return;
+
+  const prevId = id > 1 ? id - 1 : null;
+  const nextId = id + 1;
 
   try {
-    const next = await $api.partners.getPartners(`?id=${partner.id + 1}`);
-    nextPartner.value = next.data;
+    const [prev, next] = await Promise.all([
+      prevId ? $api.partners.getPartners(`?id=${prevId}`) : null,
+      $api.partners.getPartners(`?id=${nextId}`),
+    ]);
+
+    prevPartner.value = prev?.data[0] ?? null;
+    nextPartner.value = next?.data[0] ?? null;
   } catch (err) {
-    nextPartner.value = null; // 404 — нет следующего
-    console.error('Error fetching next partner:', err);
+    console.error('Error loading prev/next partners:', err);
+    prevPartner.value = null;
+    nextPartner.value = null;
   }
 });
 

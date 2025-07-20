@@ -2,21 +2,7 @@ import type { AxiosInstance } from 'axios';
 
 export interface PartnersResponse {
   status: number;
-  data: {
-    id: number;
-    email: string | null;
-    facebook_id: string | null;
-    google_id: string | null;
-    name: string;
-    surname: string;
-    phone: string;
-    picture: string;
-    role: string;
-    social_login: boolean;
-    isactivated: boolean;
-    created_at: string;
-    udated_at: string;
-  };
+  data: Partners[];
 }
 
 export interface Partners {
