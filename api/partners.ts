@@ -7,16 +7,20 @@ export interface PartnersResponse {
 
 export interface Partners {
   id: number;
-  email: string | null;
-  facebook_id: string | null;
-  google_id: string | null;
-  name: string;
-  surname: string;
-  phone: string;
-  picture: string;
-  role: string;
-  social_login: boolean;
-  isactivated: boolean;
+  user_id: number;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  category: string;
+  contacts: {};
+  url: string;
+  tags: string[];
+  images: string[];
+  address: string;
+  location: string;
+  formatted_address: string;
+  published: boolean;
   created_at: string;
   udated_at: string;
 }

@@ -49,19 +49,40 @@
 <script setup>
 const route = useRoute();
 const slug = route.params.slug;
-const { data: post } = await useFetch(`/api/blogs/${slug}`);
+const { $api } = useNuxtApp();
 
-// Завантаження всіх блогів (для навігації)
-const { data: allPosts } = await useFetch('/api/blogs');
+const post = ref(null);
+const allPosts = ref([]);
+const isLoading = ref(false);
 
-const currentIndex = computed(() => allPosts.value?.findIndex((p) => p.slug === slug));
+const fetchPost = async () => {
+  try {
+    const res = await $api.posts.getPosts(`?slug=${slug}`);
+    post.value = res.data[0];
+  } catch (err) {
+    console.error('Error loading post:', err);
+  }
+};
+
+const fetchAllPosts = async () => {
+  try {
+    const res = await $api.posts.getPosts();
+    allPosts.value = res.data;
+  } catch (err) {
+    console.error('Error loading all posts:', err);
+  }
+};
+
+await fetchPost();
+await fetchAllPosts();
+
+const currentIndex = computed(() => allPosts.value.findIndex((p) => p.slug === slug));
 
 const prevPost = computed(() => (currentIndex.value > 0 ? allPosts.value[currentIndex.value - 1] : null));
 
 const nextPost = computed(() =>
   currentIndex.value < allPosts.value.length - 1 ? allPosts.value[currentIndex.value + 1] : null,
 );
-
 // Формат дати
 function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString('uk-UA', {
