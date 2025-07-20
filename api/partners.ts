@@ -13,7 +13,7 @@ export interface Partners {
   excerpt: string;
   content: string;
   category: string;
-  contacts: {};
+  contacts: { address: string; phone: string; email: string };
   url: string;
   tags: string[];
   images: string[];

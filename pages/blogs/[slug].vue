@@ -53,7 +53,6 @@ const { $api } = useNuxtApp();
 
 const post = ref(null);
 const allPosts = ref([]);
-const isLoading = ref(false);
 
 const fetchPost = async () => {
   try {
