@@ -196,15 +196,15 @@
 <script setup>
 import CollapsedIcon from '~/components/icons/CollapsedIcon.vue';
 import ExpandedIcon from '~/components/icons/ExpandedIcon.vue';
-import IconsUser from '~/components/icons/User.vue';
-import IconsCloseIcon from '~/components/icons/CloseIcon.vue';
+// import IconsUser from '~/components/icons/User.vue';
+// import IconsCloseIcon from '~/components/icons/CloseIcon.vue';
 import LoginRegistrationMobile from './LoginRegistrationMobile.vue';
-import { useAuthStore } from '~/stores/app.store';
+// import { useAuthStore } from '~/stores/app.store';
 import HeaderButtons from './HeaderButtons.vue';
 import SearchInput from './SearchInput.vue';
 
-const authStore = useAuthStore();
-const isAuthed = computed(() => authStore.isAuthed);
+// const authStore = useAuthStore();
+// const isAuthed = computed(() => authStore.isAuthed);
 
 const isLoginMobaileOpen = ref(false);
 const isSearchVisible = ref(false);

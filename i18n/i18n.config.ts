@@ -1,5 +1,3 @@
-import partners from '~/api/partners';
-
 export default defineI18nConfig(() => ({
   fallbackLocale: 'uk',
   legacy: false,

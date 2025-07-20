@@ -1,7 +1,9 @@
 <template>
   <section class="py-6">
     <UContainer>
-      <h2 class="text-2xl font-bold text-center mb-10">{{ $t('Index.partners') }}</h2>
+      <h2 class="text-2xl font-bold text-center mb-10">
+        {{ $t('Index.partners') }}
+      </h2>
       <div v-if="isLoading" class="text-center py-10">
         <span class="text-gray-500">Завантаження партнерів...</span>
       </div>
