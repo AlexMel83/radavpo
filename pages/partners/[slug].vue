@@ -132,6 +132,7 @@ watch(partner, async (partner) => {
     prevPartner.value = prev.data;
   } catch (err) {
     prevPartner.value = null; // 404 — нет предыдущего
+    console.error('Error fetching previous partner:', err);
   }
 
   try {
@@ -139,6 +140,7 @@ watch(partner, async (partner) => {
     nextPartner.value = next.data;
   } catch (err) {
     nextPartner.value = null; // 404 — нет следующего
+    console.error('Error fetching next partner:', err);
   }
 });
 
