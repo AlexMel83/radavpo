@@ -21,7 +21,7 @@
           {{ $t('menu.about') }}
         </NuxtLink>
         <ul
-          class="absolute z-50 right-3 top-full hidden bg-gray-800 shadow-md rounded-md p-1 group-hover:block transition-all duration-300"
+          class="absolute z-50 right-3 top-full opacity-0 scale-y-95 pointer-events-none group-hover:opacity-100 group-hover:scale-y-100 group-hover:pointer-events-auto bg-gray-800 shadow-md rounded-md p-1 transform origin-top transition-all duration-300 ease-out"
         >
           <li>
             <NuxtLink
@@ -32,8 +32,9 @@
             </NuxtLink>
           </li>
         </ul>
-        <CollapsedIcon v-if="!isMenuAboutOpen" />
-        <ExpandedIcon v-if="isMenuAboutOpen" class="text-primary-300" />
+        <ExpandedIcon
+          :class="['text-primary-300 transition-transform duration-300', isMenuAboutOpen ? 'rotate-180' : 'rotate-0']"
+        />
       </li>
       <li class="relative mx-1 lg:mx-2 text-sm sm:text-base lg:text-lg">
         <NuxtLink
@@ -55,7 +56,7 @@
           {{ $t('menu.resources') }}
         </NuxtLink>
         <ul
-          class="absolute z-50 left-1/2 top-full hidden bg-gray-800 shadow-md rounded-md p-1 group-hover:block transition-all duration-300 transform -translate-x-1/2"
+          class="absolute z-50 right-3 top-full opacity-0 scale-y-95 pointer-events-none group-hover:opacity-100 group-hover:scale-y-100 group-hover:pointer-events-auto bg-gray-800 shadow-md rounded-md p-1 transform origin-top transition-all duration-300 ease-out"
         >
           <li>
             <NuxtLink
@@ -82,8 +83,12 @@
             </NuxtLink>
           </li>
         </ul>
-        <CollapsedIcon v-if="!isMenuResourcesOpen" />
-        <ExpandedIcon v-if="isMenuResourcesOpen" class="text-primary-300" />
+        <ExpandedIcon
+          :class="[
+            'text-primary-300 transition-transform duration-300',
+            isMenuResourcesOpen ? 'rotate-180' : 'rotate-0',
+          ]"
+        />
       </li>
       <li
         class="relative mx-1 lg:mx-2 flex items-center group text-sm sm:text-base lg:text-lg"
@@ -97,7 +102,7 @@
           {{ $t('menu.join') }}
         </NuxtLink>
         <ul
-          class="absolute z-50 left-1/2 top-full hidden bg-gray-800 shadow-md rounded-md p-1 group-hover:block transition-all duration-300 transform -translate-x-1/2"
+          class="absolute z-50 right-3 top-full opacity-0 scale-y-95 pointer-events-none group-hover:opacity-100 group-hover:scale-y-100 group-hover:pointer-events-auto bg-gray-800 shadow-md rounded-md p-1 transform origin-top transition-all duration-300 ease-out"
         >
           <li>
             <NuxtLink
@@ -124,8 +129,9 @@
             </NuxtLink>
           </li>
         </ul>
-        <CollapsedIcon v-if="!isMenuJoinOpen" />
-        <ExpandedIcon v-if="isMenuJoinOpen" class="text-primary-300" />
+        <ExpandedIcon
+          :class="['text-primary-300 transition-transform duration-300', isMenuJoinOpen ? 'rotate-180' : 'rotate-0']"
+        />
       </li>
     </ul>
   </div>
