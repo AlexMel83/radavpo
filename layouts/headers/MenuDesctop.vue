@@ -138,7 +138,6 @@
 </template>
 
 <script setup>
-import CollapsedIcon from '~/components/icons/CollapsedIcon.vue';
 import ExpandedIcon from '~/components/icons/ExpandedIcon.vue';
 
 const isMenuResourcesOpen = ref(false);

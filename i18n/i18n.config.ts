@@ -1,3 +1,5 @@
+import partners from '~/api/partners';
+
 export default defineI18nConfig(() => ({
   fallbackLocale: 'uk',
   legacy: false,
@@ -191,6 +193,8 @@ export default defineI18nConfig(() => ({
       },
       Index: {
         title: 'Ради ВПО',
+        news: 'Новини',
+        partners: 'Наші партнери',
         description1:
           'Люди, які через війну в Україні переїхали в інше місто чи регіон, можуть стати повноцінними учасниками економічного та громадського життя у своїй новій громаді. Для цього діє ефективний механізм — ради внутрішньо переміщених осіб при місцевих та обласних органах влади (ради ВПО), які створюються в межах програми «Єднання заради дії»',
         description2:
@@ -399,6 +403,8 @@ export default defineI18nConfig(() => ({
       },
       Index: {
         title: 'IDP Councils',
+        news: 'News',
+        partners: 'Our partners',
         description1:
           'People who moved to another city or region due to the war in Ukraine can become full participants in the economic and social life of their new community. An effective mechanism for this is the councils of internally displaced persons at local and regional authorities (IDP councils), which are created within the framework of the “Unity for Action” program.',
         description2:

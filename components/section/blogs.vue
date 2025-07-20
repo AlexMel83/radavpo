@@ -1,7 +1,7 @@
 <template>
   <section class="py-6 px-4 bg-white">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-2xl font-bold text-center mb-10">Новини</h2>
+      <h2 class="text-2xl font-bold text-center mb-10">{{ $t('Index.news') }}</h2>
 
       <div class="relative">
         <!-- Стрілка вліво -->
