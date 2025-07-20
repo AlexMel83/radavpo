@@ -27,7 +27,37 @@
 </template>
 
 <script setup>
-const { data: posts } = await useFetch('/api/blogs');
+const isLoading = ref(false);
+const { $api } = useNuxtApp();
+const postsDataApi = ref([]);
+const posts = computed(() => {
+  const response = postsDataApi.value.map((post) => ({
+    ...post,
+    images: post.images || 'default-preview.jpg',
+  }));
+  return response;
+});
+
+onMounted(async () => {
+  try {
+    await fetchPosts();
+  } catch (error) {
+    console.error('Error in onMounted:', error);
+  }
+});
+
+const fetchPosts = async (searchQuery = null) => {
+  isLoading.value = true;
+  try {
+    const response = await $api.posts.getPosts(searchQuery);
+    postsDataApi.value = response.data;
+  } catch (error) {
+    isLoading.value = false;
+    console.error('Error fetching posts data:', error);
+  } finally {
+    isLoading.value = false;
+  }
+};
 
 function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString('uk-UA', {

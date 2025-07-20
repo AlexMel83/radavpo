@@ -6,15 +6,16 @@ export default defineNuxtPlugin((nuxtApp) => {
   const config = useRuntimeConfig();
   const authStore = useAuthStore();
   let baseURL;
-  if (process.client) {
-    if (window.location.hostname === 'memory.pp.ua') {
-      baseURL = 'https://api.' + window.location.hostname;
-    } else {
-      baseURL = config.public.apiBase || 'http://localhost:4040';
-    }
-  } else {
-    baseURL = config.public.apiBase || 'http://localhost:4040';
-  }
+  // if (process.client) {
+  //   if (window.location.hostname === 'radavpo.starkon.pp.ua') {
+  //     baseURL = 'https://api.' + window.location.hostname;
+  //   } else {
+  //     baseURL = config.public.apiBase || 'http://localhost:4040';
+  //   }
+  // } else {
+  //   baseURL = config.public.apiBase || 'http://localhost:4040';
+  // }
+  baseURL = config.public.apiBase || 'http://localhost:4040';
 
   const axiosInstance = axios.create({
     baseURL,

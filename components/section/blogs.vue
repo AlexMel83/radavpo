@@ -1,7 +1,9 @@
 <template>
   <section class="py-6 px-4 bg-white">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-2xl font-bold text-center mb-10">Новини</h2>
+      <h2 class="text-2xl font-bold text-center mb-10">
+        {{ $t('Index.news') }}
+      </h2>
 
       <div class="relative">
         <!-- Стрілка вліво -->
@@ -77,16 +79,45 @@
 </template>
 
 <script setup>
-const { data: posts } = await useFetch('/api/blogs');
-const windowWidth = ref(process.client ? window.innerWidth : 1024);
+const isLoading = ref(false);
+const { $api } = useNuxtApp();
+const postsDataApi = ref([]);
+const posts = computed(() => {
+  const response = postsDataApi.value.map((post) => ({
+    ...post,
+    images: post.images || 'default-preview.jpg',
+  }));
+  return response;
+});
 
+onMounted(async () => {
+  try {
+    await fetchPosts();
+  } catch (error) {
+    console.error('Error in onMounted:', error);
+  }
+});
+
+const fetchPosts = async (searchQuery = null) => {
+  isLoading.value = true;
+  try {
+    const response = await $api.posts.getPosts(searchQuery);
+    postsDataApi.value = response.data;
+  } catch (error) {
+    isLoading.value = false;
+    console.error('Error fetching posts data:', error);
+  } finally {
+    isLoading.value = false;
+  }
+};
+
+const windowWidth = ref(process.client ? window.innerWidth : 1024);
 // Динамічний розмір пачки
 const chunkSize = computed(() => {
   if (windowWidth.value < 640) return 1; // мобільні
   if (windowWidth.value < 868) return 2; // планшети
   return 3; // десктоп
 });
-
 // Стежимо за шириною екрана
 if (process.client) {
   window.addEventListener('resize', () => {
