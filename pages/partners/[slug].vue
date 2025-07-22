@@ -145,24 +145,4 @@ watch(partner, async (partner) => {
     nextPartner.value = null;
   }
 });
-
-// SEO head
-definePageMeta({
-  layout: 'default',
-  async head() {
-    const { data: partner } = await useFetch(`/api/partners/${useRoute().params.slug}`);
-    const img = Array.isArray(partner.value?.images)
-      ? `/blog-images/${partner.value.images[0]}`
-      : `/blog-images/${partner.value?.images}`;
-
-    return {
-      title: partner.value?.title || 'Партнер',
-      meta: [
-        { name: 'description', content: partner.value?.excerpt || '' },
-        { property: 'og:title', content: partner.value?.title },
-        { property: 'og:image', content: img },
-      ],
-    };
-  },
-});
 </script>

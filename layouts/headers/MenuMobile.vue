@@ -78,7 +78,7 @@
       <li class="text-sm sm:text-base lg:text-lg">
         <NuxtLink
           class="hover:text-primary-300 p-1 inline-block transition-colors border-b-2 border-transparent hover:border-primary-300"
-          to="/page_under_construction"
+          to="/blogs"
         >
           {{ $t('menu.blog') }}
         </NuxtLink>
