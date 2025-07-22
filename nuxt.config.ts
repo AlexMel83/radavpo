@@ -117,7 +117,10 @@ export default defineNuxtConfig({
       apiBase: process.env.API_BASE || 'api-vpo.starkon.pp.ua',
       isDocker: process.env.NUXT_PUBLIC_IS_DOCKER || 'false',
       API_URL: process.env.API_BASE || 'https://api-vpo.starkon.pp.ua',
-      API_KEY: process.env.API_KEY
+      API_KEY: process.env.API_KEY,
+      gtagId: process.env.NUXT_PUBLIC_GTAG_ID || 'G-6RYNGNQ3ZB',
+      googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
+      facebookAppId: process.env.FACEBOOK_APP_ID,
     },
   },
   compatibilityDate: '2025-01-29',
