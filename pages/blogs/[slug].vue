@@ -49,7 +49,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, nextTick } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { useRoute, useAsyncData, useHead } from '#app';
 
 const route = useRoute();
