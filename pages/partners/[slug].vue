@@ -1,5 +1,10 @@
 <template>
   <div v-if="partner" class="max-w-3xl mx-auto py-12 px-4">
+    <MetaTags
+      :title="partner?.title || 'Partner'"
+      :description="partner?.excerpt || 'Description'"
+      :image="partnerImage"
+    />
     <div v-if="isLoading" class="text-center py-10">
       <span class="text-gray-500">Завантаження партнерів...</span>
     </div>
@@ -133,44 +138,5 @@ const nextPartner = computed(() => ({
 const partnerImage = computed(() => {
   if (!partner.value?.images) return '/org-images/cfhope-logo-transparent.png';
   return `/org-images/${Array.isArray(partner.value.images) ? partner.value.images[0] : partner.value.images}`;
-});
-
-// Set meta tags using useHead for SSR
-useHead({
-  title: computed(() => partner.value?.title || 'Партнер'),
-  meta: [
-    {
-      name: 'description',
-      content: computed(() => partner.value?.excerpt || 'Опис партнера'),
-    },
-    {
-      property: 'og:title',
-      content: computed(() => partner.value?.title || 'Партнер'),
-    },
-    {
-      property: 'og:description',
-      content: computed(() => partner.value?.excerpt || 'Опис партнера'),
-    },
-    {
-      property: 'og:image',
-      content: partnerImage,
-    },
-    {
-      name: 'twitter:card',
-      content: 'summary_large_image',
-    },
-    {
-      name: 'twitter:title',
-      content: computed(() => partner.value?.title || 'Партнер'),
-    },
-    {
-      name: 'twitter:description',
-      content: computed(() => partner.value?.excerpt || 'Опис партнера'),
-    },
-    {
-      name: 'twitter:image',
-      content: partnerImage,
-    },
-  ],
 });
 </script>

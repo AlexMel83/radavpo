@@ -9,7 +9,6 @@ const props = defineProps({
   image: { type: String, default: '' },
   url: { type: String, default: '' }, // optional override
 });
-console.log('MetaTags props:', props);
 
 // Базова URL (SSR-safe)
 const config = useRuntimeConfig();
@@ -17,11 +16,7 @@ const reqUrl = useRequestURL();
 const baseUrl = reqUrl.origin || config.public.baseURL || 'https://radavpo.starkon.pp.ua';
 
 // Повна URL-адреса сторінки
-const currentUrl = computed(() => {
-  if (props.url) return props.url;
-
-  return baseUrl;
-});
+const currentUrl = computed(() => (props.url ? props.url : baseUrl));
 
 // Повна URL для зображення
 const urlImage = computed(() => (props.image.startsWith('http') ? props.image : baseUrl + props.image));
@@ -30,7 +25,7 @@ useHead({
   htmlAttrs: {
     lang: 'uk',
     locale: 'uk',
-    title: computed(() => partner.value?.title || 'Партнер'),
+    title: props.title || 'Рада з питань ВПО при Старокостянтинівський міський раді',
   },
   meta: [
     // базові
