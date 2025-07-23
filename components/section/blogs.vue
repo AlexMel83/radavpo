@@ -23,8 +23,8 @@
         <button
           class="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2"
           aria-label="Попередні"
-          @click="prevSlide"
           :disabled="currentIndex === 0"
+          @click="prevSlide"
         >
           ◀
         </button>
@@ -83,8 +83,8 @@
         <button
           class="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2"
           aria-label="Наступні"
-          @click="nextSlide"
           :disabled="currentIndex >= chunkedPosts.length - 1"
+          @click="nextSlide"
         >
           ▶
         </button>
