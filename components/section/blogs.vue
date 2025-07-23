@@ -5,12 +5,26 @@
         {{ $t('Index.news') }}
       </h2>
 
-      <div class="relative">
+      <!-- Состояние загрузки -->
+      <div v-if="pending" class="text-center py-10">
+        <p class="text-gray-600">Завантаження...</p>
+      </div>
+      <!-- Состояние ошибки -->
+      <div v-else-if="error" class="text-center py-10">
+        <p class="text-red-600">Помилка при завантаженні постів: {{ error.message }}</p>
+      </div>
+      <!-- Состояние пустых данных -->
+      <div v-else-if="!chunkedPosts.length" class="text-center py-10">
+        <p class="text-gray-600">Пости не знайдено</p>
+      </div>
+      <!-- Карусель -->
+      <div v-else class="relative">
         <!-- Стрілка вліво -->
         <button
           class="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2"
           aria-label="Попередні"
           @click="prevSlide"
+          :disabled="currentIndex === 0"
         >
           ◀
         </button>
@@ -57,7 +71,7 @@
                   </p>
 
                   <p class="text-xs text-gray-400 mt-auto">
-                    {{ formatDate(post.createdAt) }}
+                    {{ formatDate(post.created_at) }}
                   </p>
                 </div>
               </UCard>
@@ -70,64 +84,113 @@
           class="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2"
           aria-label="Наступні"
           @click="nextSlide"
+          :disabled="currentIndex >= chunkedPosts.length - 1"
         >
           ▶
         </button>
+      </div>
+
+      <!-- Пагинация -->
+      <div v-if="chunkedPosts.length > 0" class="flex justify-between mt-8">
+        <UButton
+          color="gray"
+          variant="soft"
+          :disabled="currentPage === 1"
+          @click="currentPage = Math.max(1, currentPage - 1)"
+        >
+          ← Попередня
+        </UButton>
+        <span class="text-gray-600">Сторінка {{ currentPage }} з {{ totalPages }}</span>
+        <UButton color="gray" variant="soft" :disabled="currentPage >= totalPages" @click="currentPage += 1">
+          Наступна →
+        </UButton>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-const isLoading = ref(false);
-const { $api } = useNuxtApp();
-const postsDataApi = ref([]);
+import { useAsyncData, useRoute, useRouter, useRequestURL } from '#app';
+
+// Реактивные переменные для пагинации
+const route = useRoute();
+const router = useRouter();
+const { origin } = useRequestURL();
+const currentPage = ref(Number(route.query.page) || 1);
+const postsPerPage = 9;
+const totalPosts = ref(0);
+
+// Загрузка постов с пагинацией и сортировкой
+const {
+  data: postsDataApi,
+  pending,
+  error,
+} = await useAsyncData(
+  `posts-page-${currentPage.value}`,
+  async () => {
+    try {
+      const query = `?status=published&limit=${postsPerPage}&offset=${
+        (currentPage.value - 1) * postsPerPage
+      }&sort_field=created_at&sortDirection=desc`;
+      console.log('Fetching posts with query:', query);
+      const { $api } = useNuxtApp();
+      const response = await $api.posts.getPosts(query);
+      console.log('API response:', response);
+      totalPosts.value = parseInt(response.total_count, 10) || 0;
+      return response.data || []; // Извлекаем массив из response.data
+    } catch (err) {
+      console.error('Error fetching posts:', err.message);
+      console.error('Error status:', err.response?.status);
+      console.error('Error data:', err.response?.data);
+      totalPosts.value = 0;
+      return []; // Возвращаем пустой массив в случае ошибки
+    }
+  },
+  {
+    server: true,
+    lazy: false,
+    default: () => [],
+    watch: [currentPage],
+  },
+);
+
+// Computed для постов с обработкой изображений
 const posts = computed(() => {
-  const response = postsDataApi.value.map((post) => ({
+  // Проверяем, что postsDataApi.value.data — массив
+  const postArray = postsDataApi.value?.data || [];
+  if (!Array.isArray(postArray)) {
+    console.error('postsDataApi.value.data is not an array:', postArray);
+    return [];
+  }
+  return postArray.map((post) => ({
     ...post,
-    images: post.images || 'default-preview.jpg',
+    images: post.images || ['default-preview.jpg'], // Фоллбэк для изображений
   }));
-  return response;
 });
 
-onMounted(async () => {
-  try {
-    await fetchPosts();
-  } catch (error) {
-    console.error('Error in onMounted:', error);
-  }
-});
-
-const fetchPosts = async (searchQuery = null) => {
-  isLoading.value = true;
-  try {
-    const response = await $api.posts.getPosts(searchQuery);
-    postsDataApi.value = response.data;
-  } catch (error) {
-    isLoading.value = false;
-    console.error('Error fetching posts data:', error);
-  } finally {
-    isLoading.value = false;
-  }
-};
-
-const windowWidth = ref(process.client ? window.innerWidth : 1024);
-// Динамічний розмір пачки
-const chunkSize = computed(() => {
-  if (windowWidth.value < 640) return 1; // мобільні
-  if (windowWidth.value < 868) return 2; // планшети
-  return 3; // десктоп
-});
-// Стежимо за шириною екрана
+// Динамическая ширина окна
+const windowWidth = ref(1024);
 if (process.client) {
-  window.addEventListener('resize', () => {
-    windowWidth.value = window.innerWidth;
-  });
+  windowWidth.value = window.innerWidth;
+  window.addEventListener(
+    'resize',
+    () => {
+      windowWidth.value = window.innerWidth;
+    },
+    { passive: true },
+  );
 }
 
-// Слайди
+// Динамический размер пачки для карусели
+const chunkSize = computed(() => {
+  if (windowWidth.value < 640) return 1;
+  if (windowWidth.value < 868) return 2;
+  return 3;
+});
+
+// Разбиение постов на группы для карусели
 const chunkedPosts = computed(() => {
-  if (!posts.value) return [];
+  if (!posts.value.length) return [];
   const chunks = [];
   for (let i = 0; i < posts.value.length; i += chunkSize.value) {
     chunks.push(posts.value.slice(i, i + chunkSize.value));
@@ -135,6 +198,7 @@ const chunkedPosts = computed(() => {
   return chunks;
 });
 
+// Управление каруселью
 const currentIndex = ref(0);
 
 function prevSlide() {
@@ -145,15 +209,24 @@ function nextSlide() {
   if (currentIndex.value < chunkedPosts.value.length - 1) currentIndex.value++;
 }
 
-// Фолбек-картинка
+// Вычисление общего количества страниц
+const totalPages = computed(() => Math.ceil(totalPosts.value / postsPerPage));
+
+// Обновление URL при изменении страницы
+watch(currentPage, () => {
+  router.replace({ query: { page: currentPage.value > 1 ? currentPage.value : undefined } });
+});
+
+// Обработка изображений
 function getImage(images) {
-  const base = '/blog-images/';
-  if (!images) return '/default-preview.jpg';
-  if (Array.isArray(images)) return base + (images[0] || 'default-preview.jpg');
-  return base + images;
+  const base = `${origin}/blog-images/`;
+  if (!images || !images.length) return `${origin}/blog-images/default-preview.jpg`;
+  return base + images[0];
 }
 
+// Форматирование даты
 function formatDate(dateStr) {
+  if (!dateStr) return '';
   return new Date(dateStr).toLocaleDateString('uk-UA', {
     year: 'numeric',
     month: 'long',
@@ -163,5 +236,8 @@ function formatDate(dateStr) {
 </script>
 
 <style scoped>
-/* Трохи стилів для плавної роботи */
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 </style>
