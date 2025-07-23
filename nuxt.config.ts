@@ -39,6 +39,7 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@nuxt/image',
     '@pinia/nuxt',
+    '@nuxt/icon',
   ],
   tailwindcss: {
     exposeConfig: true,
