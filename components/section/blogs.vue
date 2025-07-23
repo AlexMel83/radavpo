@@ -137,7 +137,7 @@ const {
       return response.data || [];
     } catch (err) {
       totalPosts.value = 0;
-      return [];
+      throw err;
     }
   },
   {
