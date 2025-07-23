@@ -86,7 +86,7 @@ const {
       totalPosts.value = parseInt(response.data.total_count, 10) || 0;
       return response.data.data || [];
     } catch (err) {
-      console.error('Error fetching posts:', err.message);
+      console.error('Error fetching posts:', err.message, error);
       console.error('Error details:', err);
       totalPosts.value = 0;
       return [];
