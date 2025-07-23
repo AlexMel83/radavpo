@@ -67,7 +67,7 @@ const { origin } = useRequestURL();
 // Реактивні змінні для пагінації
 const currentPage = ref(1);
 const postsPerPage = 3;
-const totalPosts = useState('totalPosts', () => 0); // Використовуємо useState для синхронізації
+const totalPosts = useState('totalPosts', () => 0);
 
 // Ініціалізація поточної сторінки з query-параметра
 currentPage.value = Number(route.query.page) || 1;
@@ -81,12 +81,12 @@ const {
   `posts-page-${currentPage.value}`,
   async () => {
     try {
-      const query = `?status=published&limit=${postsPerPage}&offset=${(currentPage.value - 1) * postsPerPage}`;
+      const query = `?status=published&limit=${postsPerPage}&offset=${(currentPage.value - 1) * postsPerPage}&sort_field=created_at&sortDirection=desc`;
       const response = await $api.posts.getPosts(query);
       totalPosts.value = parseInt(response.data.total_count, 10) || 0;
       return response.data.data || [];
     } catch (err) {
-      console.error('Error fetching posts:', err.message, error);
+      console.error('Error fetching posts:', err.message);
       console.error('Error details:', err);
       totalPosts.value = 0;
       return [];
