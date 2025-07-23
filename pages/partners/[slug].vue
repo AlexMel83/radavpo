@@ -113,7 +113,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, nextTick } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { useRoute, useAsyncData } from '#app';
 
 const route = useRoute();
@@ -195,22 +195,6 @@ watch(
   },
   { immediate: true },
 );
-
-// Додаткове логування для дебагінгу
-watch(
-  partner,
-  async (newPartner) => {
-    await nextTick();
-  },
-  { immediate: true },
-);
-
-watchEffect(async () => {
-  await nextTick();
-  if (error.value) {
-    console.error('Fetch error:', JSON.stringify(error.value, null, 2));
-  }
-});
 
 // Використовуємо prev_slug і next_slug з даних партнера
 const prevPartner = computed(() => ({
