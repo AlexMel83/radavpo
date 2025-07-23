@@ -30,13 +30,13 @@ useHead({
   htmlAttrs: {
     lang: 'uk',
     locale: 'uk',
+    title: computed(() => partner.value?.title || 'Партнер'),
   },
   meta: [
     // базові
     { charset: 'utf-8' },
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     { name: 'robots', content: 'index, follow' },
-    { name: 'title', content: props.title },
     { name: 'description', content: props.description },
     { name: 'keywords', content: 'Рада ВПО, Старокостянтинів, допомога ВПО, партнерство' },
     { name: 'author', content: 'Рада з питань ВПО при Старокостянтинівський міський раді' },

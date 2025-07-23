@@ -1,10 +1,5 @@
 <template>
   <div v-if="partner" class="max-w-3xl mx-auto py-12 px-4">
-    <MetaTags
-      :title="partner.title"
-      :description="partner.excerpt"
-      :image="`/org-images/${Array.isArray(partner?.images) ? partner.images[0] : partner?.images}`"
-    />
     <div v-if="isLoading" class="text-center py-10">
       <span class="text-gray-500">Завантаження партнерів...</span>
     </div>
@@ -34,7 +29,6 @@
               {{ partner.contacts.address }}
             </a>
           </li>
-
           <li v-if="partner.contacts.phone">
             <strong>Телефон: </strong>
             <a :href="`tel:${partner.contacts.phone.replace(/[^+\d]/g, '')}`" class="text-blue-600 hover:underline">
@@ -44,8 +38,8 @@
           <li v-if="partner.contacts.email">
             <strong>Email: </strong>
             <a :href="`mailto:${partner.contacts.email}`" class="text-blue-600 hover:underline">
-              {{ partner.contacts.email }}</a
-            >
+              {{ partner.contacts.email }}
+            </a>
           </li>
           <li v-if="partner.url">
             <strong>Вебсайт: </strong>
@@ -65,16 +59,16 @@
         <UButton
           color="gray"
           variant="soft"
-          :disabled="!prevPartner"
-          @click="navigateTo(`/partners/${prevPartner?.slug}`)"
+          :disabled="!prevPartner?.slug"
+          @click="navigateTo(`/partners/${prevPartner.slug}`)"
         >
           ← Назад
         </UButton>
         <UButton
           color="gray"
           variant="soft"
-          :disabled="!nextPartner"
-          @click="navigateTo(`/partners/${nextPartner?.slug}`)"
+          :disabled="!nextPartner?.slug"
+          @click="navigateTo(`/partners/${nextPartner.slug}`)"
         >
           Вперед →
         </UButton>
@@ -84,65 +78,99 @@
         :page-object="{
           title: partner.title,
           description: partner.excerpt,
-          image: `/org-images/${Array.isArray(partner?.images) ? partner.images[0] : partner?.images || 'cfhope-logo-tranparent.png'}`,
+          image: partnerImage,
         }"
       />
     </div>
   </div>
 
   <div v-else class="text-center py-20 text-gray-500">
-    <p>Запис не знайдено або ще завантажується.</p>
+    <p v-if="error">Помилка: {{ error.message }}</p>
+    <p v-else>Запис не знайдено або ще завантажується.</p>
   </div>
 </template>
 
 <script setup>
 const route = useRoute();
+const { $api } = useNuxtApp();
 const slug = route.params.slug;
 
-const isLoading = ref(false);
-const { $api } = useNuxtApp();
-const partner = ref([]);
-const prevPartner = ref(null);
-const nextPartner = ref(null);
+// Fetch partner data with useAsyncData for SSR
+const {
+  data: partner,
+  pending: isLoading,
+  error,
+} = useAsyncData(
+  `partner-${slug}`,
+  async () => {
+    try {
+      const response = await $api.partners.getPartners(`?slug=${slug}&status=published`);
+      if (!response.data?.[0]) {
+        console.warn('No data found for slug:', slug);
+      }
+      return response.data?.[0] || null;
+    } catch (err) {
+      console.error('Error fetching partner data:', err.message);
+      console.error('Full error:', JSON.stringify(err, null, 2));
+      return null;
+    }
+  },
+  {
+    server: true,
+    lazy: false,
+    immediate: true, // Виконувати запит одразу
+  },
+);
 
-onMounted(async () => {
-  await fetchPartners(`?slug=${slug}`);
+const prevPartner = computed(() => ({
+  slug: partner.value?.prev_slug || null,
+}));
+const nextPartner = computed(() => ({
+  slug: partner.value?.next_slug || null,
+}));
+
+// Compute the partner image
+const partnerImage = computed(() => {
+  if (!partner.value?.images) return '/org-images/cfhope-logo-transparent.png';
+  return `/org-images/${Array.isArray(partner.value.images) ? partner.value.images[0] : partner.value.images}`;
 });
 
-const fetchPartners = async (searchQuery = null) => {
-  isLoading.value = true;
-  try {
-    const response = await $api.partners.getPartners(searchQuery);
-    partner.value = response.data[0] || null;
-    return response.data[0] || null;
-  } catch (error) {
-    isLoading.value = false;
-    console.error('Error fetching partners data:', error);
-    return null;
-  } finally {
-    isLoading.value = false;
-  }
-};
-
-watch(partner, async (partner) => {
-  const id = partner?.id;
-  if (!id) return;
-
-  const prevId = id > 1 ? id - 1 : null;
-  const nextId = id + 1;
-
-  try {
-    const [prev, next] = await Promise.all([
-      prevId ? $api.partners.getPartners(`?id=${prevId}`) : null,
-      $api.partners.getPartners(`?id=${nextId}`),
-    ]);
-
-    prevPartner.value = prev?.data[0] ?? null;
-    nextPartner.value = next?.data[0] ?? null;
-  } catch (err) {
-    console.error('Error loading prev/next partners:', err);
-    prevPartner.value = null;
-    nextPartner.value = null;
-  }
+// Set meta tags using useHead for SSR
+useHead({
+  title: computed(() => partner.value?.title || 'Партнер'),
+  meta: [
+    {
+      name: 'description',
+      content: computed(() => partner.value?.excerpt || 'Опис партнера'),
+    },
+    {
+      property: 'og:title',
+      content: computed(() => partner.value?.title || 'Партнер'),
+    },
+    {
+      property: 'og:description',
+      content: computed(() => partner.value?.excerpt || 'Опис партнера'),
+    },
+    {
+      property: 'og:image',
+      content: partnerImage,
+    },
+    {
+      name: 'twitter:card',
+      content: 'summary_large_image',
+    },
+    {
+      name: 'twitter:title',
+      content: computed(() => partner.value?.title || 'Партнер'),
+    },
+    {
+      name: 'twitter:description',
+      content: computed(() => partner.value?.excerpt || 'Опис партнера'),
+    },
+    {
+      name: 'twitter:image',
+      content: partnerImage,
+    },
+  ],
 });
 </script>
