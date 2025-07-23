@@ -5,8 +5,8 @@ export default defineI18nConfig(() => ({
     uk: {
       header: {
         enter: 'Увійти',
-        title: 'Рада ВПО:',
-        subtitle: 'Старокостянтинів',
+        title: 'Рада з питань ВПО',
+        subtitle: 'при Старокостянтинівський міський раді',
         autorization_close: 'Закрити форму авторизації',
       },
       menu: {
@@ -225,8 +225,8 @@ export default defineI18nConfig(() => ({
     en: {
       header: {
         enter: 'Enter',
-        title: 'The Council of the IDPs:',
-        subtitle: 'Starokostyantiniv',
+        title: 'Council on IDPs',
+        subtitle: 'at the Starokostyantyniv City Council',
         autorization_close: 'Close autorization form',
       },
       menu: {

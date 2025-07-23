@@ -1,9 +1,9 @@
 <template>
   <div v-if="partner" class="max-w-3xl mx-auto py-12 px-4">
     <MetaTags
-      :title="partner.title || 'Default Title'"
-      :description="partner.excerpt || 'Default Description'"
-      :image="`/org-images/${Array.isArray(partner?.images) ? partner.images[0] : partner?.images || 'cfhope-logo-tranparent.png'}`"
+      :title="partner.title"
+      :description="partner.excerpt"
+      :image="`/org-images/${Array.isArray(partner?.images) ? partner.images[0] : partner?.images}`"
     />
     <div v-if="isLoading" class="text-center py-10">
       <span class="text-gray-500">Завантаження партнерів...</span>

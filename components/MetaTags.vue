@@ -4,11 +4,12 @@
 
 <script setup>
 const props = defineProps({
-  title: { type: String, default: 'Default Title' },
-  description: { type: String, default: 'Default Description' },
-  image: { type: String, default: '/cfhope-logo-tranparent.png' },
+  title: { type: String, default: '' },
+  description: { type: String, default: '' },
+  image: { type: String, default: '' },
   url: { type: String, default: '' }, // optional override
 });
+console.log('MetaTags props:', props);
 
 // Базова URL (SSR-safe)
 const config = useRuntimeConfig();
@@ -19,52 +20,48 @@ const baseUrl = reqUrl.origin || config.public.baseURL || 'https://radavpo.stark
 const currentUrl = computed(() => {
   if (props.url) return props.url;
 
-  if (process.server) {
-    const reqUrl = useRequestURL();
-    return reqUrl.href;
-  }
-
-  if (process.client) {
-    return window.location.href;
-  }
-
   return baseUrl;
 });
 
 // Повна URL для зображення
 const urlImage = computed(() => (props.image.startsWith('http') ? props.image : baseUrl + props.image));
 
-// Генерація мета-тегів
-watchEffect(() => {
-  useHead({
-    htmlAttrs: { lang: 'uk' },
-    title: props.title,
-    meta: [
-      { name: 'description', content: props.description },
-      { name: 'robots', content: 'index, follow' },
-      { name: 'theme-color', content: '#0057b7' },
-
-      // Open Graph
-      { property: 'og:type', content: 'article' },
-      { property: 'og:site_name', content: 'Рада ВПО' },
-      { property: 'og:title', content: props.title },
-      { property: 'og:description', content: props.description },
-      { property: 'og:image', content: urlImage.value },
-      { property: 'og:image:alt', content: props.title },
-      { property: 'og:url', content: currentUrl.value },
-      { property: 'og:locale', content: 'uk_UA' },
-      { property: 'fb:app_id', content: config.public.facebookAppId },
-
-      // Twitter
-      { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:title', content: props.title },
-      { name: 'twitter:description', content: props.description },
-      { name: 'twitter:image', content: urlImage.value },
-      { name: 'twitter:image:alt', content: props.title },
-      { name: 'twitter:site', content: '@cfhope' },
-      { name: 'twitter:creator', content: '@cfhope' },
-    ],
-    link: [{ rel: 'canonical', href: currentUrl.value }],
-  });
+useHead({
+  htmlAttrs: {
+    lang: 'uk',
+    locale: 'uk',
+  },
+  meta: [
+    // базові
+    { charset: 'utf-8' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    { name: 'robots', content: 'index, follow' },
+    { name: 'title', content: props.title },
+    { name: 'description', content: props.description },
+    { name: 'keywords', content: 'Рада ВПО, Старокостянтинів, допомога ВПО, партнерство' },
+    { name: 'author', content: 'Рада з питань ВПО при Старокостянтинівський міський раді' },
+    // OpenGraph для Facebook та LinkedIn
+    { property: 'og:type', content: 'article' },
+    { property: 'og:site_name', content: 'Рада з питань ВПО при Старокостянтинівський міський раді' }, // або назва проєкту
+    { property: 'og:title', content: props.title },
+    { property: 'og:description', content: props.description },
+    { property: 'og:image', content: urlImage.value },
+    { property: 'og:image:type', content: 'image/png' }, // або image/jpeg
+    { property: 'og:image:width', content: '1200' },
+    { property: 'og:image:height', content: '630' },
+    { property: 'og:url', content: currentUrl.value },
+    { property: 'og:locale', content: 'uk' }, // або 'uk' для української
+    // Facebook специфіка
+    { property: 'fb:app_id', content: config.public.facebookAppId },
+    // Twitter Cards
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: props.title },
+    { name: 'twitter:description', content: props.description },
+    { name: 'twitter:image', content: urlImage.value },
+    { name: 'twitter:site', content: '@cfhope' }, // якщо є акаунт
+    { name: 'twitter:creator', content: '@cfhope' }, // якщо є акаунт
+    // для telegram / whatsapp
+    { name: 'theme-color', content: '#0057b7' }, // покращує вигляд лінку в месенджерах
+  ],
 });
 </script>

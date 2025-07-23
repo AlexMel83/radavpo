@@ -84,9 +84,9 @@ export default defineNuxtConfig({
           content: 'width=device-width, initial-scale=1',
         },
         { name: 'robots', content: 'width=device-width, initial-scale=1' },
-        { property: 'og:locale', content: 'uk_UA' },
+        { property: 'og:locale', content: 'uk' },
         { property: 'og:type', content: 'article' },
-        { property: 'og:site_name', content: 'The Council of the IDPs' },
+        { property: 'og:site_name', content: 'Рада з питань ВПО при Старокостянтинівський міський раді' },
         { name: 'google-site-verification', content: '4oenAoJxtD-JUqm5e3ajGvAigOo9BTUQluabs7_6jBY' },
       ],
       link: [
