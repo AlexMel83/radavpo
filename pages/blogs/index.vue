@@ -10,7 +10,10 @@
     />
     <h1 class="text-3xl font-bold mb-6 text-center">Блог</h1>
     <div v-if="isLoading" class="text-center py-10 text-gray-500">Завантаження...</div>
-    <div v-else-if="posts.length === 0" class="text-center py-10 text-gray-500">Пости не знайдено.</div>
+    <div v-else-if="error" class="text-center py-10 text-red-600">
+      Помилка при завантаженні постів: {{ error.message }}
+    </div>
+    <div v-else-if="posts.length === 0 && !isLoading" class="text-center py-10 text-gray-500">Пости не знайдено.</div>
     <ul v-else class="grid gap-6">
       <li
         v-for="post in posts"
@@ -56,7 +59,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 import { useRoute, useRouter, useAsyncData, useRequestURL, useHead, useState } from '#app';
 
 const route = useRoute();
@@ -64,19 +67,17 @@ const router = useRouter();
 const { $api } = useNuxtApp();
 const { origin } = useRequestURL();
 
-// Реактивні змінні для пагінації
 const currentPage = ref(1);
 const postsPerPage = 3;
 const totalPosts = useState('totalPosts', () => 0);
 
-// Ініціалізація поточної сторінки з query-параметра
 currentPage.value = Number(route.query.page) || 1;
 
-// Завантаження постів із пагінацією через useAsyncData
 const {
   data: postsDataApi,
   pending: isLoading,
   error,
+  refresh,
 } = useAsyncData(
   `posts-page-${currentPage.value}`,
   async () => {
@@ -86,7 +87,7 @@ const {
       totalPosts.value = parseInt(response.data.total_count, 10) || 0;
       return response.data.data || [];
     } catch (err) {
-      console.error('Error fetching posts:', err.message, error);
+      console.error('Error fetching posts:', err.message);
       console.error('Error details:', err);
       totalPosts.value = 0;
       return [];
@@ -97,11 +98,15 @@ const {
     lazy: false,
     immediate: true,
     watch: [currentPage],
+    default: () => [],
   },
 );
 
-// Обчислювані значення
 const posts = computed(() => {
+  if (postsDataApi.value == null) {
+    console.warn('postsDataApi.value is null or undefined, returning empty array');
+    return [];
+  }
   if (!Array.isArray(postsDataApi.value)) {
     console.error('postsDataApi.value is not an array:', postsDataApi.value);
     return [];
@@ -117,14 +122,12 @@ const totalPages = computed(() => {
   return pages;
 });
 
-// Обробник для кнопки "Наступна"
 function nextPage() {
   if (currentPage.value < totalPages.value) {
     currentPage.value += 1;
   }
 }
 
-// Додаємо SEO для пагінації
 useHead({
   link: computed(() => {
     const links = [];
@@ -144,12 +147,10 @@ useHead({
   }),
 });
 
-// Оновлення URL при зміні сторінки
 watch(currentPage, () => {
   router.replace({ query: { page: currentPage.value > 1 ? currentPage.value : undefined } });
 });
 
-// Структуровані дані для SEO (JSON-LD)
 const structuredData = computed(() => ({
   '@context': 'https://schema.org',
   '@type': 'Blog',
@@ -166,7 +167,14 @@ const structuredData = computed(() => ({
   },
 }));
 
-// Формат дати
+if (process.client) {
+  onMounted(async () => {
+    if (!postsDataApi.value && !isLoading.value) {
+      await refresh();
+    }
+  });
+}
+
 function formatDate(dateStr) {
   if (!dateStr) return '';
   return new Date(dateStr).toLocaleDateString('uk-UA', {
@@ -176,7 +184,6 @@ function formatDate(dateStr) {
   });
 }
 
-// Отримання зображення
 function getImage(post) {
   const fallback = `${origin}/blog-images/default-preview.jpg`;
   if (!post.images) return fallback;
