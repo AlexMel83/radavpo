@@ -1,8 +1,17 @@
+```vue
 <template>
   <div class="my-6 relative rounded-xl overflow-hidden h-96 bg-gray-100">
+    <!-- Заглушка, если нет изображений -->
+    <img
+      v-if="!images || (Array.isArray(images) && images.length === 0)"
+      src="/blog-images/default-preview.jpg"
+      class="w-full h-full object-contain"
+      :alt="alt || 'Зображення за замовчуванням'"
+    />
+
     <!-- Якщо одне зображення -->
     <img
-      v-if="typeof images === 'string'"
+      v-else-if="typeof images === 'string'"
       :src="`/blog-images/${images}`"
       class="w-full h-full object-contain"
       :alt="alt"
@@ -57,7 +66,11 @@
       class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center"
       @click.self="closeFullscreen"
     >
-      <img :src="`/blog-images/${images[currentIndex]}`" class="max-h-full max-w-full object-contain" :alt="alt" />
+      <img
+        :src="getFullscreenImage"
+        class="max-h-full max-w-full object-contain"
+        :alt="alt || 'Зображення за замовчуванням'"
+      />
       <button class="absolute top-4 right-4 text-white text-3xl" aria-label="Закрити" @click="closeFullscreen">
         ✖
       </button>
@@ -66,10 +79,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue';
-
 const props = defineProps<{
-  images: string | string[];
+  images: string | string[] | null;
   alt?: string;
 }>();
 
@@ -77,14 +88,24 @@ const currentIndex = ref(0);
 const fullscreen = ref(false);
 let interval: ReturnType<typeof setInterval> | undefined;
 
+const getFullscreenImage = computed(() => {
+  if (!props.images || (Array.isArray(props.images) && props.images.length === 0)) {
+    return '/blog-images/default-preview.jpg';
+  }
+  if (typeof props.images === 'string') {
+    return `/blog-images/${props.images}`;
+  }
+  return `/blog-images/${props.images[currentIndex.value]}`;
+});
+
 function nextImage() {
-  if (Array.isArray(props.images)) {
+  if (Array.isArray(props.images) && props.images.length > 0) {
     currentIndex.value = (currentIndex.value + 1) % props.images.length;
   }
 }
 
 function prevImage() {
-  if (Array.isArray(props.images)) {
+  if (Array.isArray(props.images) && props.images.length > 0) {
     currentIndex.value = (currentIndex.value - 1 + props.images.length) % props.images.length;
   }
 }
@@ -100,7 +121,7 @@ function closeFullscreen() {
 }
 
 function startAutoplay() {
-  if (Array.isArray(props.images)) {
+  if (Array.isArray(props.images) && props.images.length > 0) {
     interval = setInterval(nextImage, 7000);
   }
 }
@@ -108,11 +129,6 @@ function startAutoplay() {
 onMounted(() => {
   startAutoplay();
   window.addEventListener('keydown', onKey);
-  if (Array.isArray(props.images)) {
-    interval = setInterval(() => {
-      currentIndex.value = (currentIndex.value + 1) % props.images.length;
-    }, 4000);
-  }
 });
 
 onBeforeUnmount(() => {

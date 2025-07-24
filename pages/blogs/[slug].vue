@@ -15,11 +15,7 @@
       </h1>
     </div>
 
-    <BlogImages
-      v-if="post.images"
-      :images="post.images"
-      :alt="post.title ? `${post.title} зображення` : 'Зображення блогу'"
-    />
+    <BlogImages :images="post.images" :alt="post.title ? `${post.title} зображення` : 'Зображення блогу'" />
     <p class="text-gray-400 text-sm mb-4">
       {{ formatDate(post.created_at) }}
     </p>
@@ -43,8 +39,8 @@
     />
   </div>
   <div v-else class="text-center py-20 text-gray-500">
-    <p v-if="error">Помилка: {{ error.message }}</p>
-    <p v-else>Запис не знайдено або ще завантажується.</p>
+    <p v-if="error || fetchError">Помилка: {{ error?.message || fetchError?.message || 'Запис не знайдено' }}</p>
+    <p v-else>Запис ще завантажується...</p>
   </div>
 </template>
 
@@ -60,7 +56,10 @@ const post = ref(null);
 const isLoading = ref(true);
 const error = ref(null);
 
-// Використовуємо useAsyncData для SSR
+if (!slug) {
+  error.value = new Error('Slug is missing in route parameters');
+}
+
 const {
   data,
   pending,
@@ -69,15 +68,14 @@ const {
   `post-${slug}`,
   async () => {
     try {
-      const response = await $api.posts.getPosts(`?slug=${slug}&status=published`);
-      if (!response.data?.[0]) {
-        console.warn('No data found for slug:', slug);
-        return null;
+      const query = `?slug=${slug}&status=published`;
+      const response = await $api.posts.getPosts(query);
+      if (!Array.isArray(response.data.data) || response.data.data.length === 0) {
+        throw new Error(`Post with slug ${slug} not found or not published`);
       }
-      return response.data[0];
+      return response.data.data[0];
     } catch (err) {
       console.error('Error fetching post data:', err.message);
-      console.error('Full error:', JSON.stringify(err, null, 2));
       return null;
     }
   },
@@ -88,7 +86,6 @@ const {
   },
 );
 
-// Синхронізуємо post.value, isLoading, і error
 watch(
   [data, pending, fetchError],
   ([newData, newPending, newError]) => {
@@ -99,7 +96,6 @@ watch(
   { immediate: true },
 );
 
-// Використовуємо prev_slug і next_slug з даних поста
 const prevPost = computed(() => ({
   slug: post.value?.prev_slug || null,
 }));
@@ -107,7 +103,6 @@ const nextPost = computed(() => ({
   slug: post.value?.next_slug || null,
 }));
 
-// Додаємо <link rel="prev"> і <link rel="next"> для SEO
 useHead({
   link: computed(() => [
     prevPost.value?.slug ? { rel: 'prev', href: `https://radavpo.starkon.pp.ua/blogs/${prevPost.value.slug}` } : {},
@@ -115,14 +110,14 @@ useHead({
   ]),
 });
 
-// Compute the post image
 const postImage = computed(() => {
   if (!post.value?.images) return 'https://radavpo.starkon.pp.ua/blog-images/cfhope-logo-transparent.png';
   const image = Array.isArray(post.value.images) ? post.value.images[0] : post.value.images;
-  return `https://radavpo.starkon.pp.ua/blog-images/${image}`;
+  return image
+    ? `https://radavpo.starkon.pp.ua/blog-images/${image}`
+    : 'https://radavpo.starkon.pp.ua/blog-images/cfhope-logo-transparent.png';
 });
 
-// Структуровані дані для SEO (JSON-LD)
 const structuredData = computed(() => {
   if (!post.value) return null;
   return {
@@ -155,7 +150,6 @@ const structuredData = computed(() => {
   };
 });
 
-// Формат дати
 function formatDate(dateStr) {
   if (!dateStr) return '';
   return new Date(dateStr).toLocaleDateString('uk-UA', {
