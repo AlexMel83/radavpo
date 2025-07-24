@@ -5,46 +5,40 @@
         {{ $t('Index.news') }}
       </h2>
 
-      <!-- Состояние загрузки -->
-      <div v-if="pending" class="text-center py-10">
-        <p class="text-gray-600">Завантаження...</p>
-      </div>
-      <!-- Состояние ошибки -->
-      <div v-else-if="error" class="text-center py-10">
-        <p class="text-red-600">Помилка при завантаженні постів: {{ error.message }}</p>
-      </div>
-      <!-- Состояние пустых данных -->
-      <div v-else-if="!chunkedPosts.length" class="text-center py-10">
-        <p class="text-gray-600">Пости не знайдено</p>
-      </div>
-
-      <!-- Карусель -->
-      <ClientOnly>
-        <div v-if="chunkedPosts.length" class="relative">
+      <!-- Контейнер для стабилизации гидратации -->
+      <div>
+        <!-- Состояние загрузки -->
+        <div v-if="pending" class="text-center py-10">
+          <p class="text-gray-600">Завантаження...</p>
+        </div>
+        <div v-else-if="error" class="text-center py-10">
+          <p class="text-red-600">Помилка при завантаженні постів: {{ error.message }}</p>
+        </div>
+        <div v-else-if="!posts.length && !pending" class="text-center py-10">
+          <p class="text-gray-600">Пости не знайдено</p>
+        </div>
+        <div v-else class="relative" ref="carousel">
           <!-- Стрілка вліво -->
           <button
             class="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2"
             aria-label="Попередні"
-            :disabled="currentIndex === 0"
             @click="prevSlide"
+            :disabled="currentPage === 1"
           >
             ◀
           </button>
 
+          <!-- Карусель -->
           <div class="overflow-hidden">
             <div
               class="flex transition-transform duration-500 ease-in-out"
-              :style="{ transform: `translateX(-${currentIndex * 100}%)` }"
+              :style="{ transform: `translateX(-${(currentPage.value - 1) * 100}%)` }"
             >
-              <div
-                v-for="(chunk, i) in chunkedPosts"
-                :key="i"
-                class="flex-shrink-0 w-full flex flex-wrap justify-center gap-4 sm:gap-6"
-              >
+              <div class="flex-shrink-0 w-full flex justify-center gap-4">
                 <UCard
-                  v-for="post in chunk"
+                  v-for="post in posts"
                   :key="post.slug"
-                  class="w-full sm:w-[32%] md:w-[25%] hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 group p-2"
+                  class="w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.666rem)] hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 group p-2"
                   :ui="{
                     base: 'flex flex-col overflow-hidden',
                     body: 'p-4 flex flex-col flex-grow',
@@ -84,120 +78,180 @@
           <button
             class="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2"
             aria-label="Наступні"
-            :disabled="currentIndex >= chunkedPosts.length - 1"
             @click="nextSlide"
+            :disabled="currentPage >= totalPages"
           >
             ▶
           </button>
         </div>
-      </ClientOnly>
 
-      <!-- Пагинация -->
-      <div v-if="chunkedPosts.length > 0" class="flex justify-between mt-8">
-        <UButton
-          color="gray"
-          variant="soft"
-          :disabled="currentPage === 1"
-          @click="currentPage = Math.max(1, currentPage - 1)"
-        >
-          ← Попередня
-        </UButton>
-        <span class="text-gray-600">Сторінка {{ currentPage }} з {{ totalPages }}</span>
-        <UButton color="gray" variant="soft" :disabled="currentPage >= totalPages" @click="currentPage += 1">
-          Наступна →
-        </UButton>
+        <!-- Пагинация -->
+        <div v-if="posts.length > 0" class="flex justify-between mt-8">
+          <UButton color="gray" variant="soft" :disabled="currentPage === 1" @click="prevSlide"> ← Попередня </UButton>
+          <span class="text-gray-600">Сторінка {{ currentPage }} з {{ totalPages }}</span>
+          <UButton color="gray" variant="soft" :disabled="currentPage >= totalPages" @click="nextSlide">
+            Наступна →
+          </UButton>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import { useAsyncData, useRoute, useRouter, useRequestURL } from '#app';
-
 const route = useRoute();
-const router = useRouter();
-const { origin } = useRequestURL();
 const currentPage = ref(Number(route.query.page) || 1);
-const postsPerPage = 9;
-const totalPosts = ref(0);
-const currentIndex = ref(0);
+const postsPerPage = ref(3);
+const totalPosts = useState('totalPosts', () => 0);
+const isMounted = ref(false);
 
+// Загрузка постов
 const {
   data: postsDataApi,
   pending,
   error,
-} = await useAsyncData(
-  `posts-page-${currentPage.value}`,
+  refresh,
+} = useAsyncData(
+  `posts-page-${currentPage.value}-${postsPerPage.value}`,
   async () => {
     try {
-      const query = `?status=published&limit=${postsPerPage}&offset=${(currentPage.value - 1) * postsPerPage}&sort_field=created_at&sortDirection=desc`;
+      const query = `?status=published&limit=${postsPerPage.value}&offset=${
+        (currentPage.value - 1) * postsPerPage.value
+      }&sort_field=created_at&sortDirection=desc`;
       const { $api } = useNuxtApp();
       const response = await $api.posts.getPosts(query);
-      totalPosts.value = parseInt(response.total_count, 10) || 0;
-      return response.data || [];
+      totalPosts.value = parseInt(response.data.total_count, 10) || 0;
+      return response.data.data || [];
     } catch (err) {
+      console.error('Error fetching posts:', err.message);
       totalPosts.value = 0;
-      throw err;
+      return [];
     }
   },
   {
     server: true,
-    lazy: false,
+    lazy: true,
     default: () => [],
-    watch: [currentPage],
   },
 );
 
+// Computed для постов
+const cachedPosts = ref([]);
+
 const posts = computed(() => {
-  const postArray = postsDataApi.value?.data || [];
-  if (!Array.isArray(postArray)) return [];
-  return postArray.map((post) => ({
-    ...post,
-    images: post.images || ['default-preview.jpg'],
-  }));
+  const postArray = Array.isArray(postsDataApi.value) ? postsDataApi.value : postsDataApi.value?.data || [];
+  if (postArray.length) {
+    cachedPosts.value = postArray.map((post) => ({
+      ...post,
+      images: post.images || ['default-preview.jpg'],
+    }));
+  }
+  return cachedPosts.value;
 });
 
-const windowWidth = ref(process.client ? window.innerWidth : 1024);
+// Динамическая ширина окна
+const windowWidth = ref(1024);
+
+// Обработка свайпов
+const touchStartX = ref(0);
+const touchEndX = ref(0);
+const carousel = ref(null);
 
 if (process.client) {
-  window.addEventListener('resize', () => (windowWidth.value = window.innerWidth), { passive: true });
+  onMounted(async () => {
+    isMounted.value = true;
+    windowWidth.value = window.innerWidth;
+    await nextTick();
+    if (windowWidth.value < 640) {
+      postsPerPage.value = 1;
+    } else if (windowWidth.value < 868) {
+      postsPerPage.value = 2;
+    } else {
+      postsPerPage.value = 3;
+    }
+    await refresh(); // Инициализация данных на клиенте
+    window.addEventListener(
+      'resize',
+      () => {
+        windowWidth.value = window.innerWidth;
+      },
+      { passive: true },
+    );
+
+    // Обработчики свайпов
+    const carouselEl = carousel.value;
+    if (carouselEl) {
+      carouselEl.addEventListener(
+        'touchstart',
+        (e) => {
+          touchStartX.value = e.changedTouches[0].screenX;
+        },
+        { passive: true },
+      );
+      carouselEl.addEventListener(
+        'touchend',
+        (e) => {
+          touchEndX.value = e.changedTouches[0].screenX;
+          handleSwipe();
+        },
+        { passive: true },
+      );
+    }
+  });
 }
 
-const chunkSize = computed(() => {
-  if (windowWidth.value < 640) return 1;
-  if (windowWidth.value < 868) return 2;
-  return 3;
+const totalPages = computed(() => {
+  const pages = Math.ceil(totalPosts.value / postsPerPage.value);
+  return pages || 1;
 });
 
-const chunkedPosts = computed(() => {
-  if (!posts.value.length) return [];
-  const chunks = [];
-  for (let i = 0; i < posts.value.length; i += chunkSize.value) {
-    chunks.push(posts.value.slice(i, i + chunkSize.value));
+// Управление каруселью
+async function prevSlide() {
+  if (currentPage.value > 1) {
+    currentPage.value--;
+    await refresh();
+    await nextTick();
   }
-  return chunks;
-});
-
-function prevSlide() {
-  if (currentIndex.value > 0) currentIndex.value--;
 }
 
-function nextSlide() {
-  if (currentIndex.value < chunkedPosts.value.length - 1) currentIndex.value++;
+async function nextSlide() {
+  if (currentPage.value < totalPages.value) {
+    currentPage.value++;
+    await refresh();
+    await nextTick();
+  }
 }
 
-const totalPages = computed(() => Math.ceil(totalPosts.value / postsPerPage));
+// Обработка свайпа
+function handleSwipe() {
+  const swipeDistance = touchStartX.value - touchEndX.value;
+  const minSwipeDistance = 50;
+  if (swipeDistance > minSwipeDistance) {
+    nextSlide();
+  } else if (swipeDistance < -minSwipeDistance) {
+    prevSlide();
+  }
+}
 
-watch(currentPage, () => {
-  router.replace({ query: { page: currentPage.value > 1 ? currentPage.value : undefined } });
+watch([windowWidth, currentPage], async () => {
+  const newPostsPerPage = windowWidth.value < 640 ? 1 : windowWidth.value < 868 ? 2 : 3;
+  if (newPostsPerPage !== postsPerPage.value) {
+    postsPerPage.value = newPostsPerPage;
+    currentPage.value = 1;
+  }
+  await nextTick();
+  await refresh();
 });
 
+// Обработка изображений
 function getImage(images) {
+  const { origin } = useRequestURL();
   const base = `${origin}/blog-images/`;
   if (!images || !images.length) return `${origin}/blog-images/default-preview.jpg`;
   return base + images[0];
 }
 
+// Форматирование даты
 function formatDate(dateStr) {
   if (!dateStr) return '';
   return new Date(dateStr).toLocaleDateString('uk-UA', {
