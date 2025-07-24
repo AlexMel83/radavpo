@@ -17,13 +17,13 @@
         <div v-else-if="!posts.length && !pending" class="text-center py-10">
           <p class="text-gray-600">Пости не знайдено</p>
         </div>
-        <div v-else class="relative" ref="carousel">
+        <div v-else ref="carousel" class="relative">
           <!-- Стрілка вліво -->
           <button
             class="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2"
             aria-label="Попередні"
-            @click="prevSlide"
             :disabled="currentPage === 1"
+            @click="prevSlide"
           >
             ◀
           </button>
@@ -78,8 +78,8 @@
           <button
             class="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2"
             aria-label="Наступні"
-            @click="nextSlide"
             :disabled="currentPage >= totalPages"
+            @click="nextSlide"
           >
             ▶
           </button>
