@@ -37,9 +37,9 @@
             >
               <div
                 v-if="posts.length > 0"
+                :key="`carousel-${currentPage}`"
                 class="flex-shrink-0 w-full flex justify-center gap-4"
                 :style="{ width: `${100 * postsPerPage.value}%` }"
-                :key="`carousel-${currentPage}`"
               >
                 <div
                   v-for="post in posts"
