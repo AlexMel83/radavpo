@@ -15,7 +15,7 @@
         <!-- Состояние ошибки -->
         <div v-else-if="error" class="text-center py-10">
           <p class="text-red-600">Помилка при завантаженні постів: {{ error.message }}</p>
-          <button @click="refresh" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded">Спробувати знову</button>
+          <button class="mt-2 px-4 py-2 bg-blue-500 text-white rounded" @click="refresh">Спробувати знову</button>
         </div>
 
         <!-- Состояние отсутствия постов -->
