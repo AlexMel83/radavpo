@@ -1,5 +1,5 @@
 <template>
-  <div class="header-buttons flex items-center justify-end gap-3 md:gap-1 px-1 text-sm sm:text-base lg:text-lg">
+  <div class="header-buttons flex items-center justify-end gap-3 md:gap-1 px-1 text-sm sm:text-base lg:text-lg flex-1">
     <div class="languages_toggle flex md:flex-col items-start px-1">
       <button
         v-for="(lang, index) in locales"
