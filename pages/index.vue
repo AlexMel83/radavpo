@@ -3,8 +3,8 @@
     <MetaTags :title="$t('header.title')" :description="$t('header.subtitle')" :image="'/cfhope-logo-tranparent.png'" />
     <ClientOnly>
       <SectionBlogs />
-      <SectionPartners />
     </ClientOnly>
+    <SectionPartners />
     <div class="rada-title text-2xl font-bold text-center dark:text-white mb-6">
       {{ $t('Index.title') }}
     </div>

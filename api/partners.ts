@@ -26,7 +26,7 @@ export interface Partners {
 }
 
 export interface PartnersApi {
-  getPartners(partnersLink: string): Promise<PartnersResponse>;
+  getPartners(partnersLink: string | null): Promise<PartnersResponse>;
 }
 
 export default function (instance: AxiosInstance): PartnersApi {
