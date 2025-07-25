@@ -68,7 +68,7 @@ const { $api } = useNuxtApp();
 const { origin } = useRequestURL();
 
 const currentPage = ref(1);
-const postsPerPage = 3;
+const postsPerPage = 5;
 const totalPosts = useState('totalPosts', () => 0);
 
 currentPage.value = Number(route.query.page) || 1;

@@ -3,11 +3,11 @@
     <div class="header-wrapper">
       <!-- Используем flex с равномерным распределением -->
       <div
-        class="heder-container flex flex-wrap items-center justify-between w-full min-h-[50px] sm:min-h-[60px] lg:min-h-[70px] px-2"
+        class="heder-container flex items-center justify-between w-full min-h-[50px] sm:min-h-[60px] lg:min-h-[70px] px-2"
       >
         <!-- Логотип -->
         <div
-          class="logo cursor-pointer p-2 flex items-center space-x-2 flex-1 min-w-[120px] sm:min-w-[150px] lg:min-w-[200px]"
+          class="logo cursor-pointer p-2 flex flex-shrink-0 items-center w-[182px] flex-0 overflow-hidden"
           @click="hideMenu"
         >
           <NuxtLink to="/" class="relative flex items-center space-x-2">
@@ -15,11 +15,11 @@
               <div class="font-bold truncate">
                 {{ $t('header.title') }}
               </div>
-              <span class="truncate">{{ $t('header.subtitle') }}</span>
+              <span class="text-xs">{{ $t('header.subtitle') }}</span>
             </div>
           </NuxtLink>
         </div>
-        <MenuDesctop class="hidden md:flex flex-1 justify-center min-w-[150px] sm:min-w-[200px]" />
+        <MenuDesctop class="hidden md:flex justify-center min-w-[150px] sm:min-w-[200px]" />
         <!-- Кнопки справа -->
         <HeaderButtons
           class="hidden md:flex"

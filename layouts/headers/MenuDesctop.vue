@@ -32,9 +32,7 @@
             </NuxtLink>
           </li>
         </ul>
-        <ExpandedIcon
-          :class="['text-primary-300 transition-transform duration-300', isMenuAboutOpen ? 'rotate-180' : 'rotate-0']"
-        />
+        <ExpandedIcon :class="['transition-transform duration-300', isMenuAboutOpen ? 'rotate-180' : 'rotate-0']" />
       </li>
       <li class="relative mx-1 lg:mx-2 text-sm sm:text-base lg:text-lg">
         <NuxtLink
@@ -83,12 +81,7 @@
             </NuxtLink>
           </li>
         </ul>
-        <ExpandedIcon
-          :class="[
-            'text-primary-300 transition-transform duration-300',
-            isMenuResourcesOpen ? 'rotate-180' : 'rotate-0',
-          ]"
-        />
+        <ExpandedIcon :class="['transition-transform duration-300', isMenuResourcesOpen ? 'rotate-180' : 'rotate-0']" />
       </li>
       <li
         class="relative mx-1 lg:mx-2 flex items-center group text-sm sm:text-base lg:text-lg"
@@ -129,9 +122,7 @@
             </NuxtLink>
           </li>
         </ul>
-        <ExpandedIcon
-          :class="['text-primary-300 transition-transform duration-300', isMenuJoinOpen ? 'rotate-180' : 'rotate-0']"
-        />
+        <ExpandedIcon :class="['transition-transform duration-300', isMenuJoinOpen ? 'rotate-180' : 'rotate-0']" />
       </li>
     </ul>
   </div>
