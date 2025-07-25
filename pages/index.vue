@@ -1,7 +1,6 @@
 <template>
   <div class="container mx-auto px-4 py-8">
     <MetaTags :title="$t('header.title')" :description="$t('header.subtitle')" :image="'/cfhope-logo-tranparent.png'" />
-    <!-- <ClientOnly> </ClientOnly> -->
     <SectionBlogs />
     <SectionPartners />
     <div class="rada-title text-2xl font-bold text-center dark:text-white mb-6">
