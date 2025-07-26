@@ -33,13 +33,13 @@
           <div class="overflow-hidden">
             <div
               class="flex transition-transform duration-500 ease-in-out"
-              :style="{ transform: `translateX(-${(currentPage - 1) * (100 / postsPerPage.value)}%)` }"
+              :style="{ transform: `translateX(-${(currentPage - 1) * (100 / postsPerPage.valueOf)}%)` }"
             >
               <div
                 v-if="posts.length > 0"
                 :key="`carousel-${currentPage}`"
                 class="flex-shrink-0 w-full flex justify-center gap-4"
-                :style="{ width: `${100 * postsPerPage.value}%` }"
+                :style="{ width: `${100 * postsPerPage.valueOf}%` }"
               >
                 <div
                   v-for="post in posts"
@@ -63,7 +63,7 @@
                       </div>
                     </NuxtLink>
 
-                    <div class="mt-4 flex flex-col justify-between flex-grow">
+                    <div class="mt-4 flex flex-col justify-between flex-grow p-2">
                       <NuxtLink :to="`/blogs/${post.slug}`">
                         <h3 class="text-lg font-semibold text-gray-800 leading-tight hover:underline mb-2">
                           {{ post.title || 'Untitled' }}
@@ -171,7 +171,7 @@ const {
   refresh,
 } = await useAsyncData(`posts-carousel-${currentPage.value}-${postsPerPage.value}`, fetchPosts, {
   server: true,
-  default: () => [],
+  // default: () => [],
 });
 
 const posts = computed(() => {

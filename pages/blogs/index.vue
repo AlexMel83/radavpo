@@ -98,7 +98,7 @@ const {
     lazy: false,
     immediate: true,
     watch: [currentPage],
-    default: () => [],
+    // default: () => [],
   },
 );
 

@@ -65,7 +65,7 @@ const {
     server: true,
     lazy: false,
     immediate: true,
-    default: () => [],
+    // default: () => [],
   },
 );
 
