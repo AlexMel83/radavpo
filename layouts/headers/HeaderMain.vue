@@ -12,8 +12,12 @@
               <div class="font-bold truncate">
                 {{ $t('header.title') }}
               </div>
-              <div class="text-xs">{{ $t('header.subtitle[0]') }}</div>
-              <div class="text-xs">{{ $t('header.subtitle[1]') }}</div>
+              <div class="text-xs">
+                {{ $t('header.subtitle[0]') }}
+              </div>
+              <div class="text-xs">
+                {{ $t('header.subtitle[1]') }}
+              </div>
             </div>
           </NuxtLink>
         </div>
