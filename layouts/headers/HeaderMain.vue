@@ -6,16 +6,14 @@
         class="heder-container flex flex-wrap items-center justify-between w-full min-h-[50px] sm:min-h-[60px] lg:min-h-[70px] px-2"
       >
         <!-- Логотип -->
-        <div
-          class="logo cursor-pointer p-2 flex items-center space-x-2 flex-1 min-w-[120px] sm:min-w-[150px] lg:min-w-[200px]"
-          @click="hideMenu"
-        >
+        <div class="logo w-[182px] p-2 cursor-pointer flex items-center" @click="hideMenu">
           <NuxtLink to="/" class="relative flex items-center space-x-2">
             <div class="text-start sm-md:max-w-[250px] flex flex-col text-gray-200 text-sm md:text-base lg:text-lg">
               <div class="font-bold truncate">
                 {{ $t('header.title') }}
               </div>
-              <span class="truncate">{{ $t('header.subtitle') }}</span>
+              <div class="text-xs">{{ $t('header.subtitle[0]') }}</div>
+              <div class="text-xs">{{ $t('header.subtitle[1]') }}</div>
             </div>
           </NuxtLink>
         </div>
