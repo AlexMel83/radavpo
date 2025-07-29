@@ -1,7 +1,7 @@
 <template>
   <div class="my-6 relative rounded-xl overflow-hidden h-96 bg-gray-100">
     <!-- Якщо одне зображення (рядок) -->
-    <img v-if="isSingle" :src="getImageSrc(singleImage)" class="w-full h-full object-contain" :alt="alt" />
+    <NuxtImg v-if="isSingle" :src="getImageSrc(singleImage)" class="w-full h-full object-contain" :alt="alt" />
 
     <!-- Карусель -->
     <div v-else-if="isArray" class="relative w-full h-full">
@@ -10,7 +10,7 @@
         class="flex transition-transform duration-700 ease-in-out h-full"
         :style="{ transform: `translateX(-${currentIndex * 100}%)` }"
       >
-        <img
+        <NuxtImg
           v-for="(img, index) in images"
           :key="index"
           :src="getImageSrc(img)"

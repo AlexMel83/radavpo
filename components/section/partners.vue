@@ -21,7 +21,7 @@
             }"
           >
             <div class="flex items-center justify-center h-48 w-full bg-white p-4">
-              <img
+              <NuxtImg
                 :src="getPartnerImage(partner)"
                 :alt="partner.title || 'Зображення партнера'"
                 class="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105"

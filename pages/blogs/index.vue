@@ -21,7 +21,7 @@
         class="bg-white rounded-lg shadow-md overflow-hidden transition hover:shadow-lg"
       >
         <NuxtLink :to="`/blogs/${post.slug}`" class="block hover:bg-gray-50 transition">
-          <img
+          <NuxtImg
             :src="getImage(post)"
             :alt="post.title ? `${post.title} зображення` : 'Зображення блогу'"
             class="w-full h-48 object-cover"

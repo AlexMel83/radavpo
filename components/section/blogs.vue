@@ -55,7 +55,7 @@
                   >
                     <NuxtLink :to="`/blogs/${post.slug}`">
                       <div class="h-48 w-full bg-white overflow-hidden flex items-center justify-center">
-                        <img
+                        <NuxtImg
                           :src="getImage(post.images)"
                           :alt="post.title || 'Post image'"
                           class="w-full h-full object-cover rounded transition-transform duration-300 group-hover:scale-105"

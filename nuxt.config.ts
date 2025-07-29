@@ -41,6 +41,10 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxt/icon',
   ],
+  image: {
+    dir: 'public',
+    format: ['webp', 'avif'],
+  },
   tailwindcss: {
     exposeConfig: true,
     viewer: true,
