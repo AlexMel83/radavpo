@@ -38,9 +38,10 @@
 <script setup>
 import { useAuthStore } from '~/stores/app.store';
 import FooterMain from './footers/FooterMain.vue';
-import HeaderAuthUser from '@/layouts/headers/HeaderAuthUser.vue';
 import HeaderMain from './headers/HeaderMain.vue';
 import { nextTick } from 'vue';
+
+const HeaderAuthUser = defineAsyncComponent(() => import('@/layouts/headers/HeaderAuthUser.vue'));
 
 const store = useAuthStore();
 const isScrollToTopInFooter = ref(false);
@@ -81,7 +82,7 @@ onUnmounted(() => {
 });
 </script>
 
-<style>
+<style scoped>
 /* Стилизация полосы прокрутки для WebKit браузеров (Chrome, Safari) */
 ::-webkit-scrollbar {
   width: 10px;

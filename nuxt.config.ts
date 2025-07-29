@@ -21,7 +21,27 @@ export default defineNuxtConfig({
         changeOrigin: true,
         headers: { "X-API-Key": "e3434354546456" }
       }
-    }
+    },
+    prerender: {
+      routes: ['/'],
+    },
+    routeRules: {
+      '/blog-images/**': {
+        headers: {
+          'cache-control': 'public, max-age=31536000, immutable',
+        },
+      },
+      '/org-images/**': {
+        headers: {
+          'cache-control': 'public, max-age=31536000, immutable',
+        },
+      },
+      '/icons/**': {
+        headers: {
+          'cache-control': 'public, max-age=31536000, immutable',
+        },
+      },
+    },
   },
   plugins: [
     '~/plugins/axios.js',

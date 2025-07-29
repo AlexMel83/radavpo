@@ -52,12 +52,13 @@
 </template>
 
 <script setup>
-import LoginRegistration from '@/components/modal/LoginRegistration.vue';
 import { useAppStore } from '~/stores/app.store';
-import HeaderButtons from './HeaderButtons.vue';
-import SearchInput from './SearchInput.vue';
-import MenuDesctop from './MenuDesctop.vue';
-import MenuMobile from './MenuMobile.vue';
+
+const LoginRegistration = defineAsyncComponent(() => import('@/components/modal/LoginRegistration.vue'));
+const HeaderButtons = defineAsyncComponent(() => import('./HeaderButtons.vue'));
+const SearchInput = defineAsyncComponent(() => import('./SearchInput.vue'));
+const MenuDesctop = defineAsyncComponent(() => import('./MenuDesctop.vue'));
+const MenuMobile = defineAsyncComponent(() => import('./MenuMobile.vue'));
 
 const isSearchVisible = ref(false);
 const store = useAppStore();
