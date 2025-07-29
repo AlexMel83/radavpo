@@ -15,7 +15,7 @@
       </h1>
     </div>
 
-    <BlogImages :images="post.images" :alt="post.title ? `${post.title} зображення` : 'Зображення блогу'" />
+    <Images type="blog" :images="post.images" :alt="post.title ? `${post.title} зображення` : 'Зображення блогу'" />
     <p class="text-gray-400 text-sm mb-4">
       {{ formatDate(post.created_at) }}
     </p>

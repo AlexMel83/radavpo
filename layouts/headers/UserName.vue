@@ -107,10 +107,6 @@ const goOut = () => {
   height: 24px;
 }
 
-img {
-  margin-right: 5px;
-}
-
 .cabinet:hover,
 .exit:hover {
   transform: scale(1.1);

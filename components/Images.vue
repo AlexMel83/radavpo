@@ -1,5 +1,12 @@
 <template>
   <div class="my-6 relative rounded-xl overflow-hidden h-96 bg-gray-100">
+    <!-- Заглушка, если нет изображений -->
+    <NuxtImg
+      v-if="!images || (Array.isArray(images) && images.length === 0)"
+      src="/blog-images/default-preview.jpg"
+      class="w-full h-full object-contain"
+      :alt="alt || 'Зображення за замовчуванням'"
+    />
     <!-- Якщо одне зображення (рядок) -->
     <NuxtImg v-if="isSingle" :src="getImageSrc(singleImage)" class="w-full h-full object-contain" :alt="alt" />
 

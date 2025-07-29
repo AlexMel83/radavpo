@@ -5,7 +5,7 @@
         <div class="cursor-pointer logo" @click="hideMenu">
           <NuxtLink to="/" class="inline-block relative">
             <div class="absolute inset-0 bg-white blur-sm" />
-            <img src="/cfhope-logo-tranparent.png" alt="logo" class="relative h-auto w-12 object-contain" />
+            <NuxtImg src="/cfhope-logo-tranparent.png" alt="logo" class="relative h-auto w-12 object-contain" />
           </NuxtLink>
         </div>
         <div class="header-buttons">
