@@ -47,13 +47,13 @@ const handleModalClosed = () => {
 
 const activeSection = ref('');
 
-const scrollToSection = (sectionId) => {
-  const element = document.getElementById(sectionId);
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth' });
-    activeSection.value = sectionId;
-  } else {
-    console.warn(`Element with id "${sectionId}" not found`);
-  }
-};
+// const scrollToSection = (sectionId) => {
+//   const element = document.getElementById(sectionId);
+//   if (element) {
+//     element.scrollIntoView({ behavior: 'smooth' });
+//     activeSection.value = sectionId;
+//   } else {
+//     console.warn(`Element with id "${sectionId}" not found`);
+//   }
+// };
 </script>

@@ -77,8 +77,6 @@ const currentLocale = computed(() => locale.value);
 const router = useRouter();
 const localSearchVisible = ref(props.isSearchVisible);
 
-const colorMode = useColorMode();
-
 watchEffect(() => {
   localSearchVisible.value = props.isSearchVisible;
 });
