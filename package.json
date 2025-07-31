@@ -27,6 +27,8 @@
   },
   "dependencies": {
     "@formkit/auto-animate": "^0.8.2",
+    "@fortawesome/fontawesome-free": "^7.0.0",
+    "@fortawesome/free-solid-svg-icons": "^7.0.0",
     "@nuxt/icon": "^1.15.0",
     "@nuxt/image": "^1.7.0",
     "@nuxt/ui": "^2.18.7",

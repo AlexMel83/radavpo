@@ -5,7 +5,7 @@ import type { AuthApi } from '../api/auth';
 interface User {
   id: number;
   email: string;
-  facabook_id: string;
+  facebook_id: string;
   google_id: string;
   name: string;
   surname: string;
@@ -14,6 +14,7 @@ interface User {
   role: string;
   social_login: boolean;
   isactivated: boolean;
+  activationlink: string;
   created_at: string;
   updated_at: string;
 }
@@ -60,7 +61,7 @@ export const useAuthStore = defineStore('auth', {
             activationlink: '',
             isactivated: false,
             social_login: false,
-            facebook_id: null,
+            facebook_id: '',
             google_id: '',
             picture: '',
             created_at: '',
@@ -74,10 +75,10 @@ export const useAuthStore = defineStore('auth', {
         };
       }
       if (data.user) {
-        this.userData.user = { ...this.userData.user, ...data.user };
+        this.userData.user = { ...this.userData?.user, ...data.user };
       }
       if (data.tokens) {
-        this.userData.tokens = { ...this.userData.tokens, ...data.tokens };
+        this.userData.tokens = { ...this.userData?.tokens, ...data.tokens };
       }
       this.isAuthed = true;
       if (typeof window !== 'undefined') {
@@ -89,7 +90,7 @@ export const useAuthStore = defineStore('auth', {
         const data = localStorage.getItem('userData');
         if (data) {
           this.userData = JSON.parse(data);
-          this.isAuthed = !!this.userData.tokens?.accessToken;
+          this.isAuthed = !!this.userData?.tokens?.accessToken;
           return this.userData;
         }
       }
@@ -97,7 +98,7 @@ export const useAuthStore = defineStore('auth', {
     },
     async logOut() {
       const nuxtApp = useNuxtApp();
-      const $api = nuxtApp.$api as { auth: AuthApi };
+      const $api = nuxtApp.$api as unknown as { auth: AuthApi };
       try {
         await $api.auth.logout();
         this.$reset(); // очищення Pinia-стану

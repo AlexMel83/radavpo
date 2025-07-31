@@ -1,5 +1,5 @@
 <template>
-  <div class="header-buttons flex items-center justify-end gap-3 md:gap-1 px-1 text-sm sm:text-base lg:text-lg">
+  <div class="header-buttons flex items-center justify-end gap-3 md:gap-1 px-1 text-sm sm:text-base lg:text-lg flex-1">
     <div class="languages_toggle flex md:flex-col items-start px-1">
       <button
         v-for="(lang, index) in locales"
@@ -25,25 +25,25 @@
         <IconsMagnifyingGlassIcon class="hover:scale-110 h-5 w-5" />
       </button>
     </div>
-    <!-- <button
+    <button
       v-if="!isAuthed"
       class="cabinet hidden md:flex text-white rounded hover:scale-110 focus:outline-none min-w-[70px] py-2"
       aria-label="cabinet"
       @click="openLoginModal"
     >
       <IconsUser class="mx-auto h-5 w-5" /> {{ $t('header.enter') }}
-    </button> -->
+    </button>
   </div>
 </template>
 
 <script setup>
-// import { useAuthStore } from '~/stores/app.store';
+import { useAuthStore } from '~/stores/app.store';
 import ColorMode from './ColorMode.vue';
 import { useI18n } from 'vue-i18n';
 
 const emit = defineEmits(['toggle-search', 'open-login-modal']);
-// const isAuthed = computed(() => authStore.isAuthed);
-// const authStore = useAuthStore();
+const isAuthed = computed(() => authStore.isAuthed);
+const authStore = useAuthStore();
 const router = useRouter();
 
 // i18n
@@ -62,9 +62,9 @@ const changeLanguage = async (langCode) => {
     console.error('Failed to change language:', error);
   }
 };
-// const openLoginModal = () => {
-//   emit('open-login-modal');
-// };
+const openLoginModal = () => {
+  emit('open-login-modal');
+};
 
 defineProps({
   isSearchVisible: Boolean,

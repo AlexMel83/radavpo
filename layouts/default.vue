@@ -1,16 +1,18 @@
 <template>
-  <div class="page-container">
-    <HeaderAuthUser v-if="store?.userData?.user?.isactivated" class="flex" />
-    <HeaderMain v-else />
-    <NuxtPage />
-    <FooterMain />
+  <div class="min-h-screen flex flex-col">
+    <HeaderAuthUser v-if="store?.userData?.user?.isactivated" class="flex-shrink-0" />
+    <HeaderMain v-else class="flex-shrink-0" />
+    <main class="flex-grow">
+      <NuxtPage />
+    </main>
+    <FooterMain class="flex-shrink-0" />
   </div>
 </template>
 
 <script setup>
 import { useAuthStore } from '~/stores/app.store';
 import FooterMain from './footers/FooterMain.vue';
-import HeaderMain from './headers/HeaderMain.vue';
+// import HeaderMain from './headers/HeaderMain.vue';
 import { nextTick } from 'vue';
 
 const HeaderAuthUser = defineAsyncComponent(() => import('@/layouts/headers/HeaderAuthUser.vue'));
@@ -28,10 +30,3 @@ onMounted(async () => {
   await setUserData();
 });
 </script>
-
-<style scoped>
-.page-container {
-  flex-direction: column;
-  min-height: 100vh;
-}
-</style>

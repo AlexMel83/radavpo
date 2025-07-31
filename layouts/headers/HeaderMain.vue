@@ -1,14 +1,76 @@
 <template>
-  <div class="header-main text-white bg-[var(--header-bg)] sticky top-0 z-50">
+  <nav
+    class="w-full min-h-[60px] px-4 py-2 bg-white dark:bg-custom-black dark:text-custom-white sticky top-0 z-[1500] border-b dark:border-gray-700 border-custom-border"
+  >
+    <div class="container mx-auto flex justify-between items-center">
+      <NuxtLink to="/" class="logo w-[182px] p-2 cursor-pointer relative flex items-center space-x-2">
+        <div class="text-start sm-md:max-w-[250px] flex flex-col text-sm md:text-base lg:text-lg">
+          <div class="font-bold truncate">
+            {{ $t('header.title') }}
+          </div>
+          <div class="text-xs">
+            {{ $t('header.subtitle[0]') }}
+          </div>
+          <div class="text-xs">
+            {{ $t('header.subtitle[1]') }}
+          </div>
+        </div>
+      </NuxtLink>
+      <HeaderMenuDesctop :active-section="activeSection" />
+      <HeaderButtons :is-menu-open="isMenuOpen" @toggle-menu="toggleMenu" @toggle-search="toggleSearch" />
+    </div>
+    <HeaderMenuMobile :is-menu-open="isMenuOpen" @close-menu="isMenuOpen = false" />
+    <div>
+      <ModalLoginRegistration ref="loginRegistrationRef" @modal-closed="handleModalClosed" />
+    </div>
+    <div v-if="isSearchVisible" class="search-container">
+      <HeaderSearchInput />
+    </div>
+  </nav>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const isMenuOpen = ref(false);
+const isSearchVisible = ref(false);
+const menuOpen = ref(false);
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+};
+const toggleSearch = () => {
+  isSearchVisible.value = !isSearchVisible.value;
+};
+const handleModalClosed = () => {
+  menuOpen.value = false;
+};
+
+const activeSection = ref('');
+
+const scrollToSection = (sectionId) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+    activeSection.value = sectionId;
+  } else {
+    console.warn(`Element with id "${sectionId}" not found`);
+  }
+};
+</script>
+
+<!-- <template>
+  <div
+    class="w-full px-4 py-2 bg-white dark:bg-gray-900 font-inter text-gray-900 dark:text-gray-200 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50"
+  >
     <div class="header-wrapper">
-      <!-- Используем flex с равномерным распределением -->
+
       <div
-        class="heder-container flex flex-wrap items-center justify-between w-full min-h-[50px] sm:min-h-[60px] lg:min-h-[70px] px-2"
+        class="heder-container flex items-center justify-between w-full min-h-[50px] sm:min-h-[60px] lg:min-h-[70px] px-2"
       >
-        <!-- Логотип -->
+
         <div class="logo w-[182px] p-2 cursor-pointer flex items-center" @click="hideMenu">
           <NuxtLink to="/" class="relative flex items-center space-x-2">
-            <div class="text-start sm-md:max-w-[250px] flex flex-col text-gray-200 text-sm md:text-base lg:text-lg">
+            <div class="text-start sm-md:max-w-[250px] flex flex-col text-sm md:text-base lg:text-lg">
               <div class="font-bold truncate">
                 {{ $t('header.title') }}
               </div>
@@ -21,15 +83,15 @@
             </div>
           </NuxtLink>
         </div>
-        <MenuDesctop class="hidden md:flex flex-1 justify-center min-w-[150px] sm:min-w-[200px]" />
-        <!-- Кнопки справа -->
+        <MenuDesctop class="hidden md:flex flex-grow flex-wrap justify-center min-w-[150px] sm:min-w-[200px]" />
+
         <HeaderButtons
-          class="hidden md:flex"
+          class="hidden md:flex flex-grow-0"
           :is-search-visible="isSearchVisible"
           @toggle-search="toggleSearch"
           @open-login-modal="openLoginModal"
         />
-        <!-- Мобильное меню -->
+
         <div class="burger md:hidden">
           <button aria-label="mobilemenubutton" @click="toggleMenu">
             <IconsBarsIcon v-if="!isMenuOpen" class="h-8 w-8 hover:scale-110" />
@@ -52,13 +114,12 @@
 </template>
 
 <script setup>
+import LoginRegistration from '@/components/modal/LoginRegistration.vue';
 import { useAppStore } from '~/stores/app.store';
-
-const LoginRegistration = defineAsyncComponent(() => import('@/components/modal/LoginRegistration.vue'));
-const HeaderButtons = defineAsyncComponent(() => import('./HeaderButtons.vue'));
-const SearchInput = defineAsyncComponent(() => import('./SearchInput.vue'));
-const MenuDesctop = defineAsyncComponent(() => import('./MenuDesctop.vue'));
-const MenuMobile = defineAsyncComponent(() => import('./MenuMobile.vue'));
+import HeaderButtons from './HeaderButtons.vue';
+import SearchInput from './SearchInput.vue';
+import MenuDesctop from './MenuDesctop.vue';
+import MenuMobile from './MenuMobile.vue';
 
 const isSearchVisible = ref(false);
 const store = useAppStore();
@@ -89,4 +150,4 @@ const openLoginModal = () => {
     loginRegistrationRef.value.openModal();
   }
 };
-</script>
+</script> -->
