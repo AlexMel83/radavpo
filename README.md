@@ -1,10 +1,14 @@
-# Nuxt Minimal Starter
+# Інтерактивний туристичний гід Хмельниччини
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Цей проєкт створено для забезпечення комунікації Ради внутрішньо переміщених осіб при Старокостянтинівський міський ради з цільовою аудиторією та ключовими стейкхолдерами.
 
-## Setup
+## Ключові особливості
 
-Make sure to install dependencies:
+-
+
+## Налаштування
+
+Переконайтесь, що ви встановили всі залежності:
 
 ```bash
 # npm
@@ -20,9 +24,9 @@ yarn install
 bun install
 ```
 
-## Development Server
+## Запуск сервера розробки
 
-Start the development server on `http://localhost:3000`:
+Запустіть сервер за адресою `http://localhost:3000`:
 
 ```bash
 # npm
@@ -38,9 +42,9 @@ yarn dev
 bun run dev
 ```
 
-## Production
+## Продакшн
 
-Build the application for production:
+Збудуйте застосунок для продакшну:
 
 ```bash
 # npm
@@ -56,7 +60,7 @@ yarn build
 bun run build
 ```
 
-Locally preview production build:
+Перегляньте збудований продакшн:
 
 ```bash
 # npm
@@ -72,4 +76,6 @@ yarn preview
 bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## Деплоймент
+
+Перегляньте [документацію Nuxt](https://nuxt.com/docs/getting-started/deployment) для деплою.
