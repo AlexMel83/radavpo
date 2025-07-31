@@ -44,6 +44,7 @@ export default defineI18nConfig(() => ({
       Footer: {
         address: 'м. Авдіївка, вул. Молодіжна, 3А',
         terms: 'Умови використання',
+        socialMedia: 'Наші соціальні мережі:',
         policy: 'Політика конфіденційності',
         howToHelp: 'Як допомогти',
         developer: 'Розроблено IT-Starkon Web Studio',
@@ -263,6 +264,7 @@ export default defineI18nConfig(() => ({
       },
       Footer: {
         address: 'Avdiivka city, Molodijna street, 3A',
+        socialMedia: 'Our social media:',
         terms: 'Terms of use',
         policy: 'Privacy policy',
         howToHelp: 'How to help',

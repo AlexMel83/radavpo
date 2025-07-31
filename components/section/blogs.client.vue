@@ -7,16 +7,16 @@
 
       <div>
         <div v-if="pending" class="text-center py-10">
-          <p class="text-gray-600">Завантаження...</p>
+          <p class="text-gray-600 dark:text-gray-300">Завантаження...</p>
         </div>
 
         <div v-else-if="error" class="text-center py-10">
-          <p class="text-red-600">Помилка при завантаженні постів: {{ error.message }}</p>
+          <p class="text-red-600 dark:text-gray-300">Помилка при завантаженні постів: {{ error.message }}</p>
           <button class="mt-2 px-4 py-2 bg-blue-500 text-white rounded" @click="refresh">Спробувати знову</button>
         </div>
 
         <div v-else-if="posts.length === 0" class="text-center py-10">
-          <p class="text-gray-600">Пости не знайдено</p>
+          <p class="text-gray-600 dark:text-gray-300">Пости не знайдено</p>
         </div>
 
         <div v-else ref="carousel" class="relative">
@@ -65,16 +65,18 @@
 
                     <div class="mt-4 flex flex-col justify-between flex-grow p-2">
                       <NuxtLink :to="`/blogs/${post.slug}`">
-                        <h3 class="text-lg font-semibold text-gray-800 leading-tight hover:underline mb-2">
+                        <h3
+                          class="text-lg font-semibold text-gray-800 dark:text-gray-300 leading-tight hover:underline mb-2"
+                        >
                           {{ post.title || 'Untitled' }}
                         </h3>
                       </NuxtLink>
 
-                      <p class="text-sm text-gray-600 line-clamp-4 mb-2">
+                      <p class="text-sm text-gray-600 dark:text-gray-300 line-clamp-4 mb-2">
                         {{ post.excerpt || 'No excerpt available' }}
                       </p>
 
-                      <p class="text-xs text-gray-400 mt-auto">
+                      <p class="text-xs text-gray-600 dark:text-gray-300 mt-auto">
                         {{ formatDate(post.created_at) }}
                       </p>
                     </div>

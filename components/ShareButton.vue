@@ -1,6 +1,23 @@
 <template>
-  <a :href="url" target="_blank" rel="noopener noreferrer" class="btn-share" :class="type">
-    <NuxtImg :src="icon" :alt="type.charAt(0).toUpperCase() + type.slice(1)" class="w-6 h-6" />
+  <a
+    :href="url"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="btn-share inline-flex items-center gap-2 px-3 py-2 rounded-md transition-colors font-semibold"
+    :class="{
+      'bg-blue-600 text-white hover:bg-blue-700': type === 'facebook',
+      'bg-purple-500 text-white hover:bg-purple-600': type === 'viber',
+      'bg-green-600 text-white hover:bg-green-700': type === 'whatsapp',
+      'bg-blue-500 text-white hover:bg-blue-600': type === 'telegram',
+    }"
+  >
+    <Icon
+      :name="getIconName(type)"
+      class="w-5 h-5"
+      :class="{
+        'text-white': true, // Колір іконки синхронізовано з текстом
+      }"
+    />
     <span class="hidden sm:inline">{{ label }}</span>
   </a>
 </template>
@@ -13,7 +30,8 @@ defineProps({
   },
   icon: {
     type: String,
-    required: true,
+    required: false, // Більше не потрібен, оскільки використовуємо @nuxt/icon
+    default: '',
   },
   label: {
     type: String,
@@ -25,58 +43,22 @@ defineProps({
     validator: (value) => ['facebook', 'viber', 'telegram', 'whatsapp'].includes(value),
   },
 });
+
+// Функція для отримання назви іконки з @nuxt/icon
+function getIconName(type) {
+  const icons = {
+    facebook: 'fa-brands:facebook-f',
+    viber: 'fa-brands:viber',
+    telegram: 'fa-brands:telegram',
+    whatsapp: 'fa-brands:whatsapp',
+  };
+  return icons[type] || 'fa-solid:link';
+}
 </script>
 
 <style scoped>
-.btn-share {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border-radius: 6px;
-  transition: background-color 0.3s;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.btn-share img {
-  width: 24px;
-  height: 24px;
-}
-
-.btn-share.facebook {
-  background-color: #3b5998;
-  color: white;
-}
-
-.btn-share.facebook:hover {
-  background-color: #2d4373;
-}
-
-.btn-share.viber {
-  background-color: #665ca7;
-  color: white;
-}
-
-.btn-share.viber:hover {
-  background-color: #4a3d77;
-}
-
-.btn-share.whatsapp {
-  background-color: #25d366;
-  color: white;
-}
-
-.btn-share.whatsapp:hover {
-  background-color: #1ebe5d;
-}
-
-.btn-share.telegram {
-  background-color: #0088cc;
-  color: white;
-}
-
-.btn-share.telegram:hover {
-  background-color: #005f8a;
+/* Додаткові стилі для темної теми */
+.dark .btn-share {
+  filter: brightness(0.9); /* Злегка затемняємо в темній темі */
 }
 </style>

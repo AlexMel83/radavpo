@@ -32,8 +32,8 @@ useHead({
   htmlAttrs: {
     lang: 'uk',
     locale: 'uk',
-    title: props.title,
   },
+  title: props.title || 'Рада з питань ВПО',
   meta: [
     // Базові
     { charset: 'utf-8' },
