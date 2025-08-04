@@ -16,6 +16,7 @@
           {{ $t('header.subtitle[1]') }}
         </div>
       </div>
+      <Button>Click me</Button>
       <HeaderMenuDesctop :active-section="activeSection" />
       <HeaderButtons :is-menu-open="isMenuOpen" @toggle-menu="toggleMenu" @toggle-search="toggleSearch" />
     </div>

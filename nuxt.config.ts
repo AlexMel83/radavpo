@@ -59,8 +59,13 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@nuxt/image',
     '@pinia/nuxt',
+    'shadcn-nuxt',
     '@nuxt/icon',
   ],
+  shadcn: {
+    prefix: '',
+    componentDir: './components/ui'
+  },
   image: {
     dir: 'public',
     format: ['webp', 'avif'],
@@ -129,7 +134,7 @@ export default defineNuxtConfig({
           async: true,
         },
         {
-          children: `
+          innerHTML: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
