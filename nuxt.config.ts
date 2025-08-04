@@ -85,18 +85,20 @@ export default defineNuxtConfig({
   colorMode: {
     preference: 'light',
   },
-  i18n: {
+ i18n: {
+    defaultLocale: "uk",
     locales: [
-      { code: 'uk', name: 'UA' },
-      { code: 'en', name: 'EN' },
+      { code: "uk", iso: "uk-UA", name: "Українська", file: "uk.json" },
+      { code: "en", iso: "en-US", name: "English", file: "en.json" },
     ],
-    vueI18n: './i18n/i18n.config.ts',
-    defaultLocale: 'uk',
-    strategy: 'prefix_except_default',
-      useCookie: false, 
-      redirectOn: 'no',
-      fallbackLocale: 'uk', 
+    strategy: "prefix_except_default",
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: "i18n_redirected",
+      redirectOn: "root",
+      alwaysRedirect: false,
     },
+  },
   app: {
     head: {
       htmlAttrs: {

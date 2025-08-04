@@ -1,0 +1,43 @@
+{
+  "header": {
+    "enter": "Enter",
+    "title": "Council on IDPs",
+    "subtitle1": "at the Starokostyantyniv",
+    "subtitle2": "City Council",
+    "autorization_close": "Close authorization form",
+    "menu": {
+      "home": "Home",
+      "about": "About us",
+      "mission": "Mission and Vision",
+      "history": "History of the organization",
+      "team": "Team (Roster)",
+      "partners": "Partners",
+      "vacancies": "Vacancies",
+      "contacts": "Contacts",
+      "reporting": "Reporting",
+      "news": "News",
+      "resources": "Resources",
+      "housing": "Housing questions",
+      "employment": "Employment",
+      "support": "Support and help",
+      "join": "Join us",
+      "donate": "Make a donation",
+      "events": "Visit our events",
+      "volunteer": "Be a volunteer",
+      "newsletter": "Subscribe",
+      "collaboration": "Collaboration with us"
+    },
+    "ui": {
+      "switch_language": "Switch language"
+    }
+  },
+  "Footer": {
+    "address": "Avdiivka city, Molodijna street, 3A",
+    "socialMedia": "Our social media:",
+    "terms": "Terms of use",
+    "policy": "Privacy policy",
+    "howToHelp": "How to help",
+    "developer": "Developed by IT-Starkon Web Studio",
+    "copyright": "© 2025. All rights reserved."
+  }
+}
