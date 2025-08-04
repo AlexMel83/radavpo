@@ -14,6 +14,9 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@iconify-json/fa-brands": "^1.2.1",
+    "@iconify-json/fa-solid": "^1.2.1",
+    "@iconify-json/fa6-solid": "^1.2.4",
     "@typescript-eslint/eslint-plugin": "^8.38.0",
     "@typescript-eslint/parser": "^8.38.0",
     "autoprefixer": "^10.4.20",
