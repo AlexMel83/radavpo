@@ -70,13 +70,7 @@
         >
           <div class="inline-block relative">
             <div class="absolute inset-0 bg-white blur-sm opacity-50" />
-            <NuxtImg
-              src="/cfhope-logo-tranparent.png"
-              alt="logo"
-              width="48"
-              height="48"
-              class="relative h-auto object-contain"
-            />
+            <NuxtImg :src="logoSrc" alt="logo" width="48" height="48" class="relative h-auto object-contain" />
           </div>
           <p class="ml-3">{{ $t('Footer.developer') }}<br />{{ $t('Footer.copyright') }}</p>
         </NuxtLink>
@@ -117,6 +111,9 @@
 const isScrollToTopInFooter = ref(false);
 const showScrollToTop = ref(false);
 const footerRef = ref(null);
+const { origin } = useRequestURL();
+
+const logoSrc = computed(() => `${origin}/cfhope-logo-tranparent.png`);
 
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });

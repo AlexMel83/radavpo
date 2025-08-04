@@ -83,9 +83,15 @@ const partners = computed(() => {
 
 // Function to get partner image with fallback
 const getPartnerImage = (partner) => {
+  // Отримуємо "http://localhost:3001" або домен вашого сайту в продакшені
+  const { origin } = useRequestURL();
+  const base = `${origin}/org-images/`;
+
   if (!partner.images || (Array.isArray(partner.images) && partner.images.length === 0)) {
-    return '/org-images/default.png';
+    return `${base}default.png`; // Також робимо повний шлях для дефолтного зображення
   }
-  return `/org-images/${Array.isArray(partner.images) ? partner.images[0] : partner.images}`;
+
+  const imageName = Array.isArray(partner.images) ? partner.images[0] : partner.images;
+  return `${base}${imageName}`;
 };
 </script>

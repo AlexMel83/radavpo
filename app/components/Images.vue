@@ -3,7 +3,7 @@
     <!-- Заглушка, если нет изображений -->
     <NuxtImg
       v-if="!images || (Array.isArray(images) && images.length === 0)"
-      src="/blog-images/default-preview.jpg"
+      :src="defaultImageSrc"
       class="w-full h-full object-contain"
       :alt="alt || 'Зображення за замовчуванням'"
     />
@@ -75,11 +75,16 @@ const props = defineProps<{
   type?: 'org' | 'blog'; // новий проп для типу
 }>();
 
+const { origin } = useRequestURL();
+
 const singleImage = computed(() => (typeof props.images === 'string' ? props.images : ''));
 
 const imageBasePath = computed(() => {
-  return props.type === 'blog' ? '/blog-images/' : '/org-images/';
+  const path = props.type === 'blog' ? '/blog-images/' : '/org-images/';
+  return `${origin}${path}`; // -> http://localhost:3001/blog-images/
 });
+
+const defaultImageSrc = `${origin}/blog-images/default-preview.jpg`;
 
 const isSingle = computed(() => typeof props.images === 'string');
 const isArray = computed(() => Array.isArray(props.images) && props.images.length > 0);
