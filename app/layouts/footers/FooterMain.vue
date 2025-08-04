@@ -111,9 +111,9 @@
 const isScrollToTopInFooter = ref(false);
 const showScrollToTop = ref(false);
 const footerRef = ref(null);
-const { origin } = useRequestURL();
+const config = useRuntimeConfig();
 
-const logoSrc = computed(() => `${origin}/cfhope-logo-tranparent.png`);
+const logoSrc = computed(() => `${config.public.siteUrl}/cfhope-logo-tranparent.png`);
 
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
