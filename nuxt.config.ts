@@ -3,7 +3,7 @@ import 'dotenv/config';
 
 export default defineNuxtConfig({
   ssr: true,
-  server: {
+  devServer: {
     port: process.env.PORT ? Number(process.env.PORT) : 3000,
     host: process.env.NUXT_HOST || '0.0.0.0'
   },
