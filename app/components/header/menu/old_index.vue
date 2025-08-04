@@ -53,7 +53,7 @@ onUnmounted(() => {
 // Menu item interface
 interface NavigationMenuItem {
   label: string;
-  icon?: any; // Lucide icon component
+  // icon?: any; // Lucide icon component
   description?: string;
   to?: string;
   children?: NavigationMenuItem[];

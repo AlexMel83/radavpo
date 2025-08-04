@@ -45,7 +45,7 @@ const handleModalClosed = () => {
   menuOpen.value = false;
 };
 
-const activeSection = ref('');
+// const activeSection = ref('');
 
 // const scrollToSection = (sectionId) => {
 //   const element = document.getElementById(sectionId);
