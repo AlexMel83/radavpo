@@ -1,6 +1,12 @@
 <script setup lang="ts">
 const { t, locale } = useI18n();
 
+interface MenuItem {
+  to?: string;
+  children?: MenuItem[];
+  [key: string]: unknown; // ← якщо є додаткові поля
+}
+
 // Reactive orientation based on screen size
 const isMobile = ref(false);
 
@@ -46,7 +52,7 @@ const keepPopoverOpen = () => {
 const menuItems = computed(() => {
   const prefix = locale.value === 'en' ? '/en' : ''; // Add /en prefix for English
 
-  const addPrefix = (item: any): any => ({
+  const addPrefix = (item: MenuItem): MenuItem => ({
     ...item,
     to: item.to ? `${prefix}${item.to}` : undefined,
     children: item.children?.map(addPrefix),
@@ -132,9 +138,9 @@ const toggleMobileDropdown = (itemLabel: string) => {
 };
 
 // Separate items for mobile vertical navigation (simple items without children)
-const simpleMobileItems = computed(() => {
-  return menuItems.value.filter((item) => !item.children || item.children.length === 0);
-});
+// const simpleMobileItems = computed(() => {
+//   return menuItems.value.filter((item) => !item.children || item.children.length === 0);
+// });
 </script>
 
 <template>
@@ -182,7 +188,6 @@ const simpleMobileItems = computed(() => {
             >
               <template #default>
                 <button
-                  @click="toggleMobileDropdown(item.label)"
                   class="group flex items-center justify-between w-full px-3 py-2.5 text-sm font-medium text-left rounded-md transition-colors duration-150"
                   :class="{
                     'bg-orange-50 dark:bg-orange-950/50 text-[#FF5500] dark:text-orange-400':
@@ -190,6 +195,7 @@ const simpleMobileItems = computed(() => {
                     'text-gray-700 dark:text-gray-200 hover:bg-orange-50 dark:hover:bg-orange-950/30 hover:text-[#FF5500] dark:hover:text-orange-400':
                       !($route.path.startsWith(item.to) || activeMobileDropdown === item.label),
                   }"
+                  @click="toggleMobileDropdown(item.label)"
                 >
                   <div class="flex items-center gap-3">
                     <UIcon
@@ -334,7 +340,9 @@ const simpleMobileItems = computed(() => {
                 <!-- Header for submenu -->
                 <div class="flex items-center gap-2 mb-3 pb-2 border-b border-gray-200 dark:border-gray-700">
                   <UIcon :name="item.icon" class="h-5 w-5 text-[#FF5500]" />
-                  <h3 class="font-semibold text-gray-900 dark:text-white">{{ item.label }}</h3>
+                  <h3 class="font-semibold text-gray-900 dark:text-white">
+                    {{ item.label }}
+                  </h3>
                 </div>
 
                 <!-- Submenu items -->

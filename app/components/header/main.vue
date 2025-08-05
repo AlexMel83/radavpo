@@ -21,7 +21,7 @@
     </div>
     <HeaderMenuMobile :is-menu-open="isMenuOpen" @close-menu="isMenuOpen = false" />
     <div>
-      <!-- <ModalLoginRegistration ref="loginRegistrationRef" @modal-closed="handleModalClosed" /> -->
+      <ModalLoginRegistration ref="loginRegistrationRef" @modal-closed="handleModalClosed" />
     </div>
     <div v-if="isSearchVisible" class="search-container">
       <HeaderSearchInput />
