@@ -47,7 +47,7 @@ export default defineNuxtConfig({
     '~/plugins/axios.js',
   ],
   build: {
-    transpile: ['@nuxt/ui'], // if using Nuxt UI
+    transpile: ['@nuxt/ui'],
   },
   devtools: { enabled: false },
   css: ['~/assets/src/tailwind.css', '~/assets/src/styles.css'],
@@ -62,8 +62,13 @@ export default defineNuxtConfig({
     'shadcn-nuxt',
     '@nuxt/icon',
   ],
+  // ui: {
+  //   // Налаштування для @nuxt/ui
+  //   prefix: 'Nuxt', // Префікс для компонентів Nuxt UI
+  //   global: true,
+  // },
   shadcn: {
-    prefix: '',
+    prefix: 'Sh', // Префікс для компонентів Shadcn
     componentDir: './app/components/ui'
   },
   image: {
