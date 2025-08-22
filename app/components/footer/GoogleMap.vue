@@ -9,15 +9,15 @@
         loading="lazy"
       />
       <button
-        @click="initMap"
         class="absolute inset-0 bg-black/40 text-white flex items-center justify-center text-lg font-semibold hover:bg-black/60 transition"
+        @click="initMap"
       >
         Показати карту
       </button>
     </div>
 
     <!-- Контейнер карти -->
-    <div v-show="mapLoaded" ref="mapRef" class="w-full h-full rounded-lg border border-custom-border"></div>
+    <div v-show="mapLoaded" ref="mapRef" class="w-full h-full rounded-lg border border-custom-border" />
   </div>
 </template>
 
