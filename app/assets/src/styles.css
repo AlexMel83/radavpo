@@ -1,23 +1,16 @@
-@import url('tailwind.css');
+@import url(tailwind.css);
 
 @font-face {
   font-family: 'Inter';
   font-weight: 400;
-  src: url('/assets/fonts/Inter-Regular.ttf') format('truetype');
+  src: url('/assets/fonts/Inter-Regular.woff2') format('truetype');
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Inter';
   font-weight: 700;
-  src: url('/assets/fonts/Inter-Bold.ttf') format('truetype');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Inter';
-  font-weight: 900;
-  src: url('/assets/fonts/Inter-Black.ttf') format('truetype');
+  src: url('/assets/fonts/Inter-Bold.woff2') format('truetype');
   font-display: swap;
 }
 

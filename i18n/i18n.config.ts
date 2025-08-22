@@ -42,7 +42,8 @@ export default defineI18nConfig(() => ({
         sharedSocial: 'Поділитись через соціальні мережі',
       },
       Footer: {
-        address: 'м. Авдіївка, вул. Молодіжна, 3А',
+        contacts: 'Контакти:',
+        address: 'Хмельницька область, м.Старокостянтинів, вул. Острозького, 70',
         terms: 'Умови використання',
         socialMedia: 'Наші соціальні мережі:',
         policy: 'Політика конфіденційності',
@@ -263,7 +264,8 @@ export default defineI18nConfig(() => ({
         sharedSocial: 'Sharing throug social media',
       },
       Footer: {
-        address: 'Avdiivka city, Molodijna street, 3A',
+        contacts: 'Contacts:',
+        address: 'Khmelnytskyi region, Starokostyantyniv, 70 Ostrozkoho St',
         socialMedia: 'Our social media:',
         terms: 'Terms of use',
         policy: 'Privacy policy',
