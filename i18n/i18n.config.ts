@@ -43,9 +43,8 @@ export default defineI18nConfig(() => ({
       },
       Footer: {
         contacts: 'Контакти:',
-        address: 'Хмельницька область, м.Старокостянтинів, вул. Острозького, 70',
+        address: 'Хмельницька область, м.Старокостянтинів, вул. Острозького, 70, 3 поверх',
         terms: 'Умови використання',
-        socialMedia: 'Наші соціальні мережі:',
         policy: 'Політика конфіденційності',
         howToHelp: 'Як допомогти',
         developer: 'Розроблено IT-Starkon Web Studio',
@@ -265,8 +264,7 @@ export default defineI18nConfig(() => ({
       },
       Footer: {
         contacts: 'Contacts:',
-        address: 'Khmelnytskyi region, Starokostyantyniv, 70 Ostrozkoho St',
-        socialMedia: 'Our social media:',
+        address: 'Khmelnytskyi region, Starokostyantyniv, 70 Ostrozkoho St, 3rd floor',
         terms: 'Terms of use',
         policy: 'Privacy policy',
         howToHelp: 'How to help',

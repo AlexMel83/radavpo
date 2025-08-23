@@ -1,5 +1,5 @@
 <template>
-  <div class="h-[300px] w-full">
+  <div class="h-[250px] w-full">
     <!-- Статичне превʼю -->
     <div v-if="!mapLoaded" class="w-full h-full relative rounded-lg border border-custom-border overflow-hidden">
       <img
