@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia';
 import { useNuxtApp } from 'nuxt/app';
 import type { AuthApi } from '../api/auth';
+import { useCookie } from '#app';
 
 interface User {
   id: number;
   email: string;
-  facabook_id: string;
+  facebook_id: string | null;
   google_id: string;
   name: string;
   surname: string;
@@ -28,15 +29,37 @@ interface AuthResponse {
   };
 }
 
-export const useAppStore = defineStore('auth', {
-  state: () => ({
-    isMenuOpen: false,
-    isLoading: false,
-    menuOpen: false,
-  }),
+export const useAppStore = defineStore('app', {
+  state: () => {
+    const themeCookie = useCookie('theme', { default: () => 'light' }); // Кукі за замовчуванням 'light'
+    const isDark = themeCookie.value === 'dark';
+
+    return {
+      isMenuOpen: false,
+      isLoading: false,
+      menuOpen: false,
+      searchTerm: '',
+      isDark, // Початкове значення береться з cookie
+    };
+  },
   actions: {
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen;
+    },
+    setSearchTerm(term: string) {
+      this.searchTerm = term;
+    },
+    toggleDarkMode() {
+      this.isDark = !this.isDark;
+      const themeCookie = useCookie('theme');
+      themeCookie.value = this.isDark ? 'dark' : 'light'; // Оновлюємо кукі
+      if (process.client) {
+        if (this.isDark) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      }
     },
   },
 });
@@ -57,7 +80,6 @@ export const useAuthStore = defineStore('auth', {
             surname: '',
             phone: '',
             role: '',
-            activationlink: '',
             isactivated: false,
             social_login: false,
             facebook_id: null,
@@ -100,7 +122,7 @@ export const useAuthStore = defineStore('auth', {
       const $api = nuxtApp.$api as { auth: AuthApi };
       try {
         await $api.auth.logout();
-        this.$reset(); // очищення Pinia-стану
+        this.$reset();
         if (typeof window !== 'undefined') {
           localStorage.clear();
         }
