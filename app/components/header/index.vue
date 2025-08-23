@@ -17,10 +17,10 @@
           {{ $t('header.subtitle[1]') }}
         </div>
       </button>
-      <!-- <HeaderMenuDesctop :active-section="activeSection" /> -->
+      <HeaderMenuDesctop :active-section="activeSection" />
       <HeaderButtons :is-menu-open="isMenuOpen" @toggle-menu="toggleMenu" @toggle-search="toggleSearch" />
     </div>
-    <!-- <HeaderMenuMobile :is-menu-open="isMenuOpen" @close-menu="isMenuOpen = false" /> -->
+    <HeaderMenuMobile :is-menu-open="isMenuOpen" @close-menu="isMenuOpen = false" />
     <div v-if="isSearchVisible">
       <HeaderSearchInput />
     </div>
