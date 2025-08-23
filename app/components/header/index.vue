@@ -30,7 +30,7 @@
 <script setup>
 const isMenuOpen = ref(false);
 const isSearchVisible = ref(false);
-const menuOpen = ref(false);
+// const menuOpen = ref(false);
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
