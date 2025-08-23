@@ -2,24 +2,38 @@
   <transition name="slide-fade">
     <div
       v-if="isMenuOpen"
-      class="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-custom-black border-b border-custom-border p-4"
+      class="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-custom-black border-b border-custom-border p-4 px-3"
     >
-      <div v-for="(menuItem, key) in menuItems" :key="key" class="mb-2">
-        <button
-          class="w-full text-left dark:text-white font-bold py-2 flex justify-between items-center hover:text-custom-orange transition-colors"
-          @click="toggleSubMenu(key)"
-        >
-          <NuxtLink :to="menuItem.link" class="flex-1" @click.stop="closeMenuAndScroll(menuItem.link)">
+      <div v-for="(menuItem, key) in menuItems" :key="key" class="mb-2 max-w-[640px] mx-auto">
+        <div class="flex justify-between items-center">
+          <!-- Основний лінк -->
+          <NuxtLink
+            :to="menuItem.link"
+            class="flex-1 font-bold py-2 dark:text-white hover:text-custom-orange transition-colors"
+            @click="closeMenuAndScroll(menuItem.link)"
+          >
             {{ key }}
           </NuxtLink>
-          <Icon
-            name="fa-chevron-down"
+
+          <!-- Кнопка для сабменю -->
+          <button
             v-if="menuItem.subItems.length"
-            class="text-xs ml-2 transition-transform duration-300 ease-in-out"
-            :class="{ 'rotate-180': openSubMenu === key }"
-          />
-        </button>
-        <div v-if="openSubMenu === key" class="pl-4">
+            class="ml-2 text-custom-gray hover:text-custom-orange transition-transform duration-300 ease-in-out"
+            @click="toggleSubMenu(key)"
+          >
+            <Icon
+              name="fa-chevron-down"
+              class="w-3 h-3 transform transition-transform duration-300 ease-in-out"
+              :class="{ 'rotate-180': openSubMenu === key }"
+            />
+          </button>
+        </div>
+
+        <!-- Сабменю -->
+        <div
+          class="pl-4 overflow-hidden transition-all duration-300"
+          :class="openSubMenu === key ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'"
+        >
           <NuxtLink
             v-for="subItem in menuItem.subItems"
             :key="subItem.text"
@@ -52,18 +66,18 @@ const { t } = useI18n();
 const openSubMenu = ref(null);
 
 const menuItems = computed(() => ({
-  [t('menu.home')]: { link: '#home', subItems: [] },
+  [t('menu.home')]: { link: '/', subItems: [] },
   [t('menu.about')]: {
-    link: '#about',
+    link: 'about',
     subItems: [
-      { text: t('menu.reporting'), link: '#mreporting' },
+      { text: t('menu.reporting'), link: '#reporting' },
       { text: t('menu.team'), link: '#team' },
       { text: t('menu.partners'), link: '#partners' },
     ],
   },
-  [t('menu.blog')]: { link: '#blog', subItems: [] },
+  [t('menu.blog')]: { link: 'blogs', subItems: [] },
   [t('menu.resources')]: {
-    link: '#resources',
+    link: 'resources',
     subItems: [
       { text: t('menu.housing'), link: '#housing' },
       { text: t('menu.employment'), link: '#employment' },
@@ -71,7 +85,7 @@ const menuItems = computed(() => ({
     ],
   },
   [t('menu.join')]: {
-    link: '#join',
+    link: 'join',
     subItems: [
       { text: t('menu.donate'), link: '#donate' },
       { text: t('menu.volunteer'), link: '#volunteer' },

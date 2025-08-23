@@ -15,8 +15,8 @@
       >
         <span>{{ item.name }}</span>
         <Icon
-          name="fa-chevron-down"
           v-if="item.subItems && item.subItems.length"
+          name="fa-chevron-down"
           :class="[
             'text-xs ml-1 transition-transform duration-300 ease-in-out',
             hoveredMenu === item.link ? 'rotate-180' : '',
