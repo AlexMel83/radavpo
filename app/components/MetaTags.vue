@@ -89,11 +89,11 @@ useHead({
     // Для Telegram/WhatsApp
     { name: 'theme-color', content: '#0057b7' },
   ],
-  script: props.structuredData
+  script: structuredData.value
     ? [
         {
           type: 'application/ld+json',
-          children: JSON.stringify(props.structuredData),
+          children: JSON.stringify(structuredData.value),
         },
       ]
     : [],
