@@ -1,8 +1,8 @@
 <template>
-  <main class="bg-gray-50 min-h-screen">
-    <div class="bg-white shadow">
+  <main class="min-h-screen">
+    <div class="shadow">
       <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold text-gray-900">
+        <h1 class="text-3xl font-bold">
           {{ $t('DonationServiceTerms.title') }}
         </h1>
       </div>

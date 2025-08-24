@@ -7,29 +7,18 @@
     />
     <SectionBlogs />
     <SectionPartners />
-    <div class="rada-title text-2xl font-bold text-center dark:text-white mb-6">
+    <div class="rada-title text-2xl font-bold text-center mb-6">
       {{ $t('Index.title') }}
     </div>
-    <div class="section-content content-wrap text-lg leading-7 text-gray-700 dark:text-white space-y-4">
+    <div class="section-content content-wrap text-lg leading-7 space-y-4">
       <p>{{ $t('Index.description1') }}</p>
       <p>{{ $t('Index.description2') }}</p>
     </div>
     <div class="section-content content-wrap mt-8">
-      <h2 class="text-xl font-semibold mb-4 text-center text-gray-800 dark:text-white">
-        {{ $t('Index.videoTitle') }}
-      </h2>
-      <div class="relative w-full">
-        <video id="rada-video" class="w-full h-auto rounded-md shadow-lg" controls>
-          <source src="https://yednanniazaradydii.org.ua/wp-content/uploads/2023/03/VPO_UKR.mp4" type="video/mp4" />
-          {{ $t('Index.videoNotSuppported') }}
-        </video>
-      </div>
-    </div>
-    <div class="section-content content-wrap mt-8">
-      <h2 class="text-xl font-semibold mb-4 text-gray-800 text-center dark:text-white">
+      <h2 class="text-xl font-semibold mb-4 text-center">
         {{ $t('Index.concil.title') }}
       </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 dark:text-white text-gray-700">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- Ліва колонка -->
         <div class="space-y-4 text-lg leading-7">
           <div>
@@ -79,10 +68,3 @@
     </div>
   </div>
 </template>
-
-<style>
-/* Додаткові стилі для заголовків або контейнера, якщо потрібні */
-.rada-title {
-  color: #2b6cb0; /* Синій відтінок */
-}
-</style>

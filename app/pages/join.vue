@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-    <p class="text-xl font-semibold text-gray-700">Сторінка в розробці</p>
+  <div class="flex flex-col items-center justify-center min-h-screen">
+    <p class="text-xl font-semibold">Сторінка в розробці</p>
     <ul>
       <li>5.1. Зробити пожертву</li>
       <li>5.2. Відвідати наші заходи</li>

@@ -5,12 +5,12 @@
         {{ $t('Index.partners') }}
       </h2>
       <div v-if="isLoading" class="text-center py-10">
-        <span class="text-gray-500">Завантаження партнерів...</span>
+        <span class="">Завантаження партнерів...</span>
       </div>
       <div v-else-if="error" class="text-center py-10 text-red-600">
         Помилка при завантаженні партнерів: {{ error.message }}
       </div>
-      <div v-else-if="partners.length === 0" class="text-center py-10 text-gray-500">Партнерів не знайдено.</div>
+      <div v-else-if="partners.length === 0" class="text-center py-10">Партнерів не знайдено.</div>
       <div v-else class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <NuxtLink v-for="partner in partners" :key="partner.slug" :to="`/partners/${partner.slug}`">
           <UCard
@@ -20,7 +20,7 @@
               body: { base: 'p-4 flex flex-col flex-grow items-center' },
             }"
           >
-            <div class="flex items-center justify-center h-48 w-full bg-white p-4">
+            <div class="flex items-center justify-center h-48 w-full p-4">
               <NuxtImg
                 :src="getPartnerImage(partner)"
                 :alt="partner.title || 'Зображення партнера'"
@@ -28,10 +28,10 @@
               />
             </div>
             <div class="mt-4">
-              <h3 class="text-lg font-semibold text-gray-800 leading-tight break-words">
+              <h3 class="text-lg font-semibold leading-tight break-words pb-2">
                 {{ partner.title }}
               </h3>
-              <p class="text-sm text-gray-500 mt-1">
+              <p class="text-sm mt-1">
                 {{ typeof partner.contacts === 'object' && partner.contacts?.address ? partner.contacts.address : '' }}
               </p>
             </div>

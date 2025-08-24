@@ -1,5 +1,5 @@
 <template>
-  <section class="py-6 px-4 bg-white">
+  <section class="py-6 px-4">
     <div class="max-w-6xl mx-auto">
       <h2 class="text-2xl font-bold text-center mb-10">
         {{ $t('Index.news') }}
@@ -7,22 +7,22 @@
 
       <div>
         <div v-if="pending" class="text-center py-10">
-          <p class="text-gray-600 dark:text-gray-300">Завантаження...</p>
+          <p class="">Завантаження...</p>
         </div>
 
         <div v-else-if="error" class="text-center py-10">
-          <p class="text-red-600 dark:text-gray-300">Помилка при завантаженні постів: {{ error.message }}</p>
-          <button class="mt-2 px-4 py-2 bg-blue-500 text-white rounded" @click="refresh">Спробувати знову</button>
+          <p class="text-red-600">Помилка при завантаженні постів: {{ error.message }}</p>
+          <button class="mt-2 px-4 py-2 bg-blue-500 rounded" @click="refresh">Спробувати знову</button>
         </div>
 
         <div v-else-if="posts.length === 0" class="text-center py-10">
-          <p class="text-gray-600 dark:text-gray-300">Пости не знайдено</p>
+          <p class="">Пости не знайдено</p>
         </div>
 
         <div v-else ref="carousel" class="relative">
           <button
             v-if="isMounted && totalPages > 1"
-            class="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2 transition-opacity"
+            class="absolute left-2 top-1/2 -translate-y-1/2 z-10 shadow-md rounded-full p-2 transition-opacity"
             aria-label="Попередні"
             :disabled="currentPage === 1 || pending"
             @click="prevSlide"
@@ -54,7 +54,7 @@
                     }"
                   >
                     <NuxtLink :to="`/blogs/${post.slug}`">
-                      <div class="h-48 w-full bg-white overflow-hidden flex items-center justify-center">
+                      <div class="h-48 w-full overflow-hidden flex items-center justify-center">
                         <NuxtImg
                           :src="getImage(post.images)"
                           :alt="post.title || 'Post image'"
@@ -65,18 +65,16 @@
 
                     <div class="mt-4 flex flex-col justify-between flex-grow p-2">
                       <NuxtLink :to="`/blogs/${post.slug}`">
-                        <h3
-                          class="text-lg font-semibold text-gray-800 dark:text-gray-300 leading-tight hover:underline mb-2"
-                        >
+                        <h3 class="text-lg font-semibold leading-tight hover:underline mb-2">
                           {{ post.title || 'Untitled' }}
                         </h3>
                       </NuxtLink>
 
-                      <p class="text-sm text-gray-600 dark:text-gray-300 line-clamp-4 mb-2">
+                      <p class="text-sm line-clamp-4 mb-2">
                         {{ post.excerpt || 'No excerpt available' }}
                       </p>
 
-                      <p class="text-xs text-gray-600 dark:text-gray-300 mt-auto">
+                      <p class="text-xs mt-auto">
                         {{ formatDate(post.created_at) }}
                       </p>
                     </div>
@@ -88,7 +86,7 @@
 
           <button
             v-if="isMounted && totalPages > 1"
-            class="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2 transition-opacity"
+            class="absolute right-2 top-1/2 -translate-y-1/2 z-10 shadow-md rounded-full p-2 transition-opacity"
             aria-label="Наступні"
             :disabled="currentPage >= totalPages || pending"
             @click="nextSlide"

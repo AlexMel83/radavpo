@@ -1,10 +1,10 @@
 <template>
   <section class="max-w-7xl mx-auto px-4 py-8">
-    <h1 class="text-4xl font-bold text-center mb-8 dark:text-white">
+    <h1 class="text-4xl font-bold text-center mb-8">
       {{ $t('HowToHelp.title') }}
     </h1>
 
-    <div class="bg-gray-100 p-6 rounded-lg shadow-md mb-1">
+    <div class="p-6 rounded-lg shadow-md mb-1">
       <h2 class="text-2xl font-semibold">
         {{ $t('HowToHelp.volonters') }}
       </h2>
@@ -38,7 +38,7 @@
       </p>
     </div>
 
-    <div class="bg-gray-100 p-6 rounded-lg shadow-md mb-1">
+    <div class="p-6 rounded-lg shadow-md mb-1">
       <h2 class="text-2xl font-semibold">
         {{ $t('HowToHelp.supportTitle') }}
       </h2>
@@ -47,7 +47,7 @@
       </p>
     </div>
 
-    <div class="bg-gray-100 p-6 rounded-lg shadow-md mb-1">
+    <div class="p-6 rounded-lg shadow-md mb-1">
       <h3 class="text-2xl font-semibold">
         {{ $t('HowToHelp.joinTitle') }}
       </h3>

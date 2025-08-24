@@ -2,8 +2,8 @@
   <!-- <div class="flex items-center justify-center min-h-screen bg-gray-100">
     <p class="text-xl font-semibold text-gray-700">Сторінка в розробці</p>
   </div> -->
-  <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-    <p class="text-xl font-semibold text-gray-700">
+  <div class="flex flex-col items-center justify-center min-h-screen">
+    <p class="text-xl font-semibold">
       {{ alertMessage }}
     </p>
   </div>

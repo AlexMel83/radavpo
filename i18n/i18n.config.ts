@@ -54,7 +54,7 @@ export default defineI18nConfig(() => ({
         title: 'Умови використання платформи',
         contractTitle: 'ДОГОВІР публічної оферти про надання благодійної пожертви',
         description:
-          'Ця публічна оферта про надання благодійної пожертви (надалі – Оферта) адресована невизначеному колу осіб – фізичним та юридичним особам (надалі – Благодійник), що є відвідувачами сайту в мережі Інтернет: https://memory.pp.ua (надалі – Сайт), і є офіційною і публічною пропозицією Благодійної організації "Благодійний фонд соціальних реформ та підтримки "Надія" (Ідентифікаційний код юридичної особи 26220897), в особі Директора Мелешка Олександра Миколайовича, який діє на підставі Статуту (надалі – Фонд), укласти договір про надання благодійної пожертви (надалі – Договір), предмет та істотні умови якого вказані нижче:',
+          'Ця публічна оферта про надання благодійної пожертви (надалі – Оферта) адресована невизначеному колу осіб – фізичним та юридичним особам (надалі – Благодійник), що є відвідувачами сайту в мережі Інтернет: https://radavpo.starkon.pp.ua (надалі – Сайт), і є офіційною і публічною пропозицією Благодійної організації "Благодійний фонд соціальних реформ та підтримки "Надія" (Ідентифікаційний код юридичної особи 26220897), в особі Директора Мелешка Олександра Миколайовича, який діє на підставі Статуту (надалі – Фонд), укласти договір про надання благодійної пожертви (надалі – Договір), предмет та істотні умови якого вказані нижче:',
         definitionTitle: '1. Терміни та визначення',
         definition1: [
           'Публічна оферта (та/або Оферта)',
@@ -150,8 +150,14 @@ export default defineI18nConfig(() => ({
       },
       PrivacyPolicy: {
         title: 'Політика конфіденційності',
-        subTitle: "Мапа пам'яті: збереження історії та відновлення справедливості",
-        fundName: 'Благодійний фонд соціальних реформ "Надія"',
+        subTitle: 'Ради з питань ВПО при Старокостянтинівській міській раді',
+        introTitle: 'Вступ',
+        introDescription:
+          'Ми поважаємо вашу приватність і прагнемо захищати ваші особисті дані. Ця політика конфіденційності пояснює, як ми збираємо, використовуємо та захищаємо вашу інформацію, коли ви користуєтесь нашим сайтом.',
+        whoWeAreTitle: 'Хто ми?',
+        whoWeAreDescription:
+          'Ми — команда, яка розробляє та підтримує цей сайт. Ми працюємо під егідою благодійної організації:',
+        fundName: 'сайт та діяльність адмініструє неприбуткова організація "Благодійний фонд соціальних реформ "Надія"',
         ourSite: 'Наш основний веб-сайт:',
         collectInfoTitle: 'Збір та використання інформації',
         collectInfoDescription:
@@ -173,7 +179,7 @@ export default defineI18nConfig(() => ({
           'Ми можемо оновлювати нашу політику конфіденційності час від часу. Усі зміни будуть опубліковані на цій сторінці.',
         contactsTitle: ' Контакти',
         contactsDescription:
-          "Якщо у вас є питання щодо нашої політики конфіденційності, будь ласка, зв'яжіться з нами електронною поштою:",
+          "Якщо у вас є питання щодо нашої політики конфіденційності, будь ласка, зв'яжіться з нами електронною поштою: ",
       },
       GeoError: {
         title: 'Помилка:',
@@ -275,7 +281,7 @@ export default defineI18nConfig(() => ({
         title: 'Platform Terms of Use',
         contractTitle: 'CONTRACT of a public offer to provide a charitable donation',
         description:
-          'This public offer to provide a charitable donation (hereinafter - the Offer) is addressed to an unspecified circle of individuals - natural and legal entities (hereinafter - the Benefactor), who are visitors to the website on the Internet: https://memory.pp.ua (hereinafter - the Site), and is an official and public offer of the Charitable Organization "Charitable Fund of Social Reforms and Support "Nadia" (Identification code of legal entity 26220897), in the person of the Director Oleksandr Mykolayovych Meleshko, acting on the basis of the Statute (hereinafter - the Foundation), to conclude a contract on the provision of a charitable donation (hereinafter - the Agreement), the subject and essential conditions of which are indicated below:',
+          'This public offer to provide a charitable donation (hereinafter - the Offer) is addressed to an unspecified circle of individuals - natural and legal entities (hereinafter - the Benefactor), who are visitors to the website on the Internet: https://radavpo.starkon.pp.ua (hereinafter - the Site), and is an official and public offer of the Charitable Organization "Charitable Fund of Social Reforms and Support "Hope" (Identification code of legal entity 26220897), in the person of the Director Oleksandr Meleshko, acting on the basis of the Statute (hereinafter - the Foundation), to conclude a contract on the provision of a charitable donation (hereinafter - the Agreement), the subject and essential conditions of which are indicated below:',
         definitionTitle: '1. Terms and Definitions',
         definition1: [
           'Public offer (and/or Offer)',
@@ -300,7 +306,7 @@ export default defineI18nConfig(() => ({
         subjectDescription3:
           '2.3. The subject of this Agreement is not directly or indirectly receiving profit by any of the parties to this Agreement.',
         contactsTitle: '11. Location and bank details',
-        fondName: 'Charitable fund of social reforms and support "Nadia"',
+        fondName: 'Charitable fund of social reforms and support "Hope"',
         edrpou: 'EDRPOU 26220897',
         address: '86065, Donetsk region, Avdiivka, 16 Nechaeva St',
         bankName: 'JSC "Privatbank"',
@@ -367,8 +373,9 @@ export default defineI18nConfig(() => ({
       },
       PrivacyPolicy: {
         title: 'Privacy Policy',
-        subTitle: 'Memory Map: Preserving History and Restoring Justice',
-        fundName: 'Charitable fund of social reforms "Hope"',
+        subTitle: 'Council on IDPs at the Starokostyantyniv City Council',
+        fundName:
+          'the website and activities are administered by a non-profit organization Charitable fund of social reforms "Hope"',
         ourSite: 'Our main website:',
         collectInfoTitle: 'Collection and use of information',
         collectInfoDescription:
@@ -389,7 +396,7 @@ export default defineI18nConfig(() => ({
         changeDescription:
           'We may update our privacy policy from time to time. All changes will be posted on this page.',
         contactsTitle: 'Contact information',
-        contactsDescription: 'If you have any questions about our privacy policy, please contact us by email:',
+        contactsDescription: 'If you have any questions about our privacy policy, please contact us by email: ',
       },
       LoginRegistration: {
         title: 'Log in or register',
