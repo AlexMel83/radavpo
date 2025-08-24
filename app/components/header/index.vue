@@ -21,9 +21,18 @@
       <HeaderButtons :is-menu-open="isMenuOpen" @toggle-menu="toggleMenu" @toggle-search="toggleSearch" />
     </div>
     <HeaderMenuMobile :is-menu-open="isMenuOpen" @close-menu="isMenuOpen = false" />
-    <div v-if="isSearchVisible">
-      <HeaderSearchInput />
-    </div>
+    <Transition
+      enter-active-class="transition-all duration-300 ease-in-out"
+      enter-from-class="max-h-0 opacity-0"
+      enter-to-class="max-h-20 opacity-100"
+      leave-active-class="transition-all duration-300 ease-in-out"
+      leave-from-class="max-h-20 opacity-100"
+      leave-to-class="max-h-0 opacity-0"
+    >
+      <div v-if="isSearchVisible" class="overflow-hidden">
+        <HeaderSearchInput />
+      </div>
+    </Transition>
   </nav>
 </template>
 

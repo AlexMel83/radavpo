@@ -30,10 +30,10 @@
       >
         <NuxtLink
           v-for="subItem in item.subItems"
-          :key="subItem.link"
+          :key="subItem.link.hash"
           :to="subItem.link"
           class="block w-full text-left px-2 py-1 whitespace-nowrap text-sm text-custom-black dark:text-custom-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-custom-orange dark:hover:text-custom-orange transition-colors duration-200"
-          @click.prevent="scrollToSection(subItem.link.replace('/', ''))"
+          @click.prevent="scrollToSection(subItem.link.hash)"
         >
           {{ subItem.name }}
         </NuxtLink>
@@ -60,37 +60,30 @@ let timeoutId = null;
 
 const menuItems = computed(() => [
   { name: t('menu.home'), link: '/', subItems: [] },
-  // {
-  //   name: t('menu.about'),
-  //   link: '/about',
-  //   subItems: [
-  //     { name: t('menu.reporting'), link: '/about#reporting' },
-  //     { name: t('menu.team'), link: '/about#team' },
-  //     { name: t('menu.partners'), link: '/about#partners' },
-  //   ],
-  // },
   { name: t('menu.blog'), link: '/blogs', subItems: [] },
   {
     name: t('menu.resources'),
     link: '/resources',
     subItems: [
-      { name: t('menu.housing'), link: '/resources#housing' },
-      { name: t('menu.employment'), link: '/resources#employment' },
-      { name: t('menu.support'), link: '/resources#support' },
+      { name: t('menu.housing'), link: { path: '/resources', hash: '#housing' } },
+      { name: t('menu.employment'), link: { path: '/resources', hash: '#employment' } },
+      { name: t('menu.support'), link: { path: '/resources', hash: '#support' } },
     ],
   },
   {
     name: t('menu.join'),
     link: '/join',
     subItems: [
-      { name: t('menu.donate'), link: '/join#donate' },
-      { name: t('menu.volunteer'), link: '/join#volunteer' },
+      { name: t('menu.donate'), link: { path: '/join', hash: '#donate' } },
+      { name: t('menu.volunteer'), link: { path: '/join', hash: '#volunteer' } },
     ],
   },
 ]);
 
-const scrollToSection = (sectionId) => {
-  const element = document.getElementById(sectionId);
+const scrollToSection = (hash) => {
+  if (!hash) return;
+  const id = hash.replace('#', '');
+  const element = document.getElementById(id);
   if (element) {
     element.scrollIntoView({ behavior: 'smooth' });
   }
