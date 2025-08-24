@@ -1,7 +1,7 @@
 <template>
   <footer
     id="contacts"
-    class="container text-base mx-auto px-3 dark:text-gray-300 py-3 border-t dark:border-gray-700 border-custom-border relative"
+    class="container text-base mx-auto px-3 py-3 border-t dark:border-gray-700 border-custom-border relative"
   >
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="flex flex-col justify-between">

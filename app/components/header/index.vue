@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="w-full min-h-[60px] bg-white dark:bg-custom-black px-3 pt-2 dark:text-gray-300 sticky top-0 z-[1500] border-b dark:border-gray-700 border-custom-border"
+    class="w-full min-h-[60px] bg-white dark:bg-custom-black px-3 pt-2 sticky top-0 z-[1500] border-b dark:border-gray-700 border-custom-border"
   >
     <div class="container mx-auto flex justify-between items-center">
       <NuxtLink
