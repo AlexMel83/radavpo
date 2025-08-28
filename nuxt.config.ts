@@ -70,8 +70,16 @@ export default defineNuxtConfig({
   },
   robots: {
     allow: '/',
-    sitemap: 'https://radavpo.starkon.pp.ua/sitemap.xml',
-  },  
+    sitemap: `${process.env.SITE_URL || 'https://radavpo.starkon.pp.ua'}/sitemap_index.xml`,
+  },
+  sitemap: {
+    // @ts-expect-error -- types are not up to date
+    siteUrl: process.env.SITE_URL || 'https://radavpo.starkon.pp.ua',
+    autoI18n: false,
+    sources: ['/api/urls'],
+    gzip: true,
+    debug: false,
+  },
   // image: {
   //   dir: 'public',
   //   format: ['webp', 'avif'],
