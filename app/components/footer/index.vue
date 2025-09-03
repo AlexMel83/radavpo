@@ -110,7 +110,7 @@
       </ClientOnly>
     </div>
 
-    <div class="text-center mt-3 pt-3 border-t border-custom-border">
+    <div class="flex text-center mt-3 pt-3 border-t border-custom-border">
       <NuxtLink
         class="text-sm hover:underline hover:text-custom-orange transition-colors"
         to="https://it.starkon.pp.ua"
